@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <app-login></app-login>
+    <img height="60px" src="/assets/logo.jpg" alt="...">
+    <p>
+        <b>Hi {{ name }}!</b> Please type the mobile verification code you received
+    </p>
+    <input class="m-2" type="number" max="9" min="0">
+    <input class="m-2" type="number" max="9" min="0">
+    <input class="m-2" type="number" max="9" min="0">
+    <input class="m-2" type="number" max="9" min="0">
+    <p>I did not receive, <a [routerLink]="['/register2', name]">resend</a></p>
+    <button class="p-2">CONTINUE</button>
+</div>

@@ -3,13 +3,17 @@
     <img height="60px" src="/assets/logo.jpg" alt="...">
     <h1>Welcome, intern!</h1>
     <h6>please fill in the following fields to create an acounnt</h6>
-    <form action="">
+    <form #regForm="ngForm">
         <div class="row my-3">            
-            <label class="col-2">ID number<input type="text" placeholder="placeholder"></label>        
-            <label class="col-2">Full name<input type="text" placeholder="placeholder"></label>       
-            <label class="col-2">Passport/Citizenship id<input type="text" placeholder="placeholder"></label>
+            <label class="form-label col-2">ID number<input type="text" class="form-control" placeholder="placeholder" [(ngModel)] = "id" name="idn" required></label>        
+            <label class="form-label col-2">Full name<input type="text" class="form-control" placeholder="placeholder" [(ngModel)] = "fullName" name="fname" required></label>       
+            <label class="form-label col-2">Passport/Citizenship id<input type="text" class="form-control" placeholder="placeholder" [(ngModel)] = "passport" name="pass" required></label>
         </div>
-        <caption class="row col-3 mx-1 my-3">Pohne number<input type="tel" placeholder="placeholder"><small class="fw-bold">A verification code will be sent to you to this number</small></caption>
-        <button type="submit">CONTINUE</button>
+        <label class="row form-label col-3 mx-1 my-3">
+            Pohne number
+            <input type="tel" class="form-control" placeholder="placeholder" [(ngModel)] = "telephone" name="tel" required>
+            <small class="fw-bold">A verification code will be sent to you to this number</small>
+        </label>
+        <button [disabled]="!regForm.valid" [routerLink]="['/register2', fullName.split(' ')[0]]" (click)="register()" type="submit" class="p-2">CONTINUE</button>
     </form>
 </div>
