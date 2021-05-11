@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -10,10 +10,26 @@ import { RegisterService } from 'src/app/services/register.service';
 export class Register2Component implements OnInit {
 
   name = '';
-  constructor(private registerService: RegisterService,) { }
+  code = '1357'
+  wrong = false;
+  codeInsert = {
+    first: '',
+    second: '',
+    third: '',
+    fourth: ''
+  }
+  constructor(private registerService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
     this.name = this.registerService.user.firstName;
+  }
+  register(): void {
+    if ('' + this.codeInsert.first + this.codeInsert.second + this.codeInsert.third + this.codeInsert.fourth == this.code) {
+      this.router.navigate(["/register3"]);
+    }
+    else {
+      this.wrong = true;
+    }
   }
 
 }

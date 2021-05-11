@@ -1,12 +1,12 @@
-<header><app-login></app-login></header>
-<div class="container">
-    <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-md-3">
+<header class="mx-2"><app-login></app-login></header>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row align-items-center">
+        <div class="col-md-4">
             <img src="/assets/logo.jpg" alt="...">
         </div>
-        <div class="col-md-5">
+        <div class="col-md-8">
             <button class="border-0 bg-white" (click)="intern()" [ngClass]="{'text-info': choice === 'intern'}">Interns</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="border-0 bg-white" (click)="supervisor()" [ngClass]="{'text-info': choice === 'supervisor'}">Suprvisors</button>
-            <h1 class="text-center">Welcome, {{ choice }}!</h1>
+            <h1>Welcome, {{ choice }}!</h1>
             <p>This is a wider card with
                 <br>
                 supporting text below as a natural lead-in to additional
@@ -14,6 +14,7 @@
                 <br>
                 This content is a little bit longer.
             </p>
+            <br><br>
             <button class="p-2" routerLink="/register">REGISTER NOW</button>
         </div>
     </div>
