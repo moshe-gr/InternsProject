@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-register2',
@@ -9,12 +10,10 @@ import { ActivatedRoute } from '@angular/router'
 export class Register2Component implements OnInit {
 
   name = '';
-  constructor(private route: ActivatedRoute) { }
+  constructor(private registerService: RegisterService,) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.name = params['name'];
-      });
+    this.name = this.registerService.user.firstName;
   }
 
 }

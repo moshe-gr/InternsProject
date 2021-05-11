@@ -6,9 +6,6 @@ import { Intern } from '../models/intern';
 })
 export class RegisterService {
 
-  private static users: Intern[] = [];
+  user: Intern = { id: 0, firstName: '', surName: '', passport: 0, telephone: '' }
   constructor() { }
-  addUser(user: Intern) {
-    RegisterService.users.push(user);
-  }
 }

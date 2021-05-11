@@ -14,6 +14,6 @@
             <input type="tel" class="form-control" placeholder="placeholder" [(ngModel)] = "telephone" name="tel" required>
             <small class="fw-bold">A verification code will be sent to you to this number</small>
         </label>
-        <button [disabled]="!regForm.valid" [routerLink]="['/register2', fullName.split(' ')[0]]" (click)="register()" type="submit" class="p-2">CONTINUE</button>
+        <button [disabled]="regForm.invalid" routerLink="/register2" (click)="register()" type="submit" class="p-2">CONTINUE</button>
     </form>
 </div>
