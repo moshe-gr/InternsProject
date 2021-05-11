@@ -11,9 +11,22 @@
             <h6 class="my-3">please fill in the following fields to create an acounnt</h6>
             <form #regForm="ngForm">
                 <div class="row my-3">            
-                    <label class="form-label col-4">ID number<input type="text" class="form-control" placeholder="id" [(ngModel)] = "id" name="idn" required></label>        
-                    <label class="form-label col-4">Full name<input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" required></label>       
-                    <label class="form-label col-4">Passport/Citizenship id<input type="text" class="form-control" placeholder="passport" [(ngModel)] = "passport" name="pass" required></label>
+                    <label class="form-label col-4">
+                        ID number
+                        <input type="text" class="form-control" placeholder="id" [(ngModel)] = "id" name="idn" #idn="ngModel" required>
+                        <small class="text-danger" *ngIf="idn.touched && idn.invalid">This is required.</small>
+                    </label>                 
+                    <label class="form-label col-4">
+                        Full name
+                        <input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" #name="ngModel" required>
+                        <small class="text-danger" *ngIf="name.touched && name.invalid">This is required.</small>
+                        <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">please enter full name.</small>
+                    </label>       
+                    <label class="form-label col-4">
+                        Passport/Citizenship id
+                        <input type="text" class="form-control" placeholder="passport" [(ngModel)] = "passport" name="pass" #pass="ngModel" required>
+                        <small class="text-danger" *ngIf="pass.touched && pass.invalid">This is required.</small>
+                    </label>
                 </div>
                 <div class="row my-3">
                     <label class="form-label col-8">
