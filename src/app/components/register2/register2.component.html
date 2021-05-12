@@ -10,10 +10,10 @@
             <p>
                 <b>Hi {{ name }}!</b> Please type the mobile verification code you received
             </p>
-            <input class="m-2" type="number" max="9" min="0" [(ngModel)]="codeInsert.first" required>
-            <input class="m-2" type="number" max="9" min="0" [(ngModel)]="codeInsert.second" required>
-            <input class="m-2" type="number" max="9" min="0" [(ngModel)]="codeInsert.third" required>
-            <input class="m-2" type="number" max="9" min="0" [(ngModel)]="codeInsert.fourth" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.first" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.second" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.third" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.fourth" required>
             <div class="text-danger" *ngIf="wrong"><small>Wrong code please try again!</small></div>
             <p class="my-4">I did not receive, <a routerLink="/register2">resend</a></p>
             <button class="p-2" type="submit" (click)="register()">CONTINUE</button>
