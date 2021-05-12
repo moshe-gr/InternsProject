@@ -10,6 +10,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class Register2Component implements OnInit {
 
   name = '';
+  telephone = '';
   code = '1357'
   wrong = false;
   codeInsert = {
@@ -22,6 +23,7 @@ export class Register2Component implements OnInit {
 
   ngOnInit(): void {
     this.name = this.registerService.user.firstName;
+    this.telephone = this.registerService.user.telephone;
   }
   register(): void {
     if ('' + this.codeInsert.first + this.codeInsert.second + this.codeInsert.third + this.codeInsert.fourth == this.code) {
