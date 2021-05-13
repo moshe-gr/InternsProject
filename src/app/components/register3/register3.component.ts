@@ -12,7 +12,7 @@ export class Register3Component implements OnInit {
   public showWebcam = true;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
-  public deviceId: string | undefined;
+  public deviceId: string = '';
   public facingMode: string = 'environment';
   public errors: WebcamInitError[] = [];
 
