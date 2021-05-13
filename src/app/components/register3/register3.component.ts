@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-register3',
@@ -16,6 +17,12 @@ export class Register3Component implements OnInit {
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
+
+  name: string = '';
+
+  constructor(private registerService: RegisterService) {
+    this.name = registerService.user.firstName;
+  }
   
   ngOnInit(): void {
   }

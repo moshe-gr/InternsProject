@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { Register1Component } from './components/register1/register1.component';
 import { Register2Component } from './components/register2/register2.component';
 import { Register3Component } from './components/register3/register3.component';
+import { RegisterSuccessComponent } from './components/register-success/register-success.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Register3Component } from './components/register3/register3.component';
     LoginComponent,
     Register1Component,
     Register2Component,
-    Register3Component
+    Register3Component,
+    RegisterSuccessComponent
   ],
   imports: [
     BrowserModule,

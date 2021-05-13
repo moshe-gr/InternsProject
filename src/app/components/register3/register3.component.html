@@ -1,19 +1,29 @@
-<div style="text-align:center">
-    <div *ngIf="!webcamImage">
-      <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
-      (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
-      </webcam>
-      <br/>
-      <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-      <br/>
-    </div> 
-  <div class="snapshot" *ngIf="webcamImage">
-    <img [src]="webcamImage.imageAsDataUrl" height="250"/>
-    <h2>Nice one!</h2>
-  </div>
-  
-  <h4 *ngIf="errors.length > 0">Messages:</h4>
-  <ul *ngFor="let error of errors">
-    <li>{{error | json}}</li>
-  </ul>
+<header class="mx-2"><app-login></app-login></header>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h3>{{ name }}, please look straight at the camera so we can spot you</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <div *ngIf="!webcamImage && errors.length == 0">
+                  <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
+                  (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
+                  </webcam>
+                  <br/>
+                  <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
+                  <br/>
+                </div> 
+              <div class="snapshot" *ngIf="webcamImage">
+                <img [src]="webcamImage.imageAsDataUrl" height="250"/>
+                <h2>Nice one!</h2>
+              </div>
+              
+              <h4 *ngIf="errors.length > 0">Messages:</h4>
+              <ul *ngFor="let error of errors">
+                <li>{{error | json}}</li>
+              </ul>
+            </div>
+        </div>
+    </div>
 </div>
