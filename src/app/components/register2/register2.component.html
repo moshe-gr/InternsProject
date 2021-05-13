@@ -1,12 +1,12 @@
 <header class="mx-2">
     <app-login></app-login>
 </header>
-<div class="container-fluid d-flex justify-content-center">
+<div class="container-fluid d-flex justify-content-center text-center text-md-start">
     <div class="row align-items-center">
-        <div class="col-4 m-1">
-            <img src="/assets/logo.jpg" alt="...">
+        <div class="col-md-4 m-1">
+            <img src="/assets/logo.jpg" alt="logo">
         </div>
-        <div class="col-7 m-1">
+        <div class="col-md-7 m-1">
             <p>
                 <b>Hi {{ name }}!</b>
                 <br>
@@ -14,10 +14,10 @@
                 <br>
             </p>
             <div><small>type the mobile verification code you received</small></div>
-            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.first" required>
-            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.second" required>
-            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.third" required>
-            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-2" type="number" [(ngModel)]="codeInsert.fourth" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.first" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.second" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.third" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.fourth" required>
             <div class="text-danger" *ngIf="wrong"><small>Wrong code please try again!</small></div>
             <p class="my-4">I did not receive, <a routerLink="/register2">resend</a>
                 <br>
