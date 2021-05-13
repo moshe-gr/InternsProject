@@ -16,8 +16,10 @@ export class Register1Component implements OnInit {
 
   ngOnInit(): void {
   }
-  register() {
-    this.registerService.user = { id: +this.id, firstName: this.fullName.split(' ')[0], surName: this.fullName.split(' ')[1], passport: +this.passport, telephone: this.telephone };
+  register(event?: any) {
+    if (!event || event.code === 'Enter') {
+      this.registerService.user = { id: +this.id, firstName: this.fullName.split(' ')[0], surName: this.fullName.split(' ')[1], passport: +this.passport, telephone: this.telephone };
+    }
   }
   
 }

@@ -40,6 +40,9 @@ export class Register2Component implements OnInit {
         element = event.srcElement.nextElementSibling;
     if (event.code === 'Backspace')
       element = event.srcElement.previousElementSibling;
+    if (event.code === 'Enter') {
+      this.register()
+    }
     if(element == null)
       return;
     else

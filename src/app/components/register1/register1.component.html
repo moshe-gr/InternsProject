@@ -35,7 +35,7 @@
                         <small class="fw-bold">A verification code will be sent to you to this number</small>
                     </label>
                 </div>
-                <button [disabled]="regForm.invalid || !fullName.split(' ')[1]" routerLink="/register2" (click)="register()" type="submit" class="p-2">CONTINUE</button>
+                <button [disabled]="regForm.invalid || !fullName.split(' ')[1]" routerLink="/register2" (click)="register()" (keyup)="register($event)" type="submit" class="p-2">CONTINUE</button>
             </form>
         </div>
     </div>
