@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
@@ -9,11 +9,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class Register3Component implements OnInit {
 
-  public showWebcam = true;
-  public allowCameraSwitch = true;
-  public multipleWebcamsAvailable = false;
-  public deviceId: string = '';
-  public facingMode: string = 'environment';
   public errors: WebcamInitError[] = [];
 
   // latest snapshot
@@ -21,22 +16,12 @@ export class Register3Component implements OnInit {
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
-  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
-  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
-
-  public ngOnInit(): void {
-    WebcamUtil.getAvailableVideoInputs()
-      .then((mediaDevices: MediaDeviceInfo[]) => {
-        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-      });
+  
+  ngOnInit(): void {
   }
 
   public triggerSnapshot(): void {
     this.trigger.next();
-  }
-
-  public toggleWebcam(): void {
-    this.showWebcam = !this.showWebcam;
   }
 
   public handleInitError(error: WebcamInitError): void {
@@ -46,38 +31,13 @@ export class Register3Component implements OnInit {
     this.errors.push(error);
   }
 
-  public showNextWebcam(directionOrDeviceId: boolean|string): void {
-    // true => move forward through devices
-    // false => move backwards through devices
-    // string => move to device with given deviceId
-    this.nextWebcam.next(directionOrDeviceId);
-  }
-
   public handleImage(webcamImage: WebcamImage): void {
     console.log('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
   }
 
-  public cameraWasSwitched(deviceId: string): void {
-    console.log('active device: ' + deviceId);
-    this.deviceId = deviceId;
-  }
-
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
-  }
-
-  public get nextWebcamObservable(): Observable<boolean|string> {
-    return this.nextWebcam.asObservable();
-  }
-
-  public get videoOptions(): MediaTrackConstraints {
-    const result: MediaTrackConstraints = {};
-    if (this.facingMode && this.facingMode !== '') {
-      result.facingMode = { ideal: this.facingMode };
-    }
-
-    return result;
   }
 
 }
