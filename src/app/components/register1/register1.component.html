@@ -13,25 +13,25 @@
                 <div class="row my-3">            
                     <label class="form-label col-md-4">
                         ID number
-                        <input type="text" class="form-control" placeholder="id" [(ngModel)] = "id" name="idn" #idn="ngModel" required>
+                        <input type="number" class="form-control" placeholder="id" [(ngModel)] = "id" name="idn" #idn="ngModel" required>
                         <small class="text-danger" *ngIf="idn.touched && idn.invalid">This is required.</small>
                     </label>                 
                     <label class="form-label col-md-4">
                         Full name
-                        <input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" #name="ngModel" required>
+                        <input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{1,} [A-Za-z]{1,}" required>
                         <small class="text-danger" *ngIf="name.touched && name.invalid">This is required.</small>
                         <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">please enter full name.</small>
                     </label>       
                     <label class="form-label col-md-4">
                         Passport/Citizenship id
-                        <input type="text" class="form-control" placeholder="passport" [(ngModel)] = "passport" name="pass" #pass="ngModel" required>
+                        <input type="number" class="form-control" placeholder="passport" [(ngModel)] = "passport" name="pass" #pass="ngModel" required>
                         <small class="text-danger" *ngIf="pass.touched && pass.invalid">This is required.</small>
                     </label>
                 </div>
                 <div class="row my-3">
                     <label class="form-label col-md-8">
                         Pohne number
-                        <input type="tel" class="form-control" placeholder="telephone" [(ngModel)] = "telephone" name="tel" required>
+                        <input type="tel" class="form-control" placeholder="123-4567890" [(ngModel)] = "telephone" name="tel" pattern="[0-9]{3}-[0-9]{7}" required>
                         <small class="fw-bold">A verification code will be sent to you to this number</small>
                     </label>
                 </div>
