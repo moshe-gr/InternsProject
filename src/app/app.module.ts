@@ -11,6 +11,7 @@ import { Register1Component } from './components/register1/register1.component';
 import { Register2Component } from './components/register2/register2.component';
 import { Register3Component } from './components/register3/register3.component';
 import { RegisterSuccessComponent } from './components/register-success/register-success.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegisterSuccessComponent } from './components/register-success/register
     Register1Component,
     Register2Component,
     Register3Component,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

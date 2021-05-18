@@ -46,5 +46,8 @@ export class Register3Component implements OnInit {
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
+  register() {
+    this.registerService.registerUser();
+  }
 
 }
