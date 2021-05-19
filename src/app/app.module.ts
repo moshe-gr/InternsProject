@@ -12,6 +12,7 @@ import { Register2Component } from './components/register2/register2.component';
 import { Register3Component } from './components/register3/register3.component';
 import { RegisterSuccessComponent } from './components/register-success/register-success.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     Register2Component,
     Register3Component,
     RegisterSuccessComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ProfileHeaderComponent
   ],
   imports: [
     BrowserModule,

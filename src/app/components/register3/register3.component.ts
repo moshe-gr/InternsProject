@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage, WebcamInitError } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
+import { Intern } from 'src/app/models/intern';
 import { RegisterService } from 'src/app/services/register.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-register3',
@@ -18,10 +20,10 @@ export class Register3Component implements OnInit {
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
 
-  name: string = '';
+  user: Intern;
 
-  constructor(private registerService: RegisterService) {
-    this.name = registerService.user.firstName;
+  constructor(private registerService: RegisterService, private usersService: UsersService) {
+    this.user = registerService.user;
   }
   
   ngOnInit(): void {
@@ -41,6 +43,8 @@ export class Register3Component implements OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     console.log('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
+    this.user.pic = webcamImage;
+    this.usersService.updateUser(this.user.passport, this.user);
   }
 
   public get triggerObservable(): Observable<void> {

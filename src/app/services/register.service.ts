@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { WebcamImage } from 'ngx-webcam';
 import { Intern } from '../models/intern';
 import { UsersService } from './users.service';
 
