@@ -14,7 +14,7 @@
                 <br>
             </p>
             <div><small>type the mobile verification code you received</small></div>
-            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.first" required>
+            <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.first" required autofocus>
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.second" required>
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.third" required>
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" type="number" [(ngModel)]="codeInsert.fourth" required>

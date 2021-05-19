@@ -19,7 +19,7 @@
                     <label class="form-label col-md-4">
                         Full name
                         <input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{1,} [A-Za-z]{1,}" required>
-                        <small class="text-danger" *ngIf="name.touched && name.invalid">This is required.</small>
+                        <small class="text-danger" *ngIf="name.touched && name.errors?.required">This is required.</small>
                         <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">please enter full name.</small>
                     </label>       
                     <label class="form-label col-md-4">
@@ -35,7 +35,7 @@
                         <small class="fw-bold">A verification code will be sent to you to this number</small>
                     </label>
                 </div>
-                <button [disabled]="regForm.invalid || !fullName.split(' ')[1]" (click)="register()" (keyup)="register($event)" type="submit" class="p-2">CONTINUE</button>
+                <button [disabled]="regForm.invalid" (click)="register()" (keyup)="register($event)" type="submit" class="p-2">CONTINUE</button>
             </form>
         </div>
     </div>

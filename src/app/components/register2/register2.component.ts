@@ -38,13 +38,9 @@ export class Register2Component implements OnInit {
     let element;
     if (event.code === "Digit0" || event.code === "Digit1" || event.code === "Digit2" || event.code === "Digit3" || event.code === "Digit4" || event.code === "Digit5" || event.code === "Digit6" || event.code === "Digit7" || event.code === "Digit8" || event.code === "Digit9")
         element = event.srcElement.nextElementSibling;
-    if (event.code === 'Backspace')
-      element = event.srcElement.previousElementSibling;
     if (event.code === 'Enter') {
       this.register()
     }
-    if(element == null)
-      return;
     else
       element.focus();
   }
