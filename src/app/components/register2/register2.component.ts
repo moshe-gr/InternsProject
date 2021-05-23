@@ -34,15 +34,11 @@ export class Register2Component implements OnInit {
     }
   }
   onDigitInput(event: any){
-
-    let element;
     if (event.code === "Digit0" || event.code === "Digit1" || event.code === "Digit2" || event.code === "Digit3" || event.code === "Digit4" || event.code === "Digit5" || event.code === "Digit6" || event.code === "Digit7" || event.code === "Digit8" || event.code === "Digit9")
-        element = event.srcElement.nextElementSibling;
-    if (event.code === 'Enter') {
+        event.srcElement.nextElementSibling.focus();
+    else if (event.code === 'Enter') {
       this.register()
     }
-    else
-      element.focus();
   }
 
 }

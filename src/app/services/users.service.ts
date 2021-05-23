@@ -8,7 +8,7 @@ import { Intern } from '../models/intern';
 export class UsersService {
 
   private _users: Intern[] = [];
-  users: BehaviorSubject<Intern[]> = new BehaviorSubject<Intern[]>([]);
+  users: BehaviorSubject<Intern[]> = new BehaviorSubject<Intern[]>(this._users);
   constructor() { }
 
   addUser(user:Intern) {

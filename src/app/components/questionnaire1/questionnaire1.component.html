@@ -1,0 +1,31 @@
+<header class="mx-2"><app-profile-header></app-profile-header></header>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <img src="/assets/logo.jpg" alt="logo">
+        </div>
+        <div class="col-md-8">
+            <small>Personal details</small>
+            <h1>Please tell us about yourself personally</h1>
+            <form>
+                <div class="row">
+                    <label class="col-md-4 form-label">Age<input class="form-control" type="text"></label>
+                    <label class="col-md-4 form-label">Country<select class="form-control"></select></label>
+                    <label class="col-md-4 form-label">City<select class="form-control"></select></label>
+                </div>
+                <div class="row">
+                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text"></label>
+                    <label class="col-md-4 form-label">Academic institution<select class="form-control"></select></label>
+                </div>
+                <button class="py-2 px-4" routerLink="/questionnaire1">NEXT</button>
+            </form>
+        </div>
+        <br><br>
+        <footer class="my-5">
+            <small>0% Completed</small>
+            <div class="progress">
+                <div class="progress-bar bg-success"></div>
+            </div>
+        </footer>
+    </div>
+</div>

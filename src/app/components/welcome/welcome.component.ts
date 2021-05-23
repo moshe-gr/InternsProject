@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebcamImage } from 'ngx-webcam';
+import { Intern } from 'src/app/models/intern';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  pic?: WebcamImage;
+  user: Intern;
   constructor(private registerService: RegisterService) {
-    this.pic = registerService.user.pic;
+    this.user = this.registerService.user;
   }
 
   ngOnInit(): void {
