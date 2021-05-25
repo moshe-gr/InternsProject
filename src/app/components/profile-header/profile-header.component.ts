@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Intern } from 'src/app/models/intern';
 import { RegisterService } from 'src/app/services/register.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -10,9 +9,9 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ProfileHeaderComponent implements OnInit {
 
-  user?: Intern;
-  constructor(private registerService: RegisterService, private usersService: UsersService) {
-    this.user = usersService.getUser(registerService.user.passport);
+  user: Intern;
+  constructor(registerService: RegisterService) {
+    this.user = registerService.user;
    }
 
   ngOnInit(): void {

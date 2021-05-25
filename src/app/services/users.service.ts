@@ -15,11 +15,15 @@ export class UsersService {
     this._users = [...this._users, user];
     this.users.next(this._users);
   }
-  getUser(passport: number) {
-    return this._users.find(intern => intern.passport == passport);
+  getUsers() {
+    return this.users;
   }
   updateUser(passport: number, update: Intern) {
-    this.users.subscribe(interns => interns.splice(interns.findIndex(() => interns.find(intern => intern.passport == passport)), 1, update));
+    this._users.splice(this._users.findIndex(
+      () => this._users.find(
+        intern => intern.passport == passport
+      )), 1, update);
+    this.users.next(this._users);
   }
 
 }

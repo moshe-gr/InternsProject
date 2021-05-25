@@ -1,4 +1,4 @@
 <p class="d-flex justify-content-end mx-2 my-3">profile-header works!
-    <img *ngIf="user && user.pic" [src]="user.pic.imageAsDataUrl" alt="" height="60px">
+    <img [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px">
 </p>
 <br>

@@ -6,5 +6,18 @@ export interface Intern {
     surName: string,
     passport: number,
     telephone: string,
-    pic?: WebcamImage
+    pic?: WebcamImage,
+    persinal?: {
+        age: number,
+        contry: string,
+        city: string,
+        gradgYear: number,
+        acdInst: string
+    },
+    professional?: {
+        medInst: string,
+        residency: string,
+        yearInResidency: number,
+        department: string
+    }
 }
