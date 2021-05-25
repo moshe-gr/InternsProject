@@ -9,7 +9,7 @@ export interface Intern {
     pic?: WebcamImage,
     persinal?: {
         age: number,
-        contry: string,
+        country: string,
         city: string,
         gradgYear: number,
         acdInst: string

@@ -9,17 +9,17 @@
             <h1>Please tell us about yourself personally</h1>
             <form>
                 <div class="row">
-                    <label class="col-md-4 form-label">Age<input class="form-control" type="text" required></label>
-                    <label class="col-md-4 form-label">Country<select class="form-select">
+                    <label class="col-md-4 form-label">Age<input class="form-control" type="text" name="age" [(ngModel)]="formFildes.age" required></label>
+                    <label class="col-md-4 form-label">Country<select class="form-select" name="Country" [(ngModel)]="formFildes.country" required>
                         <option>Choose</option>
                     </select></label>
-                    <label class="col-md-4 form-label">City<select class="form-select">
+                    <label class="col-md-4 form-label">City<select class="form-select" name="city" [(ngModel)]="formFildes.city" required>
                         <option>Choose</option>
                     </select></label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text" required></label>
-                    <label class="col-md-4 form-label">Academic institution<select class="form-select" required>
+                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text" name="gradYear" [(ngModel)]="formFildes.gradYear" required></label>
+                    <label class="col-md-4 form-label">Academic institution<select class="form-select" name="acdInst" [(ngModel)]="formFildes.acdInst" required>
                         <option>Choose</option>
                     </select></label>
                 </div>

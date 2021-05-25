@@ -22,7 +22,7 @@ export class Register1Component implements OnInit {
   
   register(event?: any) {
     if (!event || event.code === 'Enter') {
-      this.usersService.users.subscribe(interns =>
+      this.usersService.getUsers().subscribe(interns =>
         interns.find(user =>
           this.exists = +this.passport == user.passport));
           if (!this.exists) {
