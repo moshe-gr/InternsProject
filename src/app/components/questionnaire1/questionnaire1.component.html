@@ -9,13 +9,19 @@
             <h1>Please tell us about yourself personally</h1>
             <form>
                 <div class="row">
-                    <label class="col-md-4 form-label">Age<input class="form-control" type="text"></label>
-                    <label class="col-md-4 form-label">Country<select class="form-control"></select></label>
-                    <label class="col-md-4 form-label">City<select class="form-control"></select></label>
+                    <label class="col-md-4 form-label">Age<input class="form-control" type="text" required></label>
+                    <label class="col-md-4 form-label">Country<select class="form-control">
+                        <option>Choose</option>
+                    </select></label>
+                    <label class="col-md-4 form-label">City<select class="form-control">
+                        <option>Choose</option>
+                    </select></label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text"></label>
-                    <label class="col-md-4 form-label">Academic institution<select class="form-control"></select></label>
+                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text" required></label>
+                    <label class="col-md-4 form-label">Academic institution<select class="form-control" required>
+                        <option>Choose</option>
+                    </select></label>
                 </div>
                 <button class="py-2 px-4" routerLink="/questionnaire1">NEXT</button>
             </form>

@@ -14,15 +14,12 @@ export class Register3Component implements OnInit {
 
   public errors: WebcamInitError[] = [];
 
-  // latest snapshot
-  public webcamImage: WebcamImage | undefined;
-
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
 
   user: Intern;
 
-  constructor(private registerService: RegisterService, private usersService: UsersService) {
+  constructor(private registerService: RegisterService, private usersService: UsersService, public webcamImage: WebcamImage) {
     this.user = registerService.user;
   }
   
