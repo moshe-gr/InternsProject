@@ -10,25 +10,30 @@
             <form>
                 <div class="row">
                     <label class="col-md-4 form-label">Age<input class="form-control" type="text" required></label>
-                    <label class="col-md-4 form-label">Country<select class="form-control">
+                    <label class="col-md-4 form-label">Country<select class="form-select">
                         <option>Choose</option>
                     </select></label>
-                    <label class="col-md-4 form-label">City<select class="form-control">
+                    <label class="col-md-4 form-label">City<select class="form-select">
                         <option>Choose</option>
                     </select></label>
                 </div>
                 <div class="row">
                     <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text" required></label>
-                    <label class="col-md-4 form-label">Academic institution<select class="form-control" required>
+                    <label class="col-md-4 form-label">Academic institution<select class="form-select" required>
                         <option>Choose</option>
                     </select></label>
                 </div>
-                <button class="py-2 px-4" routerLink="/questionnaire1">NEXT</button>
+                <button class="py-2 px-4" routerLink="/questionnaire2">NEXT</button>
             </form>
         </div>
         <br><br>
-        <footer class="mt-5">
-            <small>0% Completed</small>
+        <footer class="row pt-5 mt-5">
+            <small class="col-6">0% Completed</small>
+            <span class="col-6 text-end">
+                <mat-icon>west</mat-icon>
+                &nbsp;&nbsp;
+                <mat-icon>east</mat-icon>
+            </span>
             <div class="progress">
                 <div class="progress-bar bg-success"></div>
             </div>

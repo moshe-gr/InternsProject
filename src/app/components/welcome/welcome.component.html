@@ -1,4 +1,4 @@
-<header class="mx-2"><app-profile-header></app-profile-header></header>
+<header><app-profile-header></app-profile-header></header>
 <div class="container-fluid d-flex justify-content-center">
     <div class="row align-items-center">
         <div class="col-md-4">
@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-8">
             <h1>Thank you {{ user.firstName }}</h1>
-            <h3>&#10003;Your user has been successfully created</h3>
+            <h3><span class="text-success">&#10003;</span>Your user has been successfully created</h3>
             <br>
             <p>In order to fit the simulator you need to have a short questionnaire.</p>
             <button class="py-2 px-4" routerLink="/questionnaire1">LET'S START</button>

@@ -1,0 +1,39 @@
+<header><app-profile-header></app-profile-header></header>
+<div class="container-fluid d-flex justify-content-center">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <img src="/assets/logo.jpg" alt="logo">
+        </div>
+        <div class="col-md-8">
+            <small>Professionally details</small>
+            <h1>Please tell us about yourself professionally</h1>
+            <form>
+                <div class="row">
+                    <label class="col-md-4 form-label">Medical institution<input class="form-control" type="text" required></label>
+                    <label class="col-md-4 form-label">Residency<select class="form-select">
+                        <option>Choose</option>
+                    </select></label>
+                    <label class="col-md-4 form-label">Department<select class="form-select">
+                        <option>Choose</option>
+                    </select></label>
+                </div>
+                <div class="row">
+                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range"></label>
+                </div>
+                <button class="py-2 px-4" routerLink="/ready">DONE!</button>
+            </form>
+        </div>
+        <br><br>
+        <footer class="row pt-5 mt-5">
+            <small class="col-6">65% Completed</small>
+            <span class="col-6 text-end">
+                <mat-icon>west</mat-icon>
+                &nbsp;&nbsp;
+                <mat-icon>east</mat-icon>
+            </span>
+            <div class="progress p-0">
+                <div class="progress-bar bg-success" style="width: 65%;"></div>
+            </div>
+        </footer>
+    </div>
+</div>

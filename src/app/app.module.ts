@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { WebcamModule } from 'ngx-webcam';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,9 @@ import { Register3Component } from './components/register3/register3.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ProfileHeaderComponent } from './components/profile-header/profile-header.component';
 import { Questionnaire1Component } from './components/questionnaire1/questionnaire1.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Questionnaire2Component } from './components/questionnaire2/questionnaire2.component';
+import { ReadyComponent } from './components/ready/ready.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,17 @@ import { Questionnaire1Component } from './components/questionnaire1/questionnai
     Register3Component,
     WelcomeComponent,
     ProfileHeaderComponent,
-    Questionnaire1Component
+    Questionnaire1Component,
+    Questionnaire2Component,
+    ReadyComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    WebcamModule
+    WebcamModule,
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
