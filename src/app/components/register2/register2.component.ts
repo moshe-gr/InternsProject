@@ -33,11 +33,15 @@ export class Register2Component implements OnInit {
       this.wrong = true;
     }
   }
-  onDigitInput(event: any){
-    if (event.code === "Digit0" || event.code === "Digit1" || event.code === "Digit2" || event.code === "Digit3" || event.code === "Digit4" || event.code === "Digit5" || event.code === "Digit6" || event.code === "Digit7" || event.code === "Digit8" || event.code === "Digit9")
-        event.srcElement.nextElementSibling.focus();
-    else if (event.code === 'Enter') {
+  onDigitInput(event: any, value: string){
+    if ((value || value == '0') && +value <= 9 && event.code !== 'Backspace') {
+      event.srcElement.nextElementSibling.focus();
+    }
+    if (event.code === 'Enter') {
       this.register()
+    }
+    else if (event.code === 'Backspace' && !value) {
+      event.srcElement.previousElementSibling.focus();
     }
   }
 
