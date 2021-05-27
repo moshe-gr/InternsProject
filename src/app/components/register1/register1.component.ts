@@ -10,7 +10,6 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class Register1Component implements OnInit {
 
-  exists: boolean;
   id: number;
   fullName: string = '';
   passport: number;
@@ -20,24 +19,19 @@ export class Register1Component implements OnInit {
   ngOnInit(): void {
   }
   
-  register(event?: any) {
-    if (!event || event.code === 'Enter') {
-      this.usersService.getUsers().subscribe(interns =>
-        interns.find(user =>
-          this.exists = this.passport == user.passport));
-          if (!this.exists) {
-            this.registerService.user = {
-              id: this.id,
-              firstName: this.fullName.split(' ')[0],
-              surName: this.fullName.split(' ')[1],
-              passport: this.passport,
-              telephone: this.telephone
-            };
-            this.router.navigate(['/register2']);
-          }
-          else {
-            alert("User allready exists")
-          }
+  register(event?: any) {  
+    if (!event || event.code === 'Enter') {     
+      if (!this.usersService.getUser(this.passport)) {
+        this.registerService.user.id = this.id;
+        this.registerService.user.firstName = this.fullName.split(" ")[0];
+        this.registerService.user.surName = this.fullName.split(" ")[1];
+        this.registerService.user.passport = this.passport;
+        this.registerService.user.telephone = this.telephone;
+        this.router.navigate(['/register2']);
+      }
+      else {
+        alert("User allready exists");
+      }
     }
   }
   

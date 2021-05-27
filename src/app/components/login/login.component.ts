@@ -10,23 +10,21 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class LoginComponent implements OnInit {
 
-  passport = '';
+  passport: number;
   constructor(private usersService: UsersService, private registerService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login() {
-    this.usersService.getUsers().subscribe(users => {
-      let user = users.find(user => user.passport == +this.passport)
-      if (user) {
-        this.registerService.user = user;
-        this.router.navigate(["/register2"]);
-      }
-      else {
-        alert("No user found");
-      }
-    });
+    let user = this.usersService.getUser(this.passport);
+    if (user) {
+      this.registerService.user = user;
+      this.router.navigate(["/register2"]);
+    }
+    else {
+      alert("No user found");
+    }
   }
 
 }

@@ -25,5 +25,10 @@ export class UsersService {
       )), 1, update);
     this.users.next(this._users);
   }
+  getUser(passport: number) {
+    let user;
+    this.getUsers().subscribe(users => user = users.find(user => user.passport == passport));
+    return user;
+  }
 
 }
