@@ -9,18 +9,18 @@
         <div class="col-md-8">
             <small>Professionally details</small>
             <h1>Please tell us about yourself professionally</h1>
-            <form>
+            <form #quesForm2="ngForm">
                 <div class="row">
-                    <label class="col-md-4 form-label">Medical institution<input class="form-control" type="text" required></label>
+                    <label class="col-md-4 form-label">Medical institution<input class="form-control" type="text" name="medInst" required></label>
                     <label class="col-md-4 form-label">Residency<select class="form-select">
                         <option>Choose</option>
                     </select></label>
-                    <label class="col-md-4 form-label">Department<select class="form-select">
+                    <label class="col-md-4 form-label">Department<select class="form-select" name="dep" required>
                         <option>Choose</option>
                     </select></label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range"></label>
+                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range" name="yInRes" required></label>
                 </div>
                 <button class="py-2 px-4" routerLink="/ready">DONE!</button>
             </form>

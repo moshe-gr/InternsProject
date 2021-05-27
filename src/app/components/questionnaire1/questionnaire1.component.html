@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <small>Personal details</small>
             <h1>Please tell us about yourself personally</h1>
-            <form>
+            <form #quesForm1="ngForm">
                 <div class="row">
                     <label class="col-md-4 form-label">Age<input class="form-control" type="text" name="age" [(ngModel)]="formFildes.age" required></label>
                     <label class="col-md-4 form-label">Country<select class="form-select" name="Country" [(ngModel)]="formFildes.country" required>
