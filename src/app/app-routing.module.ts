@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 import { Questionnaire1Component } from './components/questionnaire1/questionnaire1.component';
 import { Questionnaire2Component } from './components/questionnaire2/questionnaire2.component';
 import { ReadyComponent } from './components/ready/ready.component';
@@ -11,13 +12,14 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'register', component: Register1Component },
+  { path: 'register1', component: Register1Component },
   { path: 'register2', component: Register2Component },
   { path: 'register3', component: Register3Component },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'questionnaire1', component: Questionnaire1Component },
   { path: 'questionnaire2', component: Questionnaire2Component },
-  { path: 'ready', component: ReadyComponent }
+  { path: 'ready', component: ReadyComponent },
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

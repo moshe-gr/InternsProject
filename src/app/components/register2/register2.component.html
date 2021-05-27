@@ -1,7 +1,7 @@
 <header class="mx-2">
-    <app-login></app-login>
+    <app-login-header></app-login-header>
 </header>
-<div class="container-fluid d-flex justify-content-center text-center">
+<div class="container-fluid d-flex justify-content-center text-center pos-lower">
     <div class="row align-items-center">
         <div class="col-md-4">
             <img src="/assets/logo.jpg" alt="logo">
@@ -22,7 +22,7 @@
             <div class="text-danger" *ngIf="wrong"><small>Wrong code please try again!</small></div>
             <div class="my-4">I did not receive, <a routerLink="/register2">resend</a>
                 <br>
-                <a routerLink="/register">Wrong number?</a>
+                <a routerLink="/register1">Wrong number?</a>
             </div>
             <button class="py-2 px-4" (click)="register()">CONTINUE</button>
         </div>
