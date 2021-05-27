@@ -8,13 +8,11 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class Questionnaire1Component implements OnInit {
 
-  formFildes: {
-    age: number,
-    country: string,
-    city: string,
-    gradYear: number,
-    acdInst: string
-  }
+  age: number;
+  country: string;
+  city: string;
+  gradYear: number;
+  acdInst: string;
   constructor(registerService: RegisterService) { }
 
   ngOnInit(): void {

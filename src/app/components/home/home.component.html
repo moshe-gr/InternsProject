@@ -3,18 +3,17 @@
 </header>
 <div class="container-fluid d-flex justify-content-center pos-lower">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 text-center">
             <img src="/assets/logo.jpg" alt="logo">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 ps-4">
             <button class="border-0 bg-white" (click)="intern()" [ngClass]="{'text-info': choice === 'intern'}">Interns</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="border-0 bg-white" (click)="supervisor()" [ngClass]="{'text-info': choice === 'supervisor'}">Suprvisors</button>
-            <h1>Welcome, {{ choice }}!</h1>
-            <p>This is a wider card with
+            <h1>Welcome {{ choice }}!</h1>
+            <p>This is wear you'l cover your internship
                 <br>
-                supporting text below as a natural lead-in to additional
-                content.
+                take your exams view your results
                 <br>
-                This content is a little bit longer.
+                and see how its going.
             </p>
             <br><br>
             <button *ngIf="choice == 'intern'" class="py-2 px-4" routerLink="/register1">REGISTER NOW</button>
