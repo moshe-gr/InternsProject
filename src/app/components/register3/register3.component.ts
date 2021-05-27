@@ -18,7 +18,7 @@ export class Register3Component implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
 
   user: Intern;
-  public webcamImage?: WebcamImage;
+  public webcamImage: WebcamImage;
 
   constructor(private registerService: RegisterService) {
     this.user = registerService.user;

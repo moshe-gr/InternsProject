@@ -10,11 +10,11 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class Register1Component implements OnInit {
 
-  exists = false;
-  id = '';
-  fullName = '';
-  passport = '';
-  telephone = '';
+  exists: boolean;
+  id: number;
+  fullName: string = '';
+  passport: number;
+  telephone: string = '';
   constructor(private registerService: RegisterService, private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,13 +24,14 @@ export class Register1Component implements OnInit {
     if (!event || event.code === 'Enter') {
       this.usersService.getUsers().subscribe(interns =>
         interns.find(user =>
-          this.exists = +this.passport == user.passport));
+          this.exists = this.passport == user.passport));
           if (!this.exists) {
             this.registerService.user = {
-              id: +this.id,
+              id: this.id,
               firstName: this.fullName.split(' ')[0],
               surName: this.fullName.split(' ')[1],
-              passport: +this.passport, telephone: this.telephone
+              passport: this.passport,
+              telephone: this.telephone
             };
             this.router.navigate(['/register2']);
           }

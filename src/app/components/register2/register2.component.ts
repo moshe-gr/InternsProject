@@ -9,16 +9,15 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class Register2Component implements OnInit {
 
-  name = '';
-  telephone = '';
+  name: string;
+  telephone: string;
   code = '1357'
-  wrong = false;
-  codeInsert = {
-    first: '',
-    second: '',
-    third: '',
-    fourth: ''
-  }
+  wrong: boolean;
+  first: number;
+  second: number;
+  third: number;
+  fourth: number;
+  
   constructor(private registerService: RegisterService, private router: Router) { }
 
   ngOnInit(): void {
@@ -26,15 +25,16 @@ export class Register2Component implements OnInit {
     this.telephone = this.registerService.user.telephone;
   }
   register(): void {
-    if ('' + this.codeInsert.first + this.codeInsert.second + this.codeInsert.third + this.codeInsert.fourth == this.code) {
+    if ('' + this.first + this.second + this.third + this.fourth == this.code) {
       this.router.navigate(["/register3"]);
     }
     else {
       this.wrong = true;
     }
   }
-  onDigitInput(event: any, value: string){
-    if ((value || value == '0') && +value <= 9 && event.code !== 'Backspace') {
+  onDigitInput(event: any) {
+    let value = event.srcElement.value;
+    if (value && !isNaN(value) && event.code !== 'Backspace') {
       event.srcElement.nextElementSibling.focus();
     }
     if (event.code === 'Enter') {

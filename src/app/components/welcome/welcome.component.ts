@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { WebcamImage } from 'ngx-webcam';
 import { Intern } from 'src/app/models/intern';
 import { RegisterService } from 'src/app/services/register.service';
 
