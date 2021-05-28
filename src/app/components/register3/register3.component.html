@@ -14,11 +14,11 @@
                   </webcam>
                   <br/>
                   <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-                  <br/>
                 </div> 
               <div class="snapshot" *ngIf="webcamImage">
                 <img [src]="webcamImage.imageAsDataUrl" height="250"/>
-                <button routerLink="/welcome" (click)="register()">Continue</button>
+                <br>
+                <button class="mt-1" routerLink="/welcome" (click)="register()">Continue</button>
               </div>
               
               <h4 *ngIf="errors.length > 0">Messages:</h4>
