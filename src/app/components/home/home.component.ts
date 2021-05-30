@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
   }
   supervisor(): void {
     this.choice = "supervisor";
-    console.log();
-    
   }
 
 }
