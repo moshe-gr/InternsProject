@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -14,12 +15,14 @@ export class Register1Component implements OnInit {
   fullName: string = '';
   passport: number;
   telephone: string = '';
-  constructor(private registerService: RegisterService, private usersService: UsersService, private router: Router) { }
+  constructor(private registerService: RegisterService, private usersService: UsersService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
+    config.backdrop = 'static';
+   }
 
   ngOnInit(): void {
   }
   
-  register(event?: any) {  
+  register(content, event?: any) {  
     if (!event || event.code === 'Enter') {     
       if (!this.usersService.getUser(this.passport)) {
         this.registerService.user.id = this.id;
@@ -30,9 +33,12 @@ export class Register1Component implements OnInit {
         this.router.navigate(['/register2']);
       }
       else {
-        alert("User allready exists");
+        this.open(content);
       }
     }
   }
   
+  open(content) {
+    this.modalService.open(content);
+  }
 }

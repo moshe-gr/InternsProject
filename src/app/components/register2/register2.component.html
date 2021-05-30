@@ -22,9 +22,26 @@
             <div class="text-danger" *ngIf="wrong"><small>Wrong code please try again!</small></div>
             <div class="my-4">I did not receive, <a routerLink="/register2">resend</a>
                 <br>
-                <a routerLink="/register1">Wrong number?</a>
+                <a routerLink="/register2" (click)="open(content)">Wrong number?</a>
             </div>
             <button class="py-2 px-4" (click)="register()">CONTINUE</button>
         </div>
     </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update phone number</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <label class="form-label">Pohne number
+          <input type="text" class="form-control" placeholder="055-555-5555" ngModel #telephone="ngModel" name="telephone" pattern="[0-9]{10}" required>
+        </label>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="telephone.invalid" type="button" class="btn btn-outline-dark" (click)="c('Save click'); save(telephone.value)">Save</button>
+    </div>
+</ng-template>

@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Questionnaire2Component } from './components/questionnaire2/questionnaire2.component';
 import { ReadyComponent } from './components/ready/ready.component';
 import { LoginComponent } from './components/login/login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { LoginComponent } from './components/login/login.component';
     WebcamModule,
     BrowserAnimationsModule,
     MatIconModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

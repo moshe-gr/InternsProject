@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -18,7 +19,9 @@ export class Register2Component implements OnInit {
   third: number;
   fourth: number;
   
-  constructor(private registerService: RegisterService, private router: Router) { }
+  constructor(private registerService: RegisterService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
+    config.backdrop = 'static';
+   }
 
   ngOnInit(): void {
     this.name = this.registerService.user.firstName;
@@ -43,6 +46,14 @@ export class Register2Component implements OnInit {
     else if (event.code === 'Backspace' && !value) {
       event.srcElement.previousElementSibling.focus();
     }
+  }
+
+  open(content) {
+    this.modalService.open(content);
+  }
+
+  save(telephone: string){
+    this.telephone = telephone;
   }
 
 }

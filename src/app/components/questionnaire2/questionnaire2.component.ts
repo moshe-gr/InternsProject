@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Questionnaire2Component implements OnInit {
 
+  medInst: string;
+  residency: string;
+  department: string;
+  yInRes: number;
   constructor() { }
 
   ngOnInit(): void {

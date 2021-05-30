@@ -7,7 +7,7 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-9">
-            <h1>Welcome intern!</h1>
+            <h1>Welcome&nbsp;intern!</h1>
             <h6 class="my-3">please fill in the following fields to create an acounnt</h6>
             <form #regForm="ngForm">
                 <div class="row my-3">            
@@ -18,7 +18,7 @@
                     </label>                 
                     <label class="form-label col-md-4">
                         Full name
-                        <input type="text" class="form-control" placeholder="name" [(ngModel)] = "fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{1,} [A-Za-z]{1,}" required>
+                        <input type="text" class="form-control" placeholder="first last" [(ngModel)] = "fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{1,} [A-Za-z]{1,}" required>
                         <small class="text-danger" *ngIf="name.touched && name.errors?.required">This is required.</small>
                         <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">please enter full name.</small>
                     </label>       
@@ -31,12 +31,24 @@
                 <div class="row my-3">
                     <label class="form-label col-md-8">
                         Pohne number
-                        <input type="tel" class="form-control" placeholder="123-4567890" [(ngModel)] = "telephone" name="tel" pattern="[0-9]{3}-[0-9]{7}" required>
+                        <input type="tel" class="form-control" placeholder="055-555-5555" [(ngModel)] = "telephone" name="tel" pattern="[0-9]{10}" required>
                         <small class="fw-bold">A verification code will be sent to you to this number</small>
                     </label>
                 </div>
-                <button [disabled]="regForm.invalid" (click)="register()" (keyup)="register($event)" type="submit" class="py-2 px-4">CONTINUE</button>
+                <button [disabled]="regForm.invalid" (click)="register(content)" (keyup)="register($event)" type="submit" class="py-2 px-4">CONTINUE</button>
             </form>
         </div>
     </div>
 </div>
+
+<ng-template #content let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" class="text-danger">User alredy exists!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Please login to continue.</p>
+    </div>
+  </ng-template>

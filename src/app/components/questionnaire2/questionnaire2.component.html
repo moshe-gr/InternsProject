@@ -11,16 +11,16 @@
             <h1>Please tell us about yourself professionally</h1>
             <form #quesForm2="ngForm">
                 <div class="row">
-                    <label class="col-md-4 form-label">Medical institution<input class="form-control" type="text" name="medInst" required></label>
-                    <label class="col-md-4 form-label">Residency<select class="form-select">
+                    <label class="col-md-4 form-label">Medical institution<input class="form-control" type="text" name="medInst" [(ngModel)]="medInst" required></label>
+                    <label class="col-md-4 form-label">Residency<select class="form-select" [(ngModel)]="residency" name="residency" required>
                         <option>Choose</option>
                     </select></label>
-                    <label class="col-md-4 form-label">Department<select class="form-select" name="dep" required>
+                    <label class="col-md-4 form-label">Department<select class="form-select" name="dep" [(ngModel)]="department" required>
                         <option>Choose</option>
                     </select></label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range" name="yInRes" required></label>
+                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range" name="yInRes" [(ngModel)]="yInRes" required></label>
                 </div>
                 <button class="py-2 px-4" routerLink="/ready">DONE!</button>
             </form>
@@ -29,9 +29,9 @@
         <footer class="row pt-5 mt-5">
             <small class="col-6">65% Completed</small>
             <span class="col-6 text-end">
-                <mat-icon>west</mat-icon>
+                <mat-icon style="cursor:pointer;" routerLink="/questionnaire1">west</mat-icon>
                 &nbsp;&nbsp;
-                <mat-icon>east</mat-icon>
+                <mat-icon style="cursor:pointer;" routerLink="/ready">east</mat-icon>
             </span>
             <div class="progress p-0">
                 <div class="progress-bar bg-success" style="width: 65%;"></div>
