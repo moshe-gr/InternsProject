@@ -10,12 +10,12 @@
             <h1><span class="text-success">&#10003;</span>Your profile is ready!</h1>
             <br>
             <p>Now you can start using the simulator system: practice, do tests and monitor your progress.</p>
-            <button [disabled]="" class="py-2 px-4">LOG IN</button>
+            <button [disabled]="!registerService.user.persinal || !registerService.user.professional" class="py-2 px-4" (click)="updateProfile()">LOG IN</button>
         </div>
         <footer class="row pt-5 mt-5">
             <small class="col-6">100% Completed</small>
             <span class="col-6 text-end">
-                <mat-icon routerLink="/questionnaire2" style="cursor:pointer;">west</mat-icon>
+                <mat-icon title="prev" routerLink="/questionnaire2" style="cursor:pointer;">west</mat-icon>
                 &nbsp;&nbsp;
                 <mat-icon style="opacity: 0.3;">east</mat-icon>
             </span>

@@ -25,7 +25,7 @@
                         <option>Choose</option>
                     </select></label>
                 </div>
-                <button class="py-2 px-4" routerLink="/questionnaire2">NEXT</button>
+                <button class="py-2 px-4" [disabled]="quesForm1.invalid" routerLink="/questionnaire2" (click)="updateProfile()">NEXT</button>
             </form>
         </div>
         <br><br>
@@ -34,7 +34,7 @@
             <span class="col-6 text-end">
                 <mat-icon style="opacity: 0.3;">west</mat-icon>
                 &nbsp;&nbsp;
-                <mat-icon style="cursor:pointer;" routerLink="/questionnaire2">east</mat-icon>
+                <mat-icon style="cursor:pointer;" title="next" routerLink="/questionnaire2">east</mat-icon>
             </span>
             <div class="progress">
                 <div class="progress-bar bg-success"></div>

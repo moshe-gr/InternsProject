@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-questionnaire2',
@@ -11,9 +12,17 @@ export class Questionnaire2Component implements OnInit {
   residency: string;
   department: string;
   yInRes: number;
-  constructor() { }
+  constructor(private registerService: RegisterService) { }
 
   ngOnInit(): void {
   }
 
+  updateProfile(){
+    this.registerService.user.professional = {
+      medInst: this.medInst,
+      residency: this.residency,
+      department: this.department,
+      yearInResidency: this.yInRes
+    };
+  }
 }

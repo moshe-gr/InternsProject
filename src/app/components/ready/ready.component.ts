@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-ready',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReadyComponent implements OnInit {
 
-  constructor() { }
+  constructor(public registerService: RegisterService) {
+   }
 
   ngOnInit(): void {
   }
 
+  updateProfile(){
+    
+  }
 }

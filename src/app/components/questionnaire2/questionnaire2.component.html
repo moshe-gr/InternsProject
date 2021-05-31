@@ -20,18 +20,18 @@
                     </select></label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Year in residency<input type="range" class="form-range" name="yInRes" [(ngModel)]="yInRes" required></label>
+                    <label class="col-md-4 form-label">Year in residency<input type="range" max="5" class="form-range" value="2" name="yInRes" [(ngModel)]="yInRes" required></label>
                 </div>
-                <button class="py-2 px-4" routerLink="/ready">DONE!</button>
+                <button class="py-2 px-4" [disabled]="quesForm2.invalid" routerLink="/ready" (click)="updateProfile()">DONE!</button>
             </form>
         </div>
         <br><br>
         <footer class="row pt-5 mt-5">
             <small class="col-6">65% Completed</small>
             <span class="col-6 text-end">
-                <mat-icon style="cursor:pointer;" routerLink="/questionnaire1">west</mat-icon>
+                <mat-icon style="cursor:pointer;" title="prev" routerLink="/questionnaire1">west</mat-icon>
                 &nbsp;&nbsp;
-                <mat-icon style="cursor:pointer;" routerLink="/ready">east</mat-icon>
+                <mat-icon style="cursor:pointer;" title="next" routerLink="/ready">east</mat-icon>
             </span>
             <div class="progress p-0">
                 <div class="progress-bar bg-success" style="width: 65%;"></div>
