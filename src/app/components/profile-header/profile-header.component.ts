@@ -9,6 +9,7 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class ProfileHeaderComponent implements OnInit {
 
+  collapsed = false;
   user: Intern;
   constructor(registerService: RegisterService) {
     this.user = registerService.user;

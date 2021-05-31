@@ -1,16 +1,10 @@
-<p class="d-flex justify-content-end mx-2 my-3">
-    <img [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" style="border-radius: 10rem;">
-</p>
-
-<div class="row">
-    <div class="col">
-      <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><img [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" style="border-radius: 10rem;"></button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem>Action - 1</button>
-          <button ngbDropdownItem>Another Action</button>
-          <button ngbDropdownItem>Something else is here</button>
-        </div>
-      </div>
+<div class="mx-2 my-3 text-end">
+  <div ngbDropdown class="d-inline-block" #profileDrop="ngbDropdown" placement="bottom-right">
+    <img ngbDropdownAnchor [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" style="border-radius: 10rem;" id="dropdownBasic1" (mouseover)="profileDrop.open()">
+    <div ngbDropdownMenu (mouseleave)="profileDrop.close()">
+      <button ngbDropdownItem>Action - 1</button>
+      <button ngbDropdownItem>Another Action</button>
+      <button ngbDropdownItem>Something else is here</button>
     </div>
+  </div>
 </div>
