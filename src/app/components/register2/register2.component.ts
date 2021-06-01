@@ -21,6 +21,8 @@ export class Register2Component implements OnInit {
   
   constructor(private registerService: RegisterService, private router: Router, config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
    }
 
   ngOnInit(): void {
@@ -33,6 +35,13 @@ export class Register2Component implements OnInit {
     }
     else {
       this.wrong = true;
+      setTimeout(() => {
+        this.first = null;
+        this.second = null;
+        this.third = null;
+        this.fourth = null;
+        this.wrong = false;
+      }, 450)
     }
   }
   onDigitInput(event: any) {
@@ -56,4 +65,7 @@ export class Register2Component implements OnInit {
     this.telephone = telephone;
   }
 
+  resend(){
+    this.router.navigate(["/register2"]);
+  }
 }
