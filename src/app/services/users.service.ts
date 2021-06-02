@@ -18,11 +18,11 @@ export class UsersService {
   getUsers() {
     return this.users;
   }
-  updateUser(passport: number, update: Intern) {
-    this._users.splice(this._users.findIndex(
-      () => this._users.find(
-        intern => intern.passport == passport
-      )), 1, update);
+  updateUser(passport: number, update: {}) {
+    let user = this._users.find(intern => intern.passport == passport);
+    for (let key of Object.keys(update)) {
+      user[key] = update[key];
+    }
     this.users.next(this._users);
   }
   getUser(passport: number) {

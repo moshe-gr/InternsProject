@@ -7,7 +7,7 @@ export interface Intern {
     passport: number,
     telephone: string,
     pic?: WebcamImage,
-    persinal?: {
+    personal?: {
         age: number,
         country: string,
         city: string,

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
 import { Observable, Subject } from 'rxjs';
 import { Intern } from 'src/app/models/intern';
 import { RegisterService } from 'src/app/services/register.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-register3',
@@ -20,7 +22,7 @@ export class Register3Component implements OnInit {
   user: Intern;
   public webcamImage: WebcamImage;
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService, private userService: UsersService, private router: Router) {
     this.user = registerService.user;
   }
   
@@ -42,14 +44,30 @@ export class Register3Component implements OnInit {
   public handleImage(webcamImage: WebcamImage): void {
     console.log('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
-    this.registerService.user.pic = webcamImage;
   }
 
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
   register(): void{
-    this.registerService.registerUser();
+    if (!this.registerService.user.pic) {
+      this.registerService.user.pic = this.webcamImage;
+      this.registerService.registerUser();
+      this.router.navigate(["/welcome"]);
+    }
+    else {
+      this.registerService.user.pic = this.webcamImage;
+      this.userService.updateUser(this.user.passport, { pic: this.webcamImage });
+      if (!this.registerService.user.personal) {
+        this.router.navigate(["/questionnaire1"]);
+      }
+      else if (!this.registerService.user.professional) {
+        this.router.navigate(["/questionnaire2"]);
+      }
+      else {
+        this.router.navigate(["/..."]);
+      }
+    }
   }
 
 }

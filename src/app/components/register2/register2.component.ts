@@ -33,7 +33,7 @@ export class Register2Component implements OnInit {
       if(!this.user.pic){
         this.router.navigate(["/register3"]);
       }
-      else if(!this.user.persinal){
+      else if(!this.user.personal){
         this.router.navigate(["/questionnaire1"]);
       }
       else{

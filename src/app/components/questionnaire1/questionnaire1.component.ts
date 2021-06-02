@@ -13,13 +13,14 @@ export class Questionnaire1Component implements OnInit {
   city: string;
   gradYear: number;
   acdInst: string;
+
   constructor(private registerService: RegisterService) { }
 
   ngOnInit(): void {
   }
 
   updateProfile(){
-    this.registerService.user.persinal = {
+    this.registerService.user.personal = {
       age: this.age,
       country: this.country,
       city: this.city,

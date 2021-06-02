@@ -2,11 +2,11 @@
   <div ngbDropdown class="d-inline-block" #profileDrop="ngbDropdown" placement="bottom-right">
     <img ngbDropdownAnchor [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" style="border-radius: 10rem;" id="dropdownBasic1" (mouseover)="profileDrop.open()">
     <div ngbDropdownMenu (mouseleave)="profileDrop.close()">
-      <div class="fw-bold text-center" ngbDropdownItem>{{ user.firstName }}</div>
-      <div class="fw-bold text-center" ngbDropdownItem>{{ user.surName }}</div>
-      <button ngbDropdownItem>Edit personal</button>
-      <button ngbDropdownItem>Edit professionall</button>
-      <button ngbDropdownItem>Change pic</button>
+      <div class="fw-bold text-center">{{ user.firstName }}</div>
+      <div class="fw-bold text-center">{{ user.surName }}</div>
+      <button ngbDropdownItem routerLink="/questionnaire1">Edit personal</button>
+      <button ngbDropdownItem routerLink="/questionnaire2">Edit professionall</button>
+      <button ngbDropdownItem routerLink="/register3">Change pic</button>
       <button ngbDropdownItem routerLink="/">Logout</button>
     </div>
   </div>
