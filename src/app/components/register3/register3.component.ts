@@ -25,6 +25,7 @@ export class Register3Component implements OnInit {
   }
   
   ngOnInit(): void {
+    setTimeout(() => this.triggerSnapshot(), 5 * 1000);
   }
 
   public triggerSnapshot(): void {
@@ -47,7 +48,7 @@ export class Register3Component implements OnInit {
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
-  register() {
+  register(): void{
     this.registerService.registerUser();
   }
 

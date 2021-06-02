@@ -7,11 +7,11 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-8">
-            <h3>Hi {{ name }}!</h3>
+            <h3>Hi {{ user.firstName }}!</h3>
             <div>
                 You will recive a verification code to:
                 <div class="fw-bold mb-2">
-                    <small> {{ telephone }}</small>
+                    <small> {{ user.telephone }}</small>
                 </div>
             </div>
             <div><small>type the mobile verification code you received</small></div>
@@ -19,7 +19,7 @@
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" [ngClass]="{'bg-danger text-white border-0': wrong}" type="number" [(ngModel)]="second" required>
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" [ngClass]="{'bg-danger text-white border-0': wrong}" type="number" [(ngModel)]="third" required>
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" [ngClass]="{'bg-danger text-white border-0': wrong}" type="number" [(ngModel)]="fourth" required>
-            <div class="my-4">I did not receive, <button (click)="resend()">resend</button>
+            <div class="my-4">I did not receive, <a routerLink="/register2">resend</a>
                 <br>
                 <a routerLink="/register2" (click)="open(content)">Wrong number?</a>
             </div>

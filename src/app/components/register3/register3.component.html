@@ -10,10 +10,8 @@
             <div class="text-center">
                 <div *ngIf="!webcamImage && errors.length == 0">
                   <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
-                  (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
+                    (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
                   </webcam>
-                  <br/>
-                  <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
                 </div> 
               <div class="snapshot" *ngIf="webcamImage">
                 <img [src]="webcamImage.imageAsDataUrl" height="250"/>
