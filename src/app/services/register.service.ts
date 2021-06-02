@@ -7,10 +7,12 @@ import { UsersService } from './users.service';
 })
 export class RegisterService {
 
-  user: Intern = { id: 0, firstName: '', surName: '', passport: 0, telephone: '' };
+  user: Intern = { id: 0, first_name: '', last_name: '', passport: 0, telephone: '' };
 
   constructor(private usersService: UsersService) { }
   registerUser() {
-    this.usersService.addUser(Object.assign({}, this.user));
+    this.usersService.addUser(Object.assign({}, this.user)).subscribe(user => this.user = user);
+    console.log(this.user);
+    
   }
 }

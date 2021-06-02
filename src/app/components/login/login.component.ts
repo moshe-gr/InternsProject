@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Intern } from 'src/app/models/intern';
+import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -12,7 +14,8 @@ import { UsersService } from 'src/app/services/users.service';
 export class LoginComponent implements OnInit {
 
   passport: number;
-  constructor(private usersService: UsersService, private registerService: RegisterService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
+
+  constructor(private authService: AuthService, private registerService: RegisterService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
     config.backdrop = 'static';
   }
 
@@ -20,14 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   login(content) {
-    let user = this.usersService.getUser(this.passport);
-    if (user) {
+    this.authService.login(this.passport).subscribe(
+      user => {
       this.registerService.user = user;
       this.router.navigate(["/register2"]);
-    }
-    else {
-      this.open(content);
-    }
+      },
+      err => {        
+        if (err.status == 404) {
+          this.open(content);
+        }
+      }
+    );
   }
 
   open(content) {

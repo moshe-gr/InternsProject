@@ -1,9 +1,10 @@
 import { WebcamImage } from "ngx-webcam";
 
 export interface Intern {
+    _id?: string,
     id: number,
-    firstName: string,
-    surName: string,
+    first_name: string,
+    last_name: string,
     passport: number,
     telephone: string,
     pic?: WebcamImage,

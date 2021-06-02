@@ -57,7 +57,7 @@ export class Register3Component implements OnInit {
     }
     else {
       this.registerService.user.pic = this.webcamImage;
-      this.userService.updateUser(this.user.passport, { pic: this.webcamImage });
+      this.userService.updateUser(this.user._id, { pic: this.webcamImage }).subscribe();
       if (!this.registerService.user.personal) {
         this.router.navigate(["/questionnaire1"]);
       }

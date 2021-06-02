@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -15,7 +16,7 @@ export class Register1Component implements OnInit {
   fullName: string = '';
   passport: number;
   telephone: string = '';
-  constructor(private registerService: RegisterService, private usersService: UsersService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private authService: AuthService, private registerService: RegisterService, private usersService: UsersService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
    }
 
@@ -23,18 +24,21 @@ export class Register1Component implements OnInit {
   }
   
   register(content, event?: any) {  
-    if (!event || event.code === 'Enter') {     
-      if (!this.usersService.getUser(this.passport)) {
-        this.registerService.user.id = this.id;
-        this.registerService.user.firstName = this.fullName.split(" ")[0];
-        this.registerService.user.surName = this.fullName.split(" ")[1];
-        this.registerService.user.passport = this.passport;
-        this.registerService.user.telephone = this.telephone;
-        this.router.navigate(['/register2']);
-      }
-      else {
+    if (!event || event.code === 'Enter') {
+      this.authService.login(this.passport).subscribe(
+      () => {
         this.open(content);
-      }
+      },
+      err => {
+        if (err.status == 404) {
+          this.registerService.user.id = this.id;
+          this.registerService.user.first_name = this.fullName.split(" ")[0];
+          this.registerService.user.last_name = this.fullName.split(" ")[1];
+          this.registerService.user.passport = this.passport;
+          this.registerService.user.telephone = this.telephone;
+          this.router.navigate(['/register2']);
+        }
+      })
     }
   }
   

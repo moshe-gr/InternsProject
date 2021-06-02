@@ -15,6 +15,6 @@ export class ReadyComponent implements OnInit {
   }
 
   updateProfile() {
-    this.userService.updateUser(this.registerService.user.passport, { personal: this.registerService.user.personal, professional: this.registerService.user.professional });
+    this.userService.updateUser(this.registerService.user._id, { personal: this.registerService.user.personal, professional: this.registerService.user.professional }).subscribe();
   }
 }

@@ -1,5 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Intern } from '../models/intern';
 
 @Injectable({
@@ -7,28 +8,32 @@ import { Intern } from '../models/intern';
 })
 export class UsersService {
 
-  private _users: Intern[] = [];
-  private users: BehaviorSubject<Intern[]> = new BehaviorSubject<Intern[]>(this._users);
-  constructor() { }
+  baseUrl = "http://localhost:8080/";
+  token: string;
 
-  addUser(user:Intern) {
-    this._users = [...this._users, user];
-    this.users.next(this._users);
+  constructor(private httpClient: HttpClient) { }
+
+  addUser(user:Intern, headers?): Observable<any> {
+    return this.httpClient.post(this.baseUrl + 'api/users/create', user, this.getOptions(headers));
   }
-  getUsers() {
-    return this.users;
+
+  getUsers(headers?): Observable<any>{
+    return this.httpClient.get(this.baseUrl + 'api/users/getAll', this.getOptions(headers));
   }
-  updateUser(passport: number, update: {}) {
-    let user = this._users.find(intern => intern.passport == passport);
-    for (let key of Object.keys(update)) {
-      user[key] = update[key];
-    }
-    this.users.next(this._users);
+
+  updateUser(_id: string, update: {}, headers?): Observable<any>{
+    return this.httpClient.put(this.baseUrl + 'api/users/' + _id, update, this.getOptions(headers));
   }
-  getUser(passport: number) {
-    let user;
-    this.getUsers().subscribe(users => user = users.find(user => user.passport == passport));
-    return user;
+
+  getUser(_id: string, headers?): Observable<any>{
+    return this.httpClient.get(this.baseUrl + 'api/users/' + _id, this.getOptions(headers));
+  }
+
+  getOptions(headers?) {
+    headers = headers ? headers : {};
+    headers['content-type'] = 'application/json';
+    headers['x-access-token'] = this.token;
+    return { headers: new HttpHeaders(headers) };
   }
 
 }
