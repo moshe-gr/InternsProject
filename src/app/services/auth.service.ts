@@ -26,4 +26,8 @@ export class AuthService {
   cancel(reqId: string): Observable<any>{
     return this.httpClient.post(this.baseUrl + 'cancel', { request_id: reqId })
   }
+
+  faceDetect(pic): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic })
+  }
 }

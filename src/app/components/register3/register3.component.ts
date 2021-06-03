@@ -4,6 +4,7 @@ import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
 import { Observable, Subject } from 'rxjs';
 import { Intern } from 'src/app/models/intern';
+import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -22,12 +23,20 @@ export class Register3Component implements OnInit {
   user: Intern;
   public webcamImage: WebcamImage;
 
-  constructor(private registerService: RegisterService, private userService: UsersService, private router: Router) {
+  constructor(private authService: AuthService, private registerService: RegisterService, private userService: UsersService, private router: Router) {
     this.user = registerService.user;
   }
   
   ngOnInit(): void {
-    setTimeout(() => this.triggerSnapshot(), 5 * 1000);
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => this.triggerSnapshot(), 1 * 1000);
+      this.authService.faceDetect(this.webcamImage).subscribe(
+        () => { i = 10; },
+        (err) => { this.webcamImage = null;
+          console.log(err.error.msg); 
+        }
+      );
+    }
   }
 
   public triggerSnapshot(): void {
@@ -49,6 +58,7 @@ export class Register3Component implements OnInit {
   public get triggerObservable(): Observable<void> {
     return this.trigger.asObservable();
   }
+
   register(): void{
     if (!this.registerService.user.pic) {
       this.registerService.user.pic = this.webcamImage;
