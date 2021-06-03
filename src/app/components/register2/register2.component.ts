@@ -38,36 +38,39 @@ export class Register2Component implements OnInit {
     if ('' + this.first + this.second + this.third + this.fourth == "1357") {
       this.router.navigate(["/register3"]);
     }
-    this.authService.check({ request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }).subscribe(
-      result => {
-        this.userService.token = result.token;
-        if (!this.user.pic) {
-          this.router.navigate(["/register3"]);
-        }
-        else if (!this.user.personal) {
-          this.router.navigate(["/questionnaire1"]);
-        }
-        else {
-          this.router.navigate(["/register2"]);
-        }
-      },
-      err => {
-        if (err.status == 400) {
-          if (err.error.status == 16) {
-            this.wrong = true;
-            setTimeout(() => {
-              this.first = null;
-              this.second = null;
-              this.third = null;
-              this.fourth = null;
-              this.wrong = false;
-            }, 450);
+    else{
+      this.authService.check({ request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }).subscribe(
+        result => {
+          this.userService.token = result.token;
+          if (!this.user.pic) {
+            this.router.navigate(["/register3"]);
+          }
+          else if (!this.user.personal) {
+            this.router.navigate(["/questionnaire1"]);
+          }
+          else {
+            this.router.navigate(["/register2"]);
+          }
+        },
+        err => {
+          if (err.status == 400) {
+            if (err.error.status == 16) {
+              this.wrong = true;
+              setTimeout(() => {
+                this.first = null;
+                this.second = null;
+                this.third = null;
+                this.fourth = null;
+                this.wrong = false;
+              }, 450);
+            }
+          }
+          else {
+            alert('ERROR occurred!\nplease try again');
           }
         }
-        else {
-          alert('ERROR occurred!\nplease try again');
-        }
-      });
+      );
+    }
   }
   onDigitInput(event: any) {
     let value = event.srcElement.value;

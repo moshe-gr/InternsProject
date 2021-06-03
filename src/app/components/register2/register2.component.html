@@ -21,7 +21,7 @@
             <input max="9" min="0" (keyup)="onDigitInput($event)" class="m-1 m-lg-2" [ngClass]="{'bg-danger text-white border-0': wrong}" type="number" [(ngModel)]="fourth" required>
             <div class="my-4">I did not receive, <a routerLink="/register2">resend</a>
                 <br>
-                <a routerLink="/register2" (click)="open(content)">Wrong number?</a>
+                <a class="link" style="cursor: pointer;" (click)="open(content)">Wrong number?</a>
             </div>
             <button class="py-2 px-4" (click)="register()">CONTINUE</button>
         </div>
@@ -41,6 +41,6 @@
         </label>
     </div>
     <div class="modal-footer">
-      <button [disabled]="telephone.invalid" type="button" class="btn btn-outline-dark" (click)="c('Save click'); save(telephone.value)">Save</button>
+      <button [disabled]="telephone.invalid" type="button" class="btn btn-outline-dark" (click)="c('Save click'); save(telephone.value)" routerLink="/register2">Save</button>
     </div>
 </ng-template>
