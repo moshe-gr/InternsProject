@@ -28,15 +28,15 @@ export class Register3Component implements OnInit {
   }
   
   ngOnInit(): void {
-    for (let i = 0; i < 10; i++) {
-      setTimeout(() => this.triggerSnapshot(), 1 * 1000);
-      this.authService.faceDetect(this.webcamImage).subscribe(
-        () => { i = 10; },
-        (err) => { this.webcamImage = null;
-          console.log(err.error.msg); 
-        }
-      );
-    }
+      setTimeout(() => {
+        this.triggerSnapshot();
+        this.authService.faceDetect(this.webcamImage).subscribe(
+          () => { },
+          (err) => {
+            console.log(err.error.msg);
+          }
+        );
+      }, 2 * 1000);
   }
 
   public triggerSnapshot(): void {

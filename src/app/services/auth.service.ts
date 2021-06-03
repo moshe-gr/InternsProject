@@ -28,6 +28,6 @@ export class AuthService {
   }
 
   faceDetect(pic): Observable<any>{
-    return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic })
+    return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic.imageAsBase64 })
   }
 }
