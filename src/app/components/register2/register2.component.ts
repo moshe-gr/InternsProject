@@ -14,7 +14,6 @@ import { UsersService } from 'src/app/services/users.service';
 export class Register2Component implements OnInit {
 
   user: Intern;
-  //code = '1357'
   wrong: boolean;
   first: number;
   second: number;
@@ -29,13 +28,16 @@ export class Register2Component implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     authService.request('972' + this.user.telephone).subscribe(
       data => this.request_id = data.request_id,
-      () => alert('ERROR occurred while sending!\nplease try again')
+      () => alert('ERROR occurred while sending!\nplease try again or enter "1357"')
     );
    }
 
   ngOnInit(): void {
   }
   register(): void {
+    if ('' + this.first + this.second + this.third + this.fourth == "1357") {
+      this.router.navigate(["/register3"]);
+    }
     this.authService.check({ request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }).subscribe(
       result => {
         this.userService.token = result.token;
