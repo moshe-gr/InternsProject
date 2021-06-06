@@ -4,19 +4,17 @@
 <div class="container-fluid d-flex justify-content-center pos-lower">
     <div class="row">
         <div class="col-md-6">
-            <h3>{{ user.first_name }}, please look straight at the camera so we can spot you</h3>
+            <h3>{{ user.first_name }}, {{ msg }}</h3>
         </div>
         <div class="col-md-6">
-            <div class="text-center">
-                <div *ngIf="!webcamImage && errors.length == 0">
-                  <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
-                    (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
-                  </webcam>
-                </div> 
+            <div class="text-center border border-5" style="width:fit-content;" [ngClass]="{ 'border-danger': numTry == 5, 'border-success': webcamImage }">
+              <div *ngIf="!webcamImage && errors.length == 0">
+                <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
+                  (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
+                </webcam>
+              </div> 
               <div class="snapshot" *ngIf="webcamImage">
                 <img [src]="webcamImage.imageAsDataUrl" height="250"/>
-                <br>
-                <button class="mt-1" (click)="register()">Continue</button>
               </div>
               
               <h4 *ngIf="errors.length > 0">Messages:</h4>

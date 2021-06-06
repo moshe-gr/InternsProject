@@ -21,6 +21,9 @@ export class Register3Component implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
 
   user: Intern;
+  msg: string = "please look straight at the camera so we can spot you";
+  numTry: number = 0;
+  detect;
   public webcamImage: WebcamImage;
 
   constructor(private authService: AuthService, private registerService: RegisterService, private userService: UsersService, private router: Router) {
@@ -28,15 +31,14 @@ export class Register3Component implements OnInit {
   }
   
   ngOnInit(): void {
-      setTimeout(() => {
-        this.triggerSnapshot();
-        this.authService.faceDetect(this.webcamImage).subscribe(
-          () => { },
-          (err) => {
-            console.log(err.error.msg);
-          }
-        );
-      }, 2 * 1000);
+    this.detect = setInterval(() => {
+      this.triggerSnapshot();
+      this.numTry++;
+      if (this.numTry == 5) {
+        clearInterval(this.detect);
+        this.msg = "To many trys detection faild"
+      }
+    }, 3 * 1000);
   }
 
   public triggerSnapshot(): void {
@@ -52,7 +54,17 @@ export class Register3Component implements OnInit {
 
   public handleImage(webcamImage: WebcamImage): void {
     console.log('received webcam image', webcamImage);
-    this.webcamImage = webcamImage;
+    this.authService.faceDetect(webcamImage).subscribe(
+      () => {
+        this.webcamImage = webcamImage;
+        clearInterval(this.detect);
+        this.msg = "Thanks this will use as yuor profile pic";
+        setTimeout(() => this.register(), 2 * 1000);
+      },
+      (err) => {
+        this.msg = "ERROR: " + err.error.msg;
+      }
+    );
   }
 
   public get triggerObservable(): Observable<void> {
