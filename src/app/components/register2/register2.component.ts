@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import * as EventEmitter from 'events';
 import { Intern } from 'src/app/models/intern';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -73,18 +74,18 @@ export class Register2Component implements OnInit {
     }
   }
   onDigitInput(event: any) {
-    let value = event.srcElement.value;
+    let value = event.target.value;
     if (value && !isNaN(value) && event.code !== 'Backspace') {
-      while(event.srcElement.value > 9){
-        event.srcElement.value = Math.floor(event.srcElement.value / 10);
+      while(event.target.value > 9){
+        event.target.value = Math.floor(event.target.value / 10);
       }
-      event.srcElement.nextElementSibling.focus();
+      event.target.nextElementSibling.focus();
     }
     if (event.code === 'Enter') {
       this.register();
     }
     else if (event.code === 'Backspace' && !value) {
-      event.srcElement.previousElementSibling.focus();
+      event.target.previousElementSibling.focus();
     }
   }
 
