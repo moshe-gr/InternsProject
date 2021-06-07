@@ -28,7 +28,7 @@ export class ConsoleComponent implements OnInit {
     { id: 0, first_name: 'mhyx', last_name: 'yryy', passport: 14, telephone: '14', rolNumber: 2 },
     { id: 0, first_name: 'wea', last_name: 'wrrr', passport: 15, telephone: '15', rolNumber: 2 }
   ];
-  searchResults: Intern[];
+  searchResults: Intern[] = [];
   searchInput: string;
   usersToShow: Intern[];
 

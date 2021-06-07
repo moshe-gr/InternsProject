@@ -7,7 +7,7 @@
                 Search
             </button>
         </div>
-        <div [ngClass]="{ 'border': searchResults }">
+        <div [ngClass]="{ 'border': searchResults.length }">
             <div *ngFor="let result of searchResults" class="result" (click)="search(result.first_name, result.last_name)">
                 {{ result.first_name }} {{ result.last_name }}
             </div>
