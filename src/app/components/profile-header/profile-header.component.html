@@ -1,6 +1,6 @@
 <div class="mx-2 my-3 text-end">
   <div ngbDropdown class="d-inline-block" #profileDrop="ngbDropdown" placement="bottom-right">
-    <img ngbDropdownAnchor [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" style="border-radius: 10rem;" id="dropdownBasic1" (mouseover)="profileDrop.open()">
+    <img ngbDropdownAnchor [src]="user.pic?.imageAsDataUrl" alt="profile pic" height="60px" class="rounded-circle" id="dropdownBasic1" (mouseover)="profileDrop.open()">
     <div ngbDropdownMenu (mouseleave)="profileDrop.close()">
       <div class="fw-bold text-center">{{ user.first_name }}</div>
       <div class="fw-bold text-center">{{ user.last_name }}</div>
