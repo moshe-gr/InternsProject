@@ -7,7 +7,7 @@ import { UsersService } from './users.service';
 })
 export class RegisterService {
 
-  user: Intern = { id: 0, first_name: '', last_name: '', passport: 0, telephone: '' };
+  user: Intern = { id: 0, first_name: '', last_name: '', passport: 0, telephone: '', rolNumber: 2 };
 
   constructor(private usersService: UsersService) { }
   registerUser() {

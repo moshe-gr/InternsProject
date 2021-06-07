@@ -21,6 +21,8 @@ import { ReadyComponent } from './components/ready/ready.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersProgressComponent } from './components/users-progress/users-progres.component';
+import { ConsoleComponent } from './components/supervisor/console/console.component';
+import { UserCardComponent } from './components/supervisor/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { UsersProgressComponent } from './components/users-progress/users-progre
     Questionnaire2Component,
     ReadyComponent,
     LoginComponent,
-    UsersProgressComponent
+    UsersProgressComponent,
+    ConsoleComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,

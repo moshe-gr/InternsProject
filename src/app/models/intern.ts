@@ -7,6 +7,7 @@ export interface Intern {
     last_name: string,
     passport: number,
     telephone: string,
+    rolNumber: number,
     pic?: WebcamImage,
     personal?: {
         age: number,

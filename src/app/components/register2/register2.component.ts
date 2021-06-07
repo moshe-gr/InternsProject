@@ -42,14 +42,19 @@ export class Register2Component implements OnInit {
       this.authService.check({ request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }).subscribe(
         result => {
           this.userService.token = result.token;
-          if (!this.user.pic) {
-            this.router.navigate(["/register3"]);
+          if(this.user.rolNumber == 2) {
+            this.router.navigate(["/console"]);
           }
-          else if (!this.user.personal) {
-            this.router.navigate(["/questionnaire1"]);
-          }
-          else {
-            this.router.navigate(["/progress"]);
+          else{
+            if (!this.user.pic) {
+              this.router.navigate(["/register3"]);
+            }
+            else if (!this.user.personal) {
+              this.router.navigate(["/questionnaire1"]);
+            }
+            else {
+              this.router.navigate(["/progress"]);
+            }
           }
         },
         err => {

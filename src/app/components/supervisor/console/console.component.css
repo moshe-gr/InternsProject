@@ -1,0 +1,6 @@
+.result{
+    cursor: pointer;
+}
+.result:hover{
+    background-color:darkgray;
+}

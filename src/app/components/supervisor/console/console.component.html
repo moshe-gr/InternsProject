@@ -1,0 +1,19 @@
+<main class="container-fluid">
+    <h1 class="text-center my-3">Hello {{ user.first_name }}!</h1>
+    <label class="form-label my-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()">
+            <button class="btn btn-outline-secondary" type="button" (click)="search()">
+                Search
+            </button>
+        </div>
+        <div [ngClass]="{ 'border': searchResults }">
+            <div *ngFor="let result of searchResults" class="result" (click)="search(result.first_name, result.last_name)">
+                {{ result.first_name }} {{ result.last_name }}
+            </div>
+        </div>
+    </label>
+    <div class="row">
+        <app-user-card class="col-md-4 col-xl-3 py-2" [user]="user" *ngFor="let user of usersToShow"></app-user-card>
+    </div>
+</main>

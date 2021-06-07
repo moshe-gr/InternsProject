@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <h4 class="card-title col">
+                {{ user.first_name }} {{ user.last_name }}
+            </h4>
+        </div>
+        <div>
+            <img class="rounded" src="{{ user.pic?.imageAsDataUrl }}" height="70px" alt="intern pic">
+        </div>        
+        <p>
+            <button type="button" class="btn btn-primary" (click)="collapse.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed"
+              aria-controls="collapseExample">
+              {{ more }} info
+            </button>
+        </p>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div class="card">
+                <div class="card-body">                
+                    <div>
+                        <span class="text-warning font-weight-bold">Passport:</span> {{ user.passport }}
+                        <br>
+                        <span class="text-warning font-weight-bold">ID:</span> {{ user.id }}
+                        <br>
+                        <span class="text-warning font-weight-bold">Phone number:</span> {{ user.telephone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
