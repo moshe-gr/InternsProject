@@ -36,7 +36,8 @@ export class Register3Component implements OnInit {
       this.numTry++;
       if (this.numTry == 5) {
         clearInterval(this.detect);
-        this.msg = "To many trys detection faild"
+        this.msg = "To many trys detection faild";
+        setTimeout(() => this.router.navigate(['/']), 4 * 1000);
       }
     }, 3 * 1000);
   }
@@ -59,7 +60,7 @@ export class Register3Component implements OnInit {
         this.webcamImage = webcamImage;
         clearInterval(this.detect);
         this.msg = "Thanks this will use as yuor profile pic";
-        setTimeout(() => this.register(), 2 * 1000);
+        setTimeout(() => this.register(), 3 * 1000);
       },
       (err) => {
         this.msg = "ERROR: " + err.error.msg;
