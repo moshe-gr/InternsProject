@@ -20,6 +20,7 @@ import { Questionnaire2Component } from './components/questionnaire2/questionnai
 import { ReadyComponent } from './components/ready/ready.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersProgressComponent } from './components/users-progress/users-progres.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     Questionnaire1Component,
     Questionnaire2Component,
     ReadyComponent,
-    LoginComponent
+    LoginComponent,
+    UsersProgressComponent
   ],
   imports: [
     BrowserModule,

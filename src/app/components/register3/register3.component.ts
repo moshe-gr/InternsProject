@@ -87,7 +87,7 @@ export class Register3Component implements OnInit {
         this.router.navigate(["/questionnaire2"]);
       }
       else {
-        this.router.navigate(["/..."]);
+        this.router.navigate(["/progress"]);
       }
     }
   }

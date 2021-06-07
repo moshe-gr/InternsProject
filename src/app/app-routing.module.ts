@@ -8,6 +8,7 @@ import { ReadyComponent } from './components/ready/ready.component';
 import { Register1Component } from './components/register1/register1.component';
 import { Register2Component } from './components/register2/register2.component';
 import { Register3Component } from './components/register3/register3.component';
+import { UsersProgressComponent } from './components/users-progress/users-progres.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'questionnaire1', component: Questionnaire1Component },
   { path: 'questionnaire2', component: Questionnaire2Component },
   { path: 'ready', component: ReadyComponent },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent },
+  { path: 'progress', component: UsersProgressComponent }
 ];
 
 @NgModule({

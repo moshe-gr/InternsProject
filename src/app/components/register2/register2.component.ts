@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import * as EventEmitter from 'events';
 import { Intern } from 'src/app/models/intern';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
@@ -50,21 +49,24 @@ export class Register2Component implements OnInit {
             this.router.navigate(["/questionnaire1"]);
           }
           else {
-            this.router.navigate(["/register2"]);
+            this.router.navigate(["/progress"]);
           }
         },
         err => {
           if (err.status == 400) {
-            if (err.error.status == 16) {
               this.wrong = true;
               setTimeout(() => {
-                this.first = null;
-                this.second = null;
-                this.third = null;
-                this.fourth = null;
-                this.wrong = false;
-              }, 450);
-            }
+                if (err.error.status == 16) {
+                  this.first = null;
+                  this.second = null;
+                  this.third = null;
+                  this.fourth = null;
+                  this.wrong = false;
+                }
+                else if (err.error.status == 17) {
+                  this.router.navigate(["/"]);
+                }
+              }, 450);           
           }
           else {
             alert('ERROR occurred!\nplease try again');

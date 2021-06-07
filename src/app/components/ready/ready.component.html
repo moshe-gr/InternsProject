@@ -7,17 +7,32 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-8">
-            <h1><span class="text-success">&#10003;</span>Your profile is ready!</h1>
+            <h1>
+                <span class="text-success">
+                    &#10003;
+                </span>
+                Your profile is ready!
+            </h1>
             <br>
-            <p>Now you can start using the simulator system: practice, do tests and monitor your progress.</p>
-            <button [disabled]="!registerService.user.personal || !registerService.user.professional" class="py-2 px-4" (click)="updateProfile()">LOG IN</button>
+            <p>
+                Now you can start using the simulator system: practice, do tests and monitor your progress.
+            </p>
+            <button [disabled]="!registerService.user.personal || !registerService.user.professional" class="py-2 px-4" (click)="updateProfile()" routerLink="/progress">
+                LOG IN
+            </button>
         </div>
         <footer class="row pt-5 mt-5">
-            <small class="col-6">100% Completed</small>
+            <small class="col-6">
+                100% Completed
+            </small>
             <span class="col-6 text-end">
-                <mat-icon title="prev" routerLink="/questionnaire2" style="cursor:pointer;">west</mat-icon>
+                <mat-icon title="prev" routerLink="/questionnaire2" style="cursor:pointer;">
+                    west
+                </mat-icon>
                 &nbsp;&nbsp;
-                <mat-icon style="opacity: 0.3;">east</mat-icon>
+                <mat-icon style="opacity: 0.3;">
+                    east
+                </mat-icon>
             </span>
             <div class="progress p-0">
                 <div class="progress-bar bg-success" style="width: 100%;"></div>
