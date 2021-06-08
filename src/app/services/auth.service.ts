@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   baseUrl = "http://localhost:8080/auth/";
+  token: string;
 
   constructor(private httpClient: HttpClient) { }
   
@@ -30,4 +31,12 @@ export class AuthService {
   faceDetect(pic): Observable<any>{
     return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic.imageAsBase64 })
   }
+
+  getOptions(headers?) {
+    headers = headers ? headers : {};
+    headers['content-type'] = 'application/json';
+    headers['x-access-token'] = this.token;
+    return { headers: new HttpHeaders(headers) };
+  }
+  
 }

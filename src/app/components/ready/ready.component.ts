@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InternService } from 'src/app/services/intern.service';
 import { RegisterService } from 'src/app/services/register.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-ready',
@@ -9,13 +9,19 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ReadyComponent implements OnInit {
 
-  constructor(public registerService: RegisterService, private userService: UsersService) { }
+  constructor(public registerService: RegisterService, private internService: InternService) { }
 
   ngOnInit(): void {
   }
 
   updateProfile() {
-    this.userService.updateUser(this.registerService.user._id, 
-      { personal: this.registerService.user.personal, professional: this.registerService.user.professional }).subscribe();
+    this.internService.createIntern( 
+      {
+        _id: this.registerService.user._id,
+        intern_info: {
+          personal: this.registerService.user.personal,
+          professional: this.registerService.user.professional
+        }
+      }).subscribe();
   }
 }

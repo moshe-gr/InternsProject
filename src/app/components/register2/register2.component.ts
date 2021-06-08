@@ -21,7 +21,7 @@ export class Register2Component implements OnInit {
   fourth: number;
   request_id: string;
   
-  constructor(private userService: UsersService, private registerService: RegisterService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
+  constructor(private registerService: RegisterService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
     this.user = this.registerService.user;
     config.backdrop = 'static';
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -39,10 +39,12 @@ export class Register2Component implements OnInit {
       this.router.navigate(["/register3"]);
     }
     else{
-      this.authService.check({ request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }).subscribe(
+      this.authService.check(
+        { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }
+      ).subscribe(
         result => {
-          this.userService.token = result.token;
-          if(this.user.rolNumber == 2) {
+          this.authService.token = result.token;
+          if(this.user.rolNumber == 1) {
             this.router.navigate(["/console"]);
           }
           else{
