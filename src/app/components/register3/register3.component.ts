@@ -32,14 +32,20 @@ export class Register3Component implements OnInit {
   
   ngOnInit(): void {
     this.detect = setInterval(() => {
-      this.triggerSnapshot();
-      if (this.numTry == 5) {
+      if (this.errors.length > 0) {
         clearInterval(this.detect);
-        this.msg = "To many trys detection faild";
-        setTimeout(() => this.router.navigate(['/']), 4 * 1000);
+        this.msg = "ERROR: camra error";
       }
-      this.numTry++;
-    }, 3 * 1000);
+      else {
+        this.triggerSnapshot();
+        if (this.numTry == 5) {
+          clearInterval(this.detect);
+          this.msg = "To many trys detection faild";
+          setTimeout(() => this.router.navigate(['/']), 4 * 1000);
+        }
+        this.numTry++;
+      }
+    }, 2.5 * 1000);
   }
 
   public triggerSnapshot(): void {
