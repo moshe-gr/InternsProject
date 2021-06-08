@@ -4,7 +4,7 @@
         <div class="input-group">
             <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()">
             <button class="btn btn-outline-secondary" type="button" (click)="search()">
-                Search
+                <mat-icon class="pt-2">search</mat-icon>
             </button>
         </div>
         <div [ngClass]="{ 'border': searchResults.length }">

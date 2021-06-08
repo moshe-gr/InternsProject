@@ -33,12 +33,12 @@ export class Register3Component implements OnInit {
   ngOnInit(): void {
     this.detect = setInterval(() => {
       this.triggerSnapshot();
-      this.numTry++;
       if (this.numTry == 5) {
         clearInterval(this.detect);
         this.msg = "To many trys detection faild";
         setTimeout(() => this.router.navigate(['/']), 4 * 1000);
       }
+      this.numTry++;
     }, 3 * 1000);
   }
 
