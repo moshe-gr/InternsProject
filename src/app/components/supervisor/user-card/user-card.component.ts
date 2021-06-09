@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Intern } from 'src/app/models/intern';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-card',
@@ -8,7 +8,7 @@ import { Intern } from 'src/app/models/intern';
 })
 export class UserCardComponent implements OnInit {
 
-  @Input() user: Intern;
+  @Input() user: User;
   more: string = "More";
   isCollapsed = true; 
   

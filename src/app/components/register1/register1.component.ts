@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-register1',
@@ -16,7 +15,7 @@ export class Register1Component implements OnInit {
   fullName: string = '';
   passport: number;
   telephone: string = '';
-  constructor(private authService: AuthService, private registerService: RegisterService, private usersService: UsersService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private authService: AuthService, private registerService: RegisterService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
    }
 

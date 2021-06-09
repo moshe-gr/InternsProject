@@ -18,7 +18,7 @@ export class Questionnaire2Component implements OnInit {
   }
 
   updateProfile(){
-    this.registerService.user.professional = {
+    this.registerService.user.intern_info.professional = {
       medInst: this.medInst,
       residency: this.residency,
       department: this.department,

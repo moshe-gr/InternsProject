@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
 import { Observable, Subject } from 'rxjs';
-import { Intern } from 'src/app/models/intern';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -20,7 +20,7 @@ export class Register3Component implements OnInit, DoCheck {
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
 
-  user: Intern;
+  user: User;
   msg: string = "please look straight at the camera so we can spot you";
   error: string;
   numTry: number = 0;
@@ -87,10 +87,10 @@ export class Register3Component implements OnInit, DoCheck {
     else {
       this.registerService.user.pic = this.webcamImage;
       this.userService.updateUser(this.user._id, { pic: this.webcamImage }).subscribe();
-      if (!this.registerService.user.personal) {
+      if (!this.registerService.user.intern_info.personal) {
         this.router.navigate(["/questionnaire1"]);
       }
-      else if (!this.registerService.user.professional) {
+      else if (!this.registerService.user.intern_info.professional) {
         this.router.navigate(["/questionnaire2"]);
       }
       else {

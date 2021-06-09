@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { Intern } from 'src/app/models/intern';
+import { InternInfo } from 'src/app/models/intern-info';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -13,7 +14,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class Register2Component implements OnInit {
 
-  user: Intern;
+  user: User;
   wrong: boolean;
   first: number;
   second: number;
@@ -51,7 +52,7 @@ export class Register2Component implements OnInit {
             if (!this.user.pic) {
               this.router.navigate(["/register3"]);
             }
-            else if (!this.user.personal) {
+            else if (!this.user.intern_info) {
               this.router.navigate(["/questionnaire1"]);
             }
             else {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Intern } from '../models/intern';
+import { InternInfo } from '../models/intern-info';
+import { User } from '../models/user';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { UsersService } from './users.service';
 })
 export class RegisterService {
 
-  user: Intern = { id: 0, first_name: '', last_name: '', passport: 0, telephone: '', rolNumber: 2 };
+  user: User = { id: 0, first_name: '', last_name: '', passport: 0, telephone: '', rolNumber: 2 };
 
   constructor(private usersService: UsersService) { }
   registerUser() {

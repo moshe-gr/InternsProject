@@ -17,7 +17,7 @@
             <p>
                 Now you can start using the simulator system: practice, do tests and monitor your progress.
             </p>
-            <button [disabled]="!registerService.user.personal || !registerService.user.professional" class="py-2 px-4" (click)="updateProfile()" routerLink="/progress">
+            <button [disabled]="!registerService.user.intern_info.personal || !registerService.user.intern_info.professional" class="py-2 px-4" (click)="updateProfile()" routerLink="/progress">
                 LOG IN
             </button>
         </div>

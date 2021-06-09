@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Intern } from 'src/app/models/intern';
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
 import { RegisterService } from 'src/app/services/register.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -10,8 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ConsoleComponent implements OnInit {
 
-  user: Intern;
-  users: Intern[] = [
+  user: User;
+  users: User[] = [
     { id: 0, first_name: 'a', last_name: 'z', passport: 1, telephone: '1', rolNumber: 2 },
     { id: 0, first_name: 're', last_name: 'y', passport: 2, telephone: '2', rolNumber: 2 },
     { id: 0, first_name: 'ghr', last_name: 'ik7yk', passport: 3, telephone: '3', rolNumber: 2 },
@@ -28,9 +28,9 @@ export class ConsoleComponent implements OnInit {
     { id: 0, first_name: 'mhyx', last_name: 'yryy', passport: 14, telephone: '14', rolNumber: 2 },
     { id: 0, first_name: 'wea', last_name: 'wrrr', passport: 15, telephone: '15', rolNumber: 2 }
   ];
-  searchResults: Intern[] = [];
+  searchResults: User[] = [];
   searchInput: string;
-  usersToShow: Intern[];
+  usersToShow: User[];
 
   constructor(private userService: UsersService, private registerService: RegisterService) {
     this.user = this.registerService.user;

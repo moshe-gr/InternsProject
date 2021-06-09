@@ -20,7 +20,7 @@ export class Questionnaire1Component implements OnInit {
   }
 
   updateProfile(){
-    this.registerService.user.personal = {
+    this.registerService.user.intern_info.personal = {
       age: this.age,
       country: this.country,
       city: this.city,

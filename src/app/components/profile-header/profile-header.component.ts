@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Intern } from 'src/app/models/intern';
+import { User } from 'src/app/models/user';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class ProfileHeaderComponent implements OnInit {
 
   collapsed = false;
-  user: Intern;
+  user: User;
   constructor(registerService: RegisterService) {
     this.user = registerService.user;
    }

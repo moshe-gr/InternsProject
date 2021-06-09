@@ -18,10 +18,8 @@ export class ReadyComponent implements OnInit {
     this.internService.createIntern( 
       {
         _id: this.registerService.user._id,
-        intern_info: {
-          personal: this.registerService.user.personal,
-          professional: this.registerService.user.professional
-        }
-      }).subscribe();
+        intern_info: this.registerService.user.intern_info
+      }
+    ).subscribe();
   }
 }
