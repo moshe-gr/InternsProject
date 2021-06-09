@@ -80,7 +80,9 @@ export class Register2Component implements OnInit {
       }
     );
   }
-  onDigitInput(event: any) {
+
+  onDigitInput(event: any): void {
+    //Handles input and focus on code input elements
     let value = event.target.value;
     if (value && !isNaN(value) && event.code !== 'Backspace') {
       while(event.target.value > 9){
@@ -100,7 +102,7 @@ export class Register2Component implements OnInit {
     this.modalService.open(content);
   }
 
-  save(telephone: string){
+  save(telephone: string): void {
     this.registerService.user.telephone = telephone;
   }
 
