@@ -6,19 +6,22 @@
         <div class="col-md-6">
             <h3>
               {{ user.first_name }},&nbsp;
-              <span [ngClass]="{ 'text-success': webcamImage, 'text-danger': errors.length > 0 || numTry > 0 && !webcamImage }">
+              <span [ngClass]="{ 'text-success': webcamImage, 'text-danger': errors.length > 0 || numTry == 5 }">
                 {{ msg }}
               </span>
             </h3>
         </div>
         <div class="col-md-6">
-            <div class="text-center border border-5" style="width:fit-content;" [ngClass]="{ 'border-danger': numTry > 5, 'border-success': webcamImage }">
-              <div *ngIf="!webcamImage && errors.length == 0">
+            <div class="text-center">
+              <div class="border border-5 mb-2" style="width:fit-content;"  *ngIf="!webcamImage && errors.length == 0" [ngClass]="{ 'border-danger': numTry == 5 }">
                 <webcam [height]="350" [width]="350" [trigger]="triggerObservable" 
                   (imageCapture)="handleImage($event)" (initError)="handleInitError($event)">
                 </webcam>
-              </div> 
-              <div class="snapshot" *ngIf="webcamImage">
+              </div>
+              <div class="text-danger" style="font-size: 1rem;">
+                {{ error }}
+              </div>
+              <div class="snapshot border border-5 border-success"  style="width:fit-content;" *ngIf="webcamImage">
                 <img [src]="webcamImage.imageAsDataUrl" height="250"/>
               </div>
               

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
@@ -13,7 +13,7 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './register3.component.html',
   styleUrls: ['./register3.component.css']
 })
-export class Register3Component implements OnInit {
+export class Register3Component implements OnInit, DoCheck {
 
   public errors: WebcamInitError[] = [];
 
@@ -22,30 +22,22 @@ export class Register3Component implements OnInit {
 
   user: Intern;
   msg: string = "please look straight at the camera so we can spot you";
+  error: string;
   numTry: number = 0;
-  detect;
   public webcamImage: WebcamImage;
 
   constructor(private authService: AuthService, private registerService: RegisterService, private userService: UsersService, private router: Router) {
     this.user = registerService.user;
   }
+
+  ngDoCheck(): void {
+    if (this.errors.length > 0) {
+      this.msg = "camra error please check camra";
+    }
+  }
   
   ngOnInit(): void {
-    this.detect = setInterval(() => {
-      if (this.errors.length > 0) {
-        clearInterval(this.detect);
-        this.msg = "ERROR: camra error";
-      }
-      else {
-        this.triggerSnapshot();
-        if (this.numTry == 5) {
-          clearInterval(this.detect);
-          this.msg = "To many trys detection faild";
-          setTimeout(() => this.router.navigate(['/']), 4 * 1000);
-        }
-        this.numTry++;
-      }
-    }, 2.5 * 1000);
+    setTimeout(() => this.triggerSnapshot(), 2 * 1000);
   }
 
   public triggerSnapshot(): void {
@@ -64,12 +56,20 @@ export class Register3Component implements OnInit {
     this.authService.faceDetect(webcamImage).subscribe(
       () => {
         this.webcamImage = webcamImage;
-        clearInterval(this.detect);
+        this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
         setTimeout(() => this.register(), 3 * 1000);
       },
       (err) => {
-        this.msg = "ERROR: " + err.error.msg;
+        this.numTry++;
+        this.error = "ERROR: " + err.error.msg;
+        if (this.numTry < 5) {
+          setTimeout(() => this.triggerSnapshot(), 1 * 1000);
+        }
+        else {
+          this.msg = "detection faild registration rejected"
+          setTimeout(() => this.router.navigate(['/']), 3 * 1000);
+        }
       }
     );
   }
