@@ -43,7 +43,7 @@ export class Register2Component implements OnInit {
     ).subscribe(
       result => {
         this.authService.token = result.token;
-        if(this.user.rolNumber == 1) {
+        if(this.user.role_number == 1) {
           this.router.navigate(["/console"]);
         }
         else{

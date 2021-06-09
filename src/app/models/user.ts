@@ -8,7 +8,7 @@ export interface User {
     last_name: string,
     passport: number,
     telephone: string,
-    rolNumber: number,
+    role_number: number,
     pic?: WebcamImage,
     intern_info?: InternInfo
 }
