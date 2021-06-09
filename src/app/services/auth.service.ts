@@ -32,7 +32,7 @@ export class AuthService {
     return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic.imageAsBase64 })
   }
 
-  getOptions(headers?) {
+  getOptions(headers?) {   
     headers = headers ? headers : {};
     headers['content-type'] = 'application/json';
     headers['x-access-token'] = this.token;

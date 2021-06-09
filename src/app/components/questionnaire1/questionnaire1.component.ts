@@ -19,13 +19,26 @@ export class Questionnaire1Component implements OnInit {
   ngOnInit(): void {
   }
 
-  updateProfile(){
-    this.registerService.user.intern_info.personal = {
-      age: this.age,
-      country: this.country,
-      city: this.city,
-      gradgYear: this.gradYear,
-      acdInst: this.acdInst
-    };
+  updateProfile() {
+    if (this.registerService.user.intern_info) {
+      this.registerService.user.intern_info.personal = {
+        acdInst: this.acdInst,
+        age: this.age,
+        country: this.country,
+        city: this.city,
+        gradgYear: this.gradYear
+      }
+    }
+    else {
+      this.registerService.user.intern_info = {
+        personal: {
+          acdInst: this.acdInst,
+          age: this.age,
+          country: this.country,
+          city: this.city,
+          gradgYear: this.gradYear
+        }
+      }
+    }
   }
 }

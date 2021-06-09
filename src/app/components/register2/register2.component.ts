@@ -29,59 +29,56 @@ export class Register2Component implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     authService.request('972' + this.user.telephone).subscribe(
       data => this.request_id = data.request_id,
-      () => alert('ERROR occurred while sending!\nplease try again or enter "1357"')
+      err => {
+        alert('ERROR occurred while sending!\nplease try again or enter "1357"');
+      }
     );
    }
 
   ngOnInit(): void {
   }
   register(): void {
-    if ('' + this.first + this.second + this.third + this.fourth == "1357") {
-      this.router.navigate(["/register3"]);
-    }
-    else{
-      this.authService.check(
-        { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }
-      ).subscribe(
-        result => {
-          this.authService.token = result.token;
-          if(this.user.rolNumber == 1) {
-            this.router.navigate(["/console"]);
+    this.authService.check(
+      { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }
+    ).subscribe(
+      result => {
+        this.authService.token = result.token;
+        if(this.user.rolNumber == 1) {
+          this.router.navigate(["/console"]);
+        }
+        else{
+          if (!this.user.pic) {
+            this.router.navigate(["/register3"]);
           }
-          else{
-            if (!this.user.pic) {
-              this.router.navigate(["/register3"]);
-            }
-            else if (!this.user.intern_info) {
-              this.router.navigate(["/questionnaire1"]);
-            }
-            else {
-              this.router.navigate(["/progress"]);
-            }
-          }
-        },
-        err => {
-          if (err.status == 400) {
-              this.wrong = true;
-              setTimeout(() => {
-                if (err.error.status == 16) {
-                  this.first = null;
-                  this.second = null;
-                  this.third = null;
-                  this.fourth = null;
-                  this.wrong = false;
-                }
-                else if (err.error.status == 17) {
-                  this.router.navigate(["/"]);
-                }
-              }, 450);           
+          else if (!this.user.intern_info) {
+            this.router.navigate(["/questionnaire1"]);
           }
           else {
-            alert('ERROR occurred!\nplease try again');
+            this.router.navigate(["/progress"]);
           }
         }
-      );
-    }
+      },
+      err => {
+        if (err.status == 400) {
+            this.wrong = true;
+            setTimeout(() => {
+              if (err.error.status == 16) {
+                this.first = null;
+                this.second = null;
+                this.third = null;
+                this.fourth = null;
+                this.wrong = false;
+              }
+              else if (err.error.status == 17) {
+                this.router.navigate(["/"]);
+              }
+            }, 450);           
+        }
+        else {
+          alert('ERROR occurred!\nplease try again');
+        }
+      }
+    );
   }
   onDigitInput(event: any) {
     let value = event.target.value;
