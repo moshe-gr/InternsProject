@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CountryInfo } from 'src/app/models/country-info';
+import { InfoService } from 'src/app/services/info.service';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -13,32 +15,46 @@ export class Questionnaire1Component implements OnInit {
   city: string;
   gradYear: number;
   acdInst: string;
+  countriesList: string[] = [];
+  citiesList: string[] = [];
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService, private infoService: InfoService) { }
 
   ngOnInit(): void {
+    this.infoService.getCountriesInfo().subscribe(
+      data => this.countriesList = data.map(data => data.country)
+    )
   }
 
   updateProfile() {
     if (this.registerService.user.intern_info) {
       this.registerService.user.intern_info.personal = {
-        acdInst: this.acdInst,
+        academic_institution: this.acdInst,
         age: this.age,
         country: this.country,
         city: this.city,
-        gradgYear: this.gradYear
+        graduation_year: this.gradYear
       }
     }
     else {
       this.registerService.user.intern_info = {
         personal: {
-          acdInst: this.acdInst,
+          academic_institution: this.acdInst,
           age: this.age,
           country: this.country,
           city: this.city,
-          gradgYear: this.gradYear
+          graduation_year: this.gradYear
         }
       }
     }
   }
+
+  getCities(): void {
+    this.infoService.getCountriesInfo().subscribe(data => {
+      this.citiesList = data.find(
+        data => data.country == this.country
+      ).cities;
+    })
+  }
+
 }

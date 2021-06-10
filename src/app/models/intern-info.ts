@@ -5,13 +5,13 @@ export interface InternInfo {
         age: number,
         country: string,
         city: string,
-        gradgYear: number,
-        acdInst: string
+        graduation_year: number,
+        academic_institution: string
     },
     professional?: {
-        medInst: string,
+        medical_institution: string,
         residency: string,
-        yearInResidency: number,
+        year_in_residency: number,
         department: string
     }
 }

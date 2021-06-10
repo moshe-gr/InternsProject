@@ -20,18 +20,18 @@ export class Questionnaire2Component implements OnInit {
   updateProfile() {
     if (this.registerService.user.intern_info) {
       this.registerService.user.intern_info['professional'] = {
-        medInst: this.medInst,
+        medical_institution: this.medInst,
         residency: this.residency,
-        yearInResidency: this.yInRes,
+        year_in_residency: this.yInRes,
         department: this.department
       }
     }
     else {
       this.registerService.user.intern_info = {
         professional: {
-          medInst: this.medInst,
+          medical_institution: this.medInst,
           residency: this.residency,
-          yearInResidency: this.yInRes,
+          year_in_residency: this.yInRes,
           department: this.department
         }
       }

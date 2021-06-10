@@ -7,34 +7,63 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-8">
-            <small>Personal details</small>
-            <h1>Please tell us about yourself personally</h1>
+            <small>
+                Personal details
+            </small>
+            <h1>
+                Please tell us about yourself personally
+            </h1>
             <form #quesForm1="ngForm">
                 <div class="row">
-                    <label class="col-md-4 form-label">Age<input class="form-control" type="text" name="age" [(ngModel)]="age" required></label>
-                    <label class="col-md-4 form-label">Country<select class="form-select" name="Country" [(ngModel)]="country" required>
-                        <option>Choose</option>
-                    </select></label>
-                    <label class="col-md-4 form-label">City<select class="form-select" name="city" [(ngModel)]="city" required>
-                        <option>Choose</option>
-                    </select></label>
+                    <label class="col-md-4 form-label">
+                        Age
+                        <input class="form-control" type="text" name="age" [(ngModel)]="age" required>
+                    </label>
+                    <label class="col-md-4 form-label">
+                        Country
+                        <select (change)="getCities()" class="form-select" name="Country" [(ngModel)]="country" required>
+                            <option *ngFor="let countryName of countriesList">
+                                {{ countryName }}
+                            </option>
+                        </select>
+                    </label>
+                    <label class="col-md-4 form-label">
+                        City
+                        <select class="form-select" name="city" [(ngModel)]="city" required>
+                            <option *ngFor="let cityName of citiesList">
+                                {{ cityName }}
+                            </option>
+                        </select>
+                    </label>
                 </div>
                 <div class="row">
-                    <label class="col-md-4 form-label">Graduation year<input class="form-control" type="text" name="gradYear" [(ngModel)]="gradYear" required></label>
-                    <label class="col-md-4 form-label">Academic institution<select class="form-select" name="acdInst" [(ngModel)]="acdInst" required>
-                        <option>Choose</option>
-                    </select></label>
+                    <label class="col-md-4 form-label">
+                        Graduation year
+                        <input class="form-control" type="text" name="gradYear" [(ngModel)]="gradYear" required>
+                    </label>
+                    <label class="col-md-4 form-label">
+                        Academic institution
+                        <input class="form-control" name="acdInst" [(ngModel)]="acdInst" required>
+                    </label>
                 </div>
-                <button class="py-2 px-4" [disabled]="quesForm1.invalid" routerLink="/questionnaire2" (click)="updateProfile()">NEXT</button>
+                <button class="py-2 px-4" [disabled]="quesForm1.invalid" routerLink="/questionnaire2" (click)="updateProfile()">
+                    NEXT
+                </button>
             </form>
         </div>
         <br><br>
         <footer class="row pt-5 mt-5">
-            <small class="col-6">0% Completed</small>
+            <small class="col-6">
+                0% Completed
+            </small>
             <span class="col-6 text-end">
-                <mat-icon style="opacity: 0.3;">west</mat-icon>
+                <mat-icon style="opacity: 0.3;">
+                    west
+                </mat-icon>
                 &nbsp;&nbsp;
-                <mat-icon style="cursor:pointer;" title="next" routerLink="/questionnaire2">east</mat-icon>
+                <mat-icon style="cursor:pointer;" title="next" routerLink="/questionnaire2">
+                    east
+                </mat-icon>
             </span>
             <div class="progress">
                 <div class="progress-bar bg-success"></div>
