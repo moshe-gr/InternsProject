@@ -5,7 +5,7 @@ import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -26,8 +26,8 @@ export class Register3Component implements OnInit, DoCheck {
   numTry: number = 0;
   public webcamImage: WebcamImage;
 
-  constructor(private authService: AuthService, private registerService: RegisterService, private userService: UsersService, private router: Router) {
-    this.user = registerService.user;
+  constructor(private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
+    this.user = currentUserService.user;
   }
 
   ngDoCheck(): void {
@@ -79,18 +79,18 @@ export class Register3Component implements OnInit, DoCheck {
   }
 
   register(): void{
-    if (!this.registerService.user.pic) {
-      this.registerService.user.pic = this.webcamImage;
-      this.registerService.registerUser();
+    if (!this.currentUserService.user.pic) {
+      this.currentUserService.user.pic = this.webcamImage;
+      this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe();
       this.router.navigate(["/welcome"]);
     }
     else {
-      this.registerService.user.pic = this.webcamImage;
-      this.userService.updateUser(this.user._id, { pic: this.webcamImage }).subscribe();
-      if (!this.registerService.user.intern_info.personal) {
+      this.currentUserService.user.pic = this.webcamImage;
+      this.usersService.updateUser(this.user._id, { pic: this.webcamImage }).subscribe();
+      if (!this.currentUserService.user.intern_info.personal) {
         this.router.navigate(["/questionnaire1"]);
       }
-      else if (!this.registerService.user.intern_info.professional) {
+      else if (!this.currentUserService.user.intern_info.professional) {
         this.router.navigate(["/questionnaire2"]);
       }
       else {

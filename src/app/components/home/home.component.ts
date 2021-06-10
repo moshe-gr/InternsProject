@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +8,7 @@ import { RegisterService } from 'src/app/services/register.service';
 export class HomeComponent implements OnInit {
 
   choice = "intern";
-  constructor(private registerService: RegisterService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -32,8 +32,8 @@ export class ConsoleComponent implements OnInit {
   searchInput: string;
   usersToShow: User[];
 
-  constructor(private userService: UsersService, private registerService: RegisterService) {
-    this.user = this.registerService.user;
+  constructor(private userService: UsersService, private currentUserService: CurrentUserService) {
+    this.user = this.currentUserService.user;
    }
 
   ngOnInit(): void {

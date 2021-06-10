@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   passport: number;
 
-  constructor(private authService: AuthService, private registerService: RegisterService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
+  constructor(private authService: AuthService, private currentUserService: CurrentUserService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
     config.backdrop = 'static';
   }
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   login(content) {
     this.authService.login(this.passport).subscribe(
       user => {
-      this.registerService.user = user;
+      this.currentUserService.user = user;
       this.router.navigate(["/register2"]);
       },
       err => {        

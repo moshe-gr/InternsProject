@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryInfo } from 'src/app/models/country-info';
 import { InfoService } from 'src/app/services/info.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
   selector: 'app-questionnaire1',
@@ -18,7 +17,7 @@ export class Questionnaire1Component implements OnInit {
   countriesList: string[] = [];
   citiesList: string[] = [];
 
-  constructor(private registerService: RegisterService, private infoService: InfoService) { }
+  constructor(private currentUserService: CurrentUserService, private infoService: InfoService) { }
 
   ngOnInit(): void {
     this.infoService.getCountriesInfo().subscribe(
@@ -27,8 +26,8 @@ export class Questionnaire1Component implements OnInit {
   }
 
   updateProfile() {
-    if (this.registerService.user.intern_info) {
-      this.registerService.user.intern_info.personal = {
+    if (this.currentUserService.user.intern_info) {
+      this.currentUserService.user.intern_info.personal = {
         academic_institution: this.acdInst,
         age: this.age,
         country: this.country,
@@ -37,7 +36,7 @@ export class Questionnaire1Component implements OnInit {
       }
     }
     else {
-      this.registerService.user.intern_info = {
+      this.currentUserService.user.intern_info = {
         personal: {
           academic_institution: this.acdInst,
           age: this.age,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -11,8 +11,8 @@ export class ProfileHeaderComponent implements OnInit {
 
   collapsed = false;
   user: User;
-  constructor(registerService: RegisterService) {
-    this.user = registerService.user;
+  constructor(currentUserService: CurrentUserService) {
+    this.user = currentUserService.user;
    }
 
   ngOnInit(): void {

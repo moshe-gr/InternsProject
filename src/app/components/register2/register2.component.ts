@@ -4,7 +4,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { InternInfo } from 'src/app/models/intern-info';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -22,8 +22,8 @@ export class Register2Component implements OnInit {
   fourth: number;
   request_id: string;
   
-  constructor(private registerService: RegisterService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
-    this.user = this.registerService.user;
+  constructor(private currentUserService: CurrentUserService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
+    this.user = this.currentUserService.user;
     config.backdrop = 'static';
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -103,7 +103,7 @@ export class Register2Component implements OnInit {
   }
 
   save(telephone: string): void {
-    this.registerService.user.telephone = telephone;
+    this.currentUserService.user.telephone = telephone;
   }
 
 }

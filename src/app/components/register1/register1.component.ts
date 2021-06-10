@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
   selector: 'app-register1',
@@ -15,7 +15,7 @@ export class Register1Component implements OnInit {
   fullName: string = '';
   passport: number;
   telephone: string = '';
-  constructor(private authService: AuthService, private registerService: RegisterService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private authService: AuthService, private currentUserService: CurrentUserService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
    }
 
@@ -30,11 +30,11 @@ export class Register1Component implements OnInit {
       },
       err => {
         if (err.status == 404) {
-          this.registerService.user.id = this.id;
-          this.registerService.user.first_name = this.fullName.split(" ")[0];
-          this.registerService.user.last_name = this.fullName.split(" ")[1];
-          this.registerService.user.passport = this.passport;
-          this.registerService.user.telephone = this.telephone;
+          this.currentUserService.user.id = this.id;
+          this.currentUserService.user.first_name = this.fullName.split(" ")[0];
+          this.currentUserService.user.last_name = this.fullName.split(" ")[1];
+          this.currentUserService.user.passport = this.passport;
+          this.currentUserService.user.telephone = this.telephone;
           this.router.navigate(['/register2']);
         }
       })
