@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { InternInfo } from '../models/intern-info';
 import { User } from '../models/user';
 import { UsersService } from './users.service';
 
@@ -13,7 +12,5 @@ export class RegisterService {
   constructor(private usersService: UsersService) { }
   registerUser() {
     this.usersService.addUser(Object.assign({}, this.user)).subscribe(user => this.user = user);
-    console.log(this.user);
-    
   }
 }
