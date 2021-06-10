@@ -35,7 +35,7 @@ export class AuthService {
   getOptions(headers?) {   
     headers = headers ? headers : {};
     headers['content-type'] = 'application/json';
-    headers['x-access-token'] = this.token;
+    headers['x-access-token'] = this.token || 'No token!';
     return { headers: new HttpHeaders(headers) };
   }
   
