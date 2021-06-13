@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { CountryInfo } from '../models/country-info';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -9,12 +8,12 @@ import { tap } from 'rxjs/operators';
 })
 export class InfoService {
 
-  countriesInfo: CountryInfo[] = [];
+  countriesInfo = [];
 
   constructor(private httpClient: HttpClient) { }
 
   getCountriesApi(): Observable<any> {
-    if (this.countriesInfo) {
+    if (this.countriesInfo.length) {
       return of(this.countriesInfo);
     }
     return this.httpClient.get("https://countriesnow.space/api/v0.1/countries").pipe(tap(data => this.countriesInfo = data.data));

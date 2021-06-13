@@ -21,7 +21,7 @@ export class Questionnaire1Component implements OnInit {
 
   ngOnInit(): void {
     this.infoService.getCountriesApi().subscribe(
-      data => this.countriesList = data.map(data => data.country)
+      data => this.countriesList = data.data.map(data => data.country)
     )
   }
 
@@ -57,3 +57,4 @@ export class Questionnaire1Component implements OnInit {
   }
 
 }
+  
