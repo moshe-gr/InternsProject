@@ -1,27 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CountryInfo } from '../models/country-info';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InfoService {
 
-  private countriesInfo: BehaviorSubject<CountryInfo[]> = new BehaviorSubject<CountryInfo[]>([]);
+  countriesInfo: CountryInfo[] = [];
 
-  constructor(private httpClient: HttpClient) {
-    this.getCountriesApi().subscribe(
-      data => this.countriesInfo.next(data.data)
-    )
-   }
+  constructor(private httpClient: HttpClient) { }
 
   getCountriesApi(): Observable<any> {
-    return this.httpClient.get("https://countriesnow.space/api/v0.1/countries");
-  }
-
-  getCountriesInfo(): Observable<CountryInfo[]> {
-    return this.countriesInfo;
+    if (this.countriesInfo) {
+      return of(this.countriesInfo);
+    }
+    return this.httpClient.get("https://countriesnow.space/api/v0.1/countries").pipe(tap(data => this.countriesInfo = data.data));
   }
 
 }

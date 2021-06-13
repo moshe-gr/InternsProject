@@ -20,7 +20,7 @@ export class Questionnaire1Component implements OnInit {
   constructor(private currentUserService: CurrentUserService, private infoService: InfoService) { }
 
   ngOnInit(): void {
-    this.infoService.getCountriesInfo().subscribe(
+    this.infoService.getCountriesApi().subscribe(
       data => this.countriesList = data.map(data => data.country)
     )
   }
@@ -49,7 +49,7 @@ export class Questionnaire1Component implements OnInit {
   }
 
   getCities(): void {
-    this.infoService.getCountriesInfo().subscribe(data => {
+    this.infoService.getCountriesApi().subscribe(data => {
       this.citiesList = data.find(
         data => data.country == this.country
       ).cities;
