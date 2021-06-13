@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { InternInfo } from 'src/app/models/intern-info';
+import { Role } from 'src/app/enums/role.enum';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-register2',
@@ -43,7 +42,7 @@ export class Register2Component implements OnInit {
     ).subscribe(
       result => {
         this.authService.token = result.token;
-        if(this.user.role_number == 1) {
+        if(this.user.role_number <= Role.supervisor) {
           this.router.navigate(["/console"]);
         }
         else{

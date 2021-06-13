@@ -11,19 +11,22 @@ import { Register3Component } from './components/register3/register3.component';
 import { ConsoleComponent } from './components/supervisor/console/console.component';
 import { UsersProgressComponent } from './components/users-progress/users-progres.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { Role } from './enums/role.enum';
+import { RoleGuard } from './guards/role.guard';
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register1', component: Register1Component },
-  { path: 'register2', component: Register2Component },
-  { path: 'register3', component: Register3Component },
-  { path: 'welcome', component: WelcomeComponent },
-  { path: 'questionnaire1', component: Questionnaire1Component },
-  { path: 'questionnaire2', component: Questionnaire2Component },
-  { path: 'ready', component: ReadyComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'progress', component: UsersProgressComponent },
-  { path: 'console', component: ConsoleComponent }
+  { path: 'register2', component: Register2Component, canActivate: [UserGuard] },
+  { path: 'register3', component: Register3Component, canActivate: [UserGuard] },
+  { path: 'welcome', component: WelcomeComponent, canActivate: [UserGuard] },
+  { path: 'questionnaire1', component: Questionnaire1Component, canActivate: [UserGuard] },
+  { path: 'questionnaire2', component: Questionnaire2Component, canActivate: [UserGuard] },
+  { path: 'ready', component: ReadyComponent, canActivate: [UserGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [UserGuard] },
+  { path: 'progress', component: UsersProgressComponent, canActivate: [UserGuard] },
+  { path: 'console', component: ConsoleComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } }
 ];
 
 @NgModule({
