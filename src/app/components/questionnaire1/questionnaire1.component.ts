@@ -50,7 +50,7 @@ export class Questionnaire1Component implements OnInit {
 
   getCities(): void {
     this.infoService.getCountriesApi().subscribe(data => {
-      this.citiesList = data.find(
+      this.citiesList = data.data.find(
         data => data.country == this.country
       ).cities;
     })

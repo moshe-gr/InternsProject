@@ -16,7 +16,7 @@ export class InfoService {
     if (this.countriesInfo.length) {
       return of(this.countriesInfo);
     }
-    return this.httpClient.get("https://countriesnow.space/api/v0.1/countries").pipe(tap(data => this.countriesInfo = data.data));
+    return this.httpClient.get("https://countriesnow.space/api/v0.1/countries").pipe(tap(data => this.countriesInfo = data));
   }
 
 }

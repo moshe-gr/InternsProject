@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'questionnaire1', component: Questionnaire1Component, canActivate: [UserGuard] },
   { path: 'questionnaire2', component: Questionnaire2Component, canActivate: [UserGuard] },
   { path: 'ready', component: ReadyComponent, canActivate: [UserGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [UserGuard] },
+  { path: 'login', component: LoginComponent },
   { path: 'progress', component: UsersProgressComponent, canActivate: [UserGuard] },
   { path: 'console', component: ConsoleComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } }
 ];
