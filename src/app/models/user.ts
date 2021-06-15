@@ -1,4 +1,3 @@
-import { WebcamImage } from "ngx-webcam";
 import { InternInfo } from "./intern-info";
 
 export interface User {
@@ -9,6 +8,6 @@ export interface User {
     passport: number,
     telephone: string,
     role_number: number,
-    pic?: WebcamImage,
+    pic?: { imageAsDataUrl: string },
     intern_info?: InternInfo
 }

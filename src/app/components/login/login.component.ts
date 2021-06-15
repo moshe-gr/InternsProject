@@ -36,6 +36,12 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  pressEnter(event, content) {
+    if (event.code == "Enter") {
+      this.login(content)
+    }
+  }
+
   open(content) {
     this.modalService.open(content);
   }

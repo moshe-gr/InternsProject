@@ -80,15 +80,15 @@ export class Register3Component implements OnInit, DoCheck {
 
   register(): void{
     if (!this.currentUserService.user.pic) {
-      this.currentUserService.user.pic = this.webcamImage;
+      this.currentUserService.user.pic = { imageAsDataUrl: this.webcamImage.imageAsDataUrl };
       this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
         user => this.currentUserService.user = user
       );
       this.router.navigate(["/welcome"]);
     }
     else {
-      this.currentUserService.user.pic = this.webcamImage;
-      this.usersService.updateUser(this.user._id, { pic: this.webcamImage }).subscribe();
+      this.currentUserService.user.pic.imageAsDataUrl = this.webcamImage.imageAsDataUrl;
+      this.usersService.updateUser(this.user._id, { pic: this.currentUserService.user.pic }).subscribe();
       if (!this.currentUserService.user.intern_info.personal) {
         this.router.navigate(["/questionnaire1"]);
       }
