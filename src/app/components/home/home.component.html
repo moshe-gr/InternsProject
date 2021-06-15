@@ -7,16 +7,23 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-8 ps-4">
-            <button class="border-0 bg-white" (click)="intern()" [ngClass]="{'text-info': choice === 'intern'}">Interns</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="border-0 bg-white" (click)="supervisor()" [ngClass]="{'text-info': choice === 'supervisor'}">Suprvisors</button>
-            <h1>Welcome&nbsp;{{ choice }}!</h1>
-            <p>This is wear you'l cover your internship
-                <br>
-                take your exams view your results
-                <br>
-                and see how its going.
+            <button class="border-0 bg-white" (click)="intern()" [ngClass]="{'text-info': choice === 'intern'}">
+                Interns
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="border-0 bg-white" (click)="supervisor()" [ngClass]="{'text-info': choice === 'supervisor'}">
+                Suprvisors
+            </button>
+            <h1>
+                Welcome&nbsp;{{ choice }}!
+            </h1>
+            <p  class="col-6">
+                {{ msg }}
             </p>
             <br><br>
-            <button *ngIf="choice == 'intern'" class="py-2 px-4" routerLink="/register1">REGISTER NOW</button>
+            <button class="py-2 px-4" routerLink="/register1">
+                REGISTER NOW
+            </button>
         </div>
     </div>
 </div>

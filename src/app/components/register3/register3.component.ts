@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
 import { Observable, Subject } from 'rxjs';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { UsersService } from 'src/app/services/users.service';

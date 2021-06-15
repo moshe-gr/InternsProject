@@ -1,4 +1,4 @@
-import { InternInfo } from "./intern-info";
+import { InternInfo } from "./intern-info.model";
 
 export interface User {
     _id?: string,
