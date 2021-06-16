@@ -8,6 +8,6 @@ export interface User {
     passport: number,
     telephone: string,
     role_number: number,
-    pic?: { imageAsDataUrl: string },
+    pic?: string,
     intern_info?: InternInfo
 }

@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'ready', component: ReadyComponent, canActivate: [UserGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'progress', component: UsersProgressComponent, canActivate: [UserGuard] },
-  { path: 'console', component: ConsoleComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } }
+  { path: 'console', component: ConsoleComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } },
 ];
 
 @NgModule({

@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
+import { FileServerService } from 'src/app/services/file-server.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class Register3Component implements OnInit, DoCheck {
   numTry: number = 0;
   public webcamImage: WebcamImage;
 
-  constructor(private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
+  constructor(private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
     this.user = currentUserService.user;
   }
 
@@ -58,6 +59,8 @@ export class Register3Component implements OnInit, DoCheck {
         this.webcamImage = webcamImage;
         this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
+        let img: Blob = this.dataURItoBlob(webcamImage.imageAsDataUrl);
+        this.fileServerService.fileUpload(img, '' + this.user.passport);
         setTimeout(() => this.register(), 3 * 1000);
       },
       (err) => {
@@ -80,14 +83,14 @@ export class Register3Component implements OnInit, DoCheck {
 
   register(): void{
     if (!this.currentUserService.user.pic) {
-      this.currentUserService.user.pic = { imageAsDataUrl: this.webcamImage.imageAsDataUrl };
+      this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
         user => this.currentUserService.user = user
       );
       this.router.navigate(["/welcome"]);
     }
     else {
-      this.currentUserService.user.pic.imageAsDataUrl = this.webcamImage.imageAsDataUrl;
+      this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.updateUser(this.user._id, { pic: this.currentUserService.user.pic }).subscribe();
       if (!this.currentUserService.user.intern_info.personal) {
         this.router.navigate(["/questionnaire1"]);
@@ -99,6 +102,17 @@ export class Register3Component implements OnInit, DoCheck {
         this.router.navigate(["/progress"]);
       }
     }
+  }
+
+  dataURItoBlob(dataURI) {
+    let binary = atob(dataURI.split(',')[1]);
+    let array = [];
+    for (let i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], {
+        type: 'image/jpg'
+    });
   }
 
 }
