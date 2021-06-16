@@ -1,0 +1,27 @@
+<header>
+    <app-profile-header></app-profile-header>
+</header>
+<div class="container-fluid d-flex justify-content-center pos-lower">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="/assets/logo.jpg" alt="logo">
+        </div>
+        <div class="col-md-8">
+            <h1>
+                Thank you {{ user.first_name }}
+            </h1>
+            <h3>
+                <span class="text-success">
+                    &#10003;
+                </span>Your user has been successfully created
+            </h3>
+            <br>
+            <p>
+                In order to fit the simulator you need to have a short questionnaire.
+            </p>
+            <button class="py-2 px-4" routerLink="/questionnaire1">
+                LET'S START
+            </button>
+        </div>
+    </div>
+</div>

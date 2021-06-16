@@ -36,6 +36,7 @@ export class Register2Component implements OnInit {
 
   ngOnInit(): void {
   }
+  
   register(): void {
     this.authService.check(
       { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }

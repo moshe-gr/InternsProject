@@ -9,8 +9,7 @@
             <img class="rounded" src="{{ user.pic?.imageAsDataUrl }}" height="70px" alt="intern pic">
         </div>        
         <p>
-            <button type="button" class="btn btn-primary" (click)="collapse.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed"
-              aria-controls="collapseExample">
+            <button type="button" class="btn btn-primary" (click)="collapse.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed">
               {{ more }} info
             </button>
         </p>
