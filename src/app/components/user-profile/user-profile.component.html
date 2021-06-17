@@ -1,0 +1,15 @@
+<img src="user.pic" alt="profile-pic">
+<h3>
+    {{ user.first_name }}&nbsp;{{ user.last_name }}
+</h3>
+<div>
+    {{ user.intern_info.professional.medical_institution }}
+</div>
+<div>
+    <span *ngIf="user.role_number == 4">
+        {{ user.intern_info.professional.year_in_residency }} year {{ user.intern_info.professional.residency }} intern
+    </span>
+    <span *ngIf="user.role_number == 2">
+        A supervisor
+    </span>
+</div>

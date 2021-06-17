@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
 
 import { Observable, Subject } from 'rxjs';
+import { Role } from 'src/app/enums/role.enum';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
@@ -54,6 +55,7 @@ export class Register3Component implements OnInit, DoCheck {
 
   public handleImage(webcamImage: WebcamImage): void {
     console.log('received webcam image', webcamImage);
+    //img face detection
     this.authService.faceDetect(webcamImage).subscribe(
       () => {
         this.webcamImage = webcamImage;
@@ -82,13 +84,20 @@ export class Register3Component implements OnInit, DoCheck {
   }
 
   register(): void{
+    //user dosn't exist
     if (!this.currentUserService.user.pic) {
       this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
         user => this.currentUserService.user = user
       );
-      this.router.navigate(["/welcome"]);
+      if(this.user.role_number <= Role.supervisor) {
+        this.router.navigate(["/console"]);
+      }
+      else {
+        this.router.navigate(["/welcome"]);
+      }
     }
+    //user updated profile pic
     else {
       this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.updateUser(this.user._id, { pic: this.currentUserService.user.pic }).subscribe();
@@ -104,6 +113,7 @@ export class Register3Component implements OnInit, DoCheck {
     }
   }
 
+//convert base64 to jpg
   dataURItoBlob(dataURI) {
     let binary = atob(dataURI.split(',')[1]);
     let array = [];

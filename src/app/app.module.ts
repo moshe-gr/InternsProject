@@ -23,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersProgressComponent } from './components/intern/users-progress/users-progres.component';
 import { ConsoleComponent } from './components/supervisor/console/console.component';
 import { UserCardComponent } from './components/supervisor/user-card/user-card.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UserCardComponent } from './components/supervisor/user-card/user-card.c
     LoginComponent,
     UsersProgressComponent,
     ConsoleComponent,
-    UserCardComponent
+    UserCardComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
