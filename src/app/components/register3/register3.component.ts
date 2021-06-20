@@ -99,8 +99,6 @@ export class Register3Component implements OnInit, DoCheck {
     }
     //user updated profile pic
     else {
-      this.currentUserService.user.pic = this.fileServerService.urlToFile;
-      this.usersService.updateUser(this.user._id, { pic: this.currentUserService.user.pic }).subscribe();
       if (!this.currentUserService.user.intern_info.personal) {
         this.router.navigate(["/questionnaire1"]);
       }
