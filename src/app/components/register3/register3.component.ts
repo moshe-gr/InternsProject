@@ -8,6 +8,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { FileServerService } from 'src/app/services/file-server.service';
+import { InfoService } from 'src/app/services/info.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class Register3Component implements OnInit, DoCheck {
   numTry: number = 0;
   public webcamImage: WebcamImage;
 
-  constructor(private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
+  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
     this.user = currentUserService.user;
   }
 
@@ -88,21 +89,36 @@ export class Register3Component implements OnInit, DoCheck {
     if (!this.currentUserService.user.pic) {
       this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
-        user => this.currentUserService.user = user
+        user => {
+          this.currentUserService.user = user;
+          if (this.user.role_number <= Role.supervisor) {
+            this.usersService.createSupervisor(
+              {
+                user:
+                  user._id,
+                medical_institution:
+                  this.infoService.medical_institutions[
+                    Math.floor(Math.random() * this.infoService.medical_institutions.length)
+                  ]
+              }
+            ).subscribe(
+              data => console.log(data),
+              err => console.log(err)
+            );
+            this.router.navigate(["/console"]);
+          }
+          else {
+            this.router.navigate(["/welcome"]);
+          }
+        }
       );
-      if(this.user.role_number <= Role.supervisor) {
-        this.router.navigate(["/console"]);
-      }
-      else {
-        this.router.navigate(["/welcome"]);
-      }
     }
     //user updated profile pic
     else {
-      if (!this.currentUserService.user.intern_info.personal) {
+      if (!this.currentUserService.user.more_info || !this.currentUserService.user.more_info.personal) {
         this.router.navigate(["/questionnaire1"]);
       }
-      else if (!this.currentUserService.user.intern_info.professional) {
+      else if (!this.currentUserService.user.more_info.professional) {
         this.router.navigate(["/questionnaire2"]);
       }
       else {

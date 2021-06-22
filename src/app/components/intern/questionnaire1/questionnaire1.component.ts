@@ -26,8 +26,8 @@ export class Questionnaire1Component implements OnInit {
   }
 
   updateProfile() {
-    if (this.currentUserService.user.intern_info) {
-      this.currentUserService.user.intern_info.personal = {
+    if (this.currentUserService.user.more_info) {
+      this.currentUserService.user.more_info.personal = {
         academic_institution: this.acdInst,
         age: this.age,
         country: this.country,
@@ -36,7 +36,7 @@ export class Questionnaire1Component implements OnInit {
       }
     }
     else {
-      this.currentUserService.user.intern_info = {
+      this.currentUserService.user.more_info = {
         personal: {
           academic_institution: this.acdInst,
           age: this.age,

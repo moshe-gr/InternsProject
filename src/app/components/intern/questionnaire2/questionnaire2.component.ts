@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
+import { InfoService } from 'src/app/services/info.service';
 
 @Component({
   selector: 'app-questionnaire2',
@@ -12,14 +13,14 @@ export class Questionnaire2Component implements OnInit {
   residency: string;
   department: string;
   yInRes: number;
-  constructor(private currentUserService: CurrentUserService) { }
+  constructor(private currentUserService: CurrentUserService, public infoService: InfoService) { }
 
   ngOnInit(): void {
   }
 
   updateProfile() {
-    if (this.currentUserService.user.intern_info) {
-      this.currentUserService.user.intern_info['professional'] = {
+    if (this.currentUserService.user.more_info) {
+      this.currentUserService.user.more_info['professional'] = {
         medical_institution: this.medInst,
         residency: this.residency,
         year_in_residency: this.yInRes,
@@ -27,7 +28,7 @@ export class Questionnaire2Component implements OnInit {
       }
     }
     else {
-      this.currentUserService.user.intern_info = {
+      this.currentUserService.user.more_info = {
         professional: {
           medical_institution: this.medInst,
           residency: this.residency,

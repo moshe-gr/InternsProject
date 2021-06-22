@@ -10,6 +10,18 @@ export class InfoService {
 
   countriesInfo = [];
 
+  medical_institutions: string[] = [
+    "Shaare zedek",
+    "Hadassa",
+    "Ziv",
+    "Sheba",
+    "Soroka",
+    "Laniado",
+    "Rambam",
+    "Barzilai",
+    "Ichilov"
+  ]
+
   constructor(private httpClient: HttpClient) { }
 
   getCountriesApi(): Observable<any> {

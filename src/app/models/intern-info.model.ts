@@ -1,6 +1,8 @@
+import { User } from "./user.model";
 
 export interface InternInfo {
     _id?: string,
+    user?: User | string,
     personal?: {
         age: number,
         country: string,

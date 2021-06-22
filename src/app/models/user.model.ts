@@ -1,4 +1,5 @@
 import { InternInfo } from "./intern-info.model";
+import { Supervisor } from "./supervisor.model";
 
 export interface User {
     _id?: string,
@@ -7,7 +8,8 @@ export interface User {
     last_name: string,
     passport: number,
     telephone: string,
+    role?: string,
     role_number: number,
     pic?: string,
-    intern_info?: InternInfo
+    more_info?: InternInfo | Supervisor | any
 }

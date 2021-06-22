@@ -20,12 +20,14 @@ export class HomeComponent implements OnInit {
   intern(): void {
     this.choice = "intern";
     this.currentUserService.user.role_number = Role.intern;
+    this.currentUserService.user.role = this.choice;
     this.msg = "This is wear you'l cover your internship take your exams view your results and see how its going.";
   }
   
   supervisor(): void {
     this.choice = "supervisor";
     this.currentUserService.user.role_number = Role.supervisor;
+    this.currentUserService.user.role = this.choice;
     this.msg = "This is wear you'l follow your interns give your exams view the results and see how its going.";
   }
 

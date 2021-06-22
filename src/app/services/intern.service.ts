@@ -15,4 +15,5 @@ export class InternService {
   createIntern(intern, headers?): Observable<any> {
     return this.httpClient.post(this.baseUrl + 'create', intern, this.authService.getOptions(headers));
   }
+
 }
