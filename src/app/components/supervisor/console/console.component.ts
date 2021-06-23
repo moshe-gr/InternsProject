@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InternInfo } from 'src/app/models/intern-info.model';
 import { User } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
-import { InternService } from 'src/app/services/intern.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -18,13 +16,18 @@ export class ConsoleComponent implements OnInit {
   searchInput: string;
   usersToShow: User[];
 
-  constructor(private  internService: InternService, private userService: UsersService, private currentUserService: CurrentUserService) {
-    this.user = this.currentUserService.user;
-    //this.interns = this.user.more_info.students;
-   }
+  constructor(private usersService: UsersService, private currentUserService: CurrentUserService) {
+    this.usersService.getUser(this.currentUserService.user._id).subscribe(
+      user => {
+        this.user = user;
+        this.interns = this.user.more_info.students;
+        this.usersToShow = this.interns;
+      },
+      err => console.log(err)
+    );
+  }
 
   ngOnInit(): void {
-    this.usersToShow = this.interns;
   }
 
   searchList(): void {

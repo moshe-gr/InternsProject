@@ -1,19 +1,22 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <h4 class="card-title col">
+            <h4 class="card-title col text-center">
                 {{ user.first_name }} {{ user.last_name }}
             </h4>
         </div>
-        <div>
+        <div class="text-center mb-3">
             <img class="profile-img" src="{{ user.pic }}" alt="intern pic">
         </div>        
-        <p>
-            <button type="button" class="btn btn-primary" (click)="collapse.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed">
-              {{ more }} info
+        <div class="row">
+            <button type="button" class="btn btn-primary col-6" (click)="collapse1.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed1">
+                {{ more1 }} info
             </button>
-        </p>
-        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <button type="button" class="btn btn-primary col-6" (click)="collapse2.toggle(); internInfo();" [attr.aria-expanded]="!isCollapsed2">
+                {{ more2 }} info
+            </button>
+        </div>
+        <div #collapse1="ngbCollapse" [(ngbCollapse)]="isCollapsed1">
             <div class="card">
                 <div class="card-body">                
                     <div>
@@ -22,6 +25,25 @@
                         <span class="text-warning font-weight-bold">ID:</span> {{ user.id }}
                         <br>
                         <span class="text-warning font-weight-bold">Phone number:</span> {{ user.telephone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div #collapse2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
+            <div class="card">
+                <div class="card-body">                
+                    <div *ngIf="intern">
+                        <span class="text-warning font-weight-bold">Residency:</span> {{ intern.professional.residency }}
+                        <br>
+                        <span class="text-warning font-weight-bold">Year in residency:</span> {{ intern.professional.year_in_residency }}
+                        <br>
+                        <span class="text-warning font-weight-bold">Department:</span> {{ intern.professional.department }}
+                    </div>
+                    <div class="text-center mt-5" *ngIf="!intern">
+                        <div class="spinner-grow text-success" role="status"></div>
+                        <div>
+                            <strong>Loading...</strong>
+                        </div>
                     </div>
                 </div>
             </div>

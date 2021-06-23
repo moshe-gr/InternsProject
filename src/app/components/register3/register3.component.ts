@@ -102,7 +102,7 @@ export class Register3Component implements OnInit, DoCheck {
                   ]
               }
             ).subscribe(
-              data => console.log(data),
+              data => this.currentUserService.user.more_info = data._id,
               err => console.log(err)
             );
             this.router.navigate(["/console"]);

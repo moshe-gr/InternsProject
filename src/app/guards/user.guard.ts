@@ -12,7 +12,7 @@ export class UserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return of(this.currentUserService.user.first_name? true : this.router.parseUrl('/register1'));
+    return of(this.currentUserService.user.first_name? true : this.router.parseUrl('/'));
   }
   
 }

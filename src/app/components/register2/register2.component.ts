@@ -39,7 +39,7 @@ export class Register2Component implements OnInit {
   
   register(): void {
     this.authService.check(
-      { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth }
+      { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth, role_number: this.user.role_number }
     ).subscribe(
       result => {
         this.authService.token = result.token;

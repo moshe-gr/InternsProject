@@ -20,7 +20,7 @@ export class AuthService {
     return this.httpClient.post(this.baseUrl + 'request', { phoneNumber: phoneNumber })
   }
 
-  check(pass:{ request_id:string, code:string }): Observable<any>{
+  check(pass:{ request_id:string, code:string, role_number?: number }): Observable<any>{
     return this.httpClient.post(this.baseUrl + 'check', pass);
   }
 
