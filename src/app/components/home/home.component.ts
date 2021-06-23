@@ -12,7 +12,9 @@ export class HomeComponent implements OnInit {
   choice = "intern";
   msg: string = "This is wear you'l cover your internship take your exams view your results and see how its going.";
 
-  constructor(private currentUserService: CurrentUserService) { }
+  constructor(private currentUserService: CurrentUserService) {
+    this.currentUserService.user.role = this.choice;
+  }
 
   ngOnInit(): void {
   }

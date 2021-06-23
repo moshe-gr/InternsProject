@@ -1,6 +1,12 @@
 <header>
   <app-login-header></app-login-header>
 </header>
+<div *ngIf="webcamImage">
+  <div class="spinner-border text-success" role="status" style="width: 1rem; height: 1rem;"></div>
+  <div>
+      <strong>Processing...</strong>
+  </div>
+</div>
 <div class="container-fluid d-flex justify-content-center pos-lower">
     <div class="row">
         <div class="col-md-6">

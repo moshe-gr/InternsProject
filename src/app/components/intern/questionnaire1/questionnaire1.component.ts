@@ -17,12 +17,26 @@ export class Questionnaire1Component implements OnInit {
   countriesList: string[] = [];
   citiesList: string[] = [];
 
-  constructor(private currentUserService: CurrentUserService, private infoService: InfoService) { }
+  constructor(private currentUserService: CurrentUserService, private infoService: InfoService) {
+    this.infoService.getCountriesApi().subscribe(
+      data => {
+        this.countriesList = data.data ?
+          data.data.map(data => data.country) : data.map(data => data.country);
+          if (this.currentUserService.user.more_info && this.currentUserService.user.more_info.personal) {
+            this.age = this.currentUserService.user.more_info.personal.age;
+            this.country = this.currentUserService.user.more_info.personal.country;
+            this.city = this.currentUserService.user.more_info.personal.city;
+            this.gradYear = this.currentUserService.user.more_info.personal.graduation_year;
+            this.acdInst = this.currentUserService.user.more_info.personal.academic_institution;
+          }
+          if (this.country) {
+            this.getCities();
+          }
+      }
+    );
+  }
 
   ngOnInit(): void {
-    this.infoService.getCountriesApi().subscribe(
-      data => this.countriesList = data.data.map(data => data.country)
-    )
   }
 
   updateProfile() {
@@ -50,10 +64,12 @@ export class Questionnaire1Component implements OnInit {
 
   getCities(): void {
     this.infoService.getCountriesApi().subscribe(data => {
-      this.citiesList = data.data.find(
-        data => data.country == this.country
+      this.citiesList = data.find(
+        data =>
+          data.data ?
+            data.data.country == this.country : data.country == this.country
       ).cities;
-    })
+    });
   }
 
 }

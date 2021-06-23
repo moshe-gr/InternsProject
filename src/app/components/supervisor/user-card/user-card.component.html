@@ -9,10 +9,10 @@
             <img class="profile-img" src="{{ user.pic }}" alt="intern pic">
         </div>        
         <div class="row">
-            <button type="button" class="btn btn-primary col-6" (click)="collapse1.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed1">
+            <button type="button" class="btn btn-outline-secondary btn-sm col-6" (click)="collapse1.toggle(); moreInfo();" [attr.aria-expanded]="!isCollapsed1">
                 {{ more1 }} info
             </button>
-            <button type="button" class="btn btn-primary col-6" (click)="collapse2.toggle(); internInfo();" [attr.aria-expanded]="!isCollapsed2">
+            <button type="button" class="btn btn-outline-secondary btn-sm col-6" (click)="collapse2.toggle(); internInfo();" [attr.aria-expanded]="!isCollapsed2">
                 {{ more2 }} info
             </button>
         </div>

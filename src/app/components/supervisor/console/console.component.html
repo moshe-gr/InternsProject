@@ -4,12 +4,15 @@
     </h1>
     <label class="form-label my-3">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()">
+            <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()" #searchFiled="ngModel" name="searchFiled">
             <button class="btn btn-outline-secondary" type="button" (click)="search()">
                 <mat-icon class="pt-2">
                     search
                 </mat-icon>
             </button>
+        </div>
+        <div *ngIf="!searchResults.length && searchFiled.dirty" class="text-danger">
+            No results!
         </div>
         <div class="border" *ngIf="searchResults.length">
             <div *ngFor="let result of searchResults" class="result" (click)="search(result.first_name, result.last_name)">

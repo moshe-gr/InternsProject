@@ -13,14 +13,21 @@ export class Questionnaire2Component implements OnInit {
   residency: string;
   department: string;
   yInRes: number;
-  constructor(private currentUserService: CurrentUserService, public infoService: InfoService) { }
+  constructor(private currentUserService: CurrentUserService, public infoService: InfoService) {
+    if (this.currentUserService.user.more_info && this.currentUserService.user.more_info.professional) {
+      this.medInst = this.currentUserService.user.more_info.professional.medical_institution;
+      this.residency = this.currentUserService.user.more_info.professional.residency;
+      this.department = this.currentUserService.user.more_info.professional.department;
+      this.yInRes = this.currentUserService.user.more_info.professional.year_in_residency;
+    }
+  }
 
   ngOnInit(): void {
   }
 
   updateProfile() {
     if (this.currentUserService.user.more_info) {
-      this.currentUserService.user.more_info['professional'] = {
+      this.currentUserService.user.more_info.professional = {
         medical_institution: this.medInst,
         residency: this.residency,
         year_in_residency: this.yInRes,
