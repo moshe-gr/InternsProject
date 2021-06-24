@@ -1,4 +1,4 @@
-<header>
+<header *ngIf="choice != 'user'">
     <app-login-header></app-login-header>
 </header>
 <div class="container-fluid d-flex justify-content-center pos-lower">
@@ -17,13 +17,13 @@
             <h1>
                 Welcome&nbsp;{{ choice }}!
             </h1>
-            <p  class="col-6">
+            <p class="col-6">
                 {{ msg }}
             </p>
             <br><br>
-            <button class="py-2 px-4" routerLink="/register1">
+            <button [disabled]="choice=='user'" class="py-2 px-4" routerLink="/register1">
                 REGISTER NOW
             </button>
-        </div>
+        </div> 
     </div>
 </div>

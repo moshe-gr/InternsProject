@@ -4,10 +4,10 @@
     <div ngbDropdownMenu (mouseleave)="profileDrop.close()">
       <div class="fw-bold text-center">{{ user.first_name }}</div>
       <div class="fw-bold text-center">{{ user.last_name }}</div>
-      <button ngbDropdownItem routerLink="/questionnaire1">Edit personal</button>
-      <button ngbDropdownItem routerLink="/questionnaire2">Edit professionall</button>
-      <button ngbDropdownItem routerLink="/register3">Change pic</button>
-      <button ngbDropdownItem routerLink="/">Logout</button>
+      <button *ngIf="user.more_info && user.more_info.personal" ngbDropdownItem routerLink="/updatePersonal">Edit personal</button>
+      <button *ngIf="user.more_info && user.more_info.professional" ngbDropdownItem routerLink="/updateProfessional">Edit professionall</button>
+      <button ngbDropdownItem routerLink="/updateImg">Change pic</button>
+      <button ngbDropdownItem routerLink="/" (click)="logout()">Logout</button>
     </div>
   </div>
 </div>

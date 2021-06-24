@@ -9,8 +9,8 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 })
 export class HomeComponent implements OnInit {
 
-  choice = "intern";
-  msg: string = "This is wear you'l cover your internship take your exams view your results and see how its going.";
+  choice: string = "user";
+  msg: string = "This is wear you can handel internship please choose role to continue.";
 
   constructor(private currentUserService: CurrentUserService) {
     this.currentUserService.user.role = this.choice;

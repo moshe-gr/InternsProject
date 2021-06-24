@@ -49,13 +49,13 @@
                         <input type="range" max="5" class="form-range" name="yInRes" [(ngModel)]="yInRes" required>
                     </label>
                 </div>
-                <button class="py-2 px-4" [disabled]="quesForm2.invalid" routerLink="/ready" (click)="updateProfile()">
-                    DONE!
+                <button class="py-2 px-4" [disabled]="quesForm2.invalid" (click)="updateProfile()">
+                    {{ updateButton }}
                 </button>
             </form>
         </div>
         <br><br>
-        <footer class="row pt-5 mt-5">
+        <footer *ngIf="!update" class="row pt-5 mt-5">
             <small class="col-6">
                 50% Completed
             </small>

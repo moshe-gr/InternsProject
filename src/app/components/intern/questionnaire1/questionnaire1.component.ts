@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from 'src/app/services/info.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
+import { Location } from '@angular/common';
+import { InternService } from 'src/app/services/intern.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire1',
@@ -16,8 +19,14 @@ export class Questionnaire1Component implements OnInit {
   acdInst: string;
   countriesList: string[] = [];
   citiesList: string[] = [];
+  updateButton: string;
+  update: boolean;
 
-  constructor(private currentUserService: CurrentUserService, private infoService: InfoService) {
+  constructor(private router: Router, private internService: InternService, private currentUserService: CurrentUserService, private infoService: InfoService, private location: Location) { }
+
+  ngOnInit(): void {
+    this.update = this.location.isCurrentPathEqualTo("/updatePersonal");
+    this.updateButton = this.update ?  "UPDATE" : "NEXT";
     this.infoService.getCountriesApi().subscribe(
       data => {
         this.countriesList = data.data ?
@@ -34,9 +43,6 @@ export class Questionnaire1Component implements OnInit {
           }
       }
     );
-  }
-
-  ngOnInit(): void {
   }
 
   updateProfile() {
@@ -59,6 +65,18 @@ export class Questionnaire1Component implements OnInit {
           graduation_year: this.gradYear
         }
       }
+    }
+    if (this.update) {
+      this.internService.updateIntern(
+        this.currentUserService.user.more_info._id, { personal: this.currentUserService.user.more_info.personal }
+      ).subscribe(
+        data => console.log(data),
+        err => console.log(err)
+      );
+      this.location.back();
+    }
+    else {
+      this.router.navigate(["/questionnaire2"]);
     }
   }
 

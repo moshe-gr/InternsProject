@@ -19,4 +19,13 @@ export class InternService {
       this.authService.getOptions(headers)
     );
   }
+
+  updateIntern(_id: string, updteData, headers?): Observable<InternInfo> {
+    return this.httpClient.put<InternInfo>(
+      this.baseUrl + _id,
+      updteData,
+      this.authService.getOptions(headers)
+    );
+  }
+  
 }
