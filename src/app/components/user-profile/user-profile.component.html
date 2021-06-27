@@ -1,10 +1,10 @@
-<img src="user.pic" alt="profile-pic" class="profile-img">
+<img [src]="user.pic" alt="profile-pic" class="profile-img">
 <h3>
-    {{ user.first_name }}&nbsp;{{ user.last_name }}
+    {{ user.first_name }} {{ user.last_name }}
 </h3>
 <ng-container *ngIf="user.role_number == 4">
     <div>
-        {{ user.more_info.professional.medical_institution }}
+        {{ user.more_info.professional.medical_institution }} academic hospital
     </div>
     <div>
         <span>
@@ -14,7 +14,7 @@
 </ng-container>
 <ng-container *ngIf="user.role_number == 2">
     <div>
-        {{ user.more_info.medical_institution }}
+        {{ user.more_info.medical_institution }} academic hospital
     </div>
     <div>
         <span>
