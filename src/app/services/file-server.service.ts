@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
 import { CurrentUserService } from './currentUser.service';
 
 @Injectable({
@@ -9,10 +10,10 @@ export class FileServerService {
 
   urlToFile: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   fileUpload(file, name: string) {
-    this.httpClient.post('http://localhost:8080/awsupload', { filename: name, content_type: file.type }).subscribe(
+    this.httpClient.post('http://localhost:8080/api/awsupload', { filename: name, content_type: file.type }, this.authService.getOptions()).subscribe(
       res => {
         console.log(res);
         let obj = res["params"];

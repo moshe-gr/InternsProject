@@ -63,7 +63,7 @@ export class Register3Component implements OnInit, DoCheck {
         this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
         let img: Blob = this.dataURItoBlob(webcamImage.imageAsDataUrl);
-        this.fileServerService.fileUpload(img, '' + this.user.passport);
+        this.fileServerService.fileUpload(img, this.user.passport + '.jpg');
         setTimeout(() => this.register(), 3 * 1000);
       },
       (err) => {
@@ -135,7 +135,7 @@ export class Register3Component implements OnInit, DoCheck {
       array.push(binary.charCodeAt(i));
     }
     return new Blob([new Uint8Array(array)], {
-        type: 'image/jpg'
+      type: 'image/jpg',
     });
   }
 
