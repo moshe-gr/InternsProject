@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WebcamInitError, WebcamImage } from 'ngx-webcam';
@@ -18,7 +19,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class Register3Component implements OnInit, DoCheck {
 
-  public errors: WebcamInitError[] = [];
+  errors: WebcamInitError[] = [];
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -27,9 +28,10 @@ export class Register3Component implements OnInit, DoCheck {
   msg: string = "please look straight at the camera so we can spot you";
   error: string;
   numTry: number = 0;
-  public webcamImage: WebcamImage;
+  webcamImage: WebcamImage;
+  update: boolean;
 
-  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) {
+  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router, private location: Location) {
     this.user = currentUserService.user;
   }
 
@@ -37,6 +39,7 @@ export class Register3Component implements OnInit, DoCheck {
     if (this.errors.length > 0) {
       this.msg = "camra error please check camra";
     }
+    this.update = this.location.isCurrentPathEqualTo("/updateImg");
   }
   
   ngOnInit(): void {
@@ -86,12 +89,13 @@ export class Register3Component implements OnInit, DoCheck {
 
   register(): void{
     //user dosn't exist
-    if (!this.currentUserService.user.pic) {
+    if (!this.update) {
       this.currentUserService.user.pic = this.fileServerService.urlToFile;
       this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
         user => {
           this.currentUserService.user = user;
-          if (this.user.role_number <= Role.supervisor) {
+          //supervisor
+          if (this.user.role_number == Role.supervisor) {
             this.usersService.createSupervisor(
               {
                 user:
@@ -107,6 +111,7 @@ export class Register3Component implements OnInit, DoCheck {
             );
             this.router.navigate(["/console"]);
           }
+          //intern
           else {
             this.router.navigate(["/welcome"]);
           }
@@ -115,15 +120,7 @@ export class Register3Component implements OnInit, DoCheck {
     }
     //user updated profile pic
     else {
-      if (!this.currentUserService.user.more_info || !this.currentUserService.user.more_info.personal) {
-        this.router.navigate(["/questionnaire1"]);
-      }
-      else if (!this.currentUserService.user.more_info.professional) {
-        this.router.navigate(["/questionnaire2"]);
-      }
-      else {
-        this.router.navigate(["/progress"]);
-      }
+      this.location.back();
     }
   }
 

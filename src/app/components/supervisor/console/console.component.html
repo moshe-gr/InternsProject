@@ -1,27 +1,37 @@
-<main class="container-fluid">
-    <h1 *ngIf="user" class="text-center my-3">
-        Hello {{ user.first_name }}!
-    </h1>
-    <label class="form-label my-3">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()" #searchFiled="ngModel" name="searchFiled">
-            <button class="btn btn-outline-secondary" type="button" (click)="search()">
-                <mat-icon class="pt-2">
-                    search
-                </mat-icon>
-            </button>
+<header class="border-bottom">
+    <app-profile-header></app-profile-header>
+</header>
+<div class="container-fluid row h-100">
+    <aside class="col-md-3 col-lg-2 py-3 text-center border-end">
+        <app-user-profile></app-user-profile>
+        <div *ngIf="user" class="text-primary fw-bolder fs-1 pt-5">
+            {{ user.more_info.students.length }}
         </div>
-        <div *ngIf="!searchResults.length && searchFiled.dirty" class="text-danger">
-            No results!
+        <div>
+            active interns
         </div>
-        <div class="border" *ngIf="searchResults.length">
-            <div *ngFor="let result of searchResults" class="result" (click)="search(result.first_name, result.last_name)">
-                {{ result.first_name }} {{ result.last_name }}
+    </aside>
+    <main class="col-md-9 col-lg-10">
+        <label class="form-label my-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="name" [(ngModel)]="searchInput" (keyup)="searchList()" #searchFiled="ngModel" name="searchFiled">
+                <button class="btn btn-outline-secondary" type="button" (click)="search()">
+                    <mat-icon class="pt-2">
+                        search
+                    </mat-icon>
+                </button>
             </div>
+            <div *ngIf="!searchResults.length && searchFiled.dirty" class="text-danger">
+                No results!
+            </div>
+            <div class="border" *ngIf="searchResults.length">
+                <div *ngFor="let result of searchResults" class="result" (click)="search(result.first_name, result.last_name)">
+                    {{ result.first_name }} {{ result.last_name }}
+                </div>
+            </div>
+        </label>
+        <div class="row d-flex justify-content-center">
+            <app-user-card class="col-md-4 col-xl-3 py-2" [user]="user" *ngFor="let user of usersToShow"></app-user-card>
         </div>
-    </label>
-    <div class="row d-flex justify-content-center">
-        <app-user-profile class="col-12 text-center"></app-user-profile>
-        <app-user-card class="col-md-4 col-xl-3 py-2" [user]="user" *ngFor="let user of usersToShow"></app-user-card>
-    </div>
-</main>
+    </main>
+</div>

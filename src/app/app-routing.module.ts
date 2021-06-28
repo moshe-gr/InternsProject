@@ -9,11 +9,11 @@ import { Register1Component } from './components/register1/register1.component';
 import { Register2Component } from './components/register2/register2.component';
 import { Register3Component } from './components/register3/register3.component';
 import { ConsoleComponent } from './components/supervisor/console/console.component';
-import { UsersProgressComponent } from './components/intern/users-progress/users-progres.component';
 import { WelcomeComponent } from './components/intern/welcome/welcome.component';
 import { Role } from './enums/role.enum';
 import { RoleGuard } from './guards/role.guard';
 import { UserGuard } from './guards/user.guard';
+import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'questionnaire2', component: Questionnaire2Component, canActivate: [UserGuard] },
   { path: 'ready', component: ReadyComponent, canActivate: [UserGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'progress', component: UsersProgressComponent, canActivate: [UserGuard] },
+  { path: 'overview', component: UserOverviewComponent, canActivate: [UserGuard] },
   { path: 'console', component: ConsoleComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } },
   { path: 'updatePersonal', component: Questionnaire1Component, canActivate: [UserGuard] },
   { path: 'updateProfessional', component: Questionnaire2Component, canActivate: [UserGuard] },

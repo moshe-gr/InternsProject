@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { WebcamModule } from 'ngx-webcam';
 import { HttpClientModule } from '@angular/common/http';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,8 @@ import { UsersProgressComponent } from './components/intern/users-progress/users
 import { ConsoleComponent } from './components/supervisor/console/console.component';
 import { UserCardComponent } from './components/supervisor/user-card/user-card.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
+import { PracticeResultsComponent } from './components/intern/practice-results/practice-results.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     UsersProgressComponent,
     ConsoleComponent,
     UserCardComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserOverviewComponent,
+    PracticeResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatIconModule,
     NgbModule,
     HttpClientModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

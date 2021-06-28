@@ -26,16 +26,16 @@
                     <label class="col-md-4 form-label">
                         Residency
                         <select class="form-select" [(ngModel)]="residency" name="residency" required>
-                            <option>
-                                Choose
+                            <option *ngFor="let resid of infoService.residencyList">
+                                {{ resid }}
                             </option>
                         </select>
                     </label>
                     <label class="col-md-4 form-label">
                         Department
                         <select class="form-select" name="dep" [(ngModel)]="department" required>
-                            <option>
-                                Choose
+                            <option *ngFor="let depart of infoService.departmentsList">
+                                {{ depart }}
                             </option>
                         </select>
                     </label>

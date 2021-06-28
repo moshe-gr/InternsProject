@@ -53,7 +53,7 @@ export class Register2Component implements OnInit {
           this.router.navigate(["/questionnaire1"]);
         }
         else {
-          this.router.navigate(["/progress"]);
+          this.router.navigate(["/overview"]);
         }
       },
       err => {
