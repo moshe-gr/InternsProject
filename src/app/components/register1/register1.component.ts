@@ -12,9 +12,9 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 })
 export class Register1Component implements OnInit {
 
-  id: number;
+  email: string;
   fullName: string = '';
-  passport: number;
+  passport: string;
   telephone: string = '';
   role: string;
 
@@ -34,7 +34,7 @@ export class Register1Component implements OnInit {
       },
       err => {
         if (err.status == 404) {
-          this.currentUserService.user.id = this.id;
+          this.currentUserService.user.email = this.email;
           this.currentUserService.user.first_name = this.fullName.split(" ")[0];
           this.currentUserService.user.last_name = this.fullName.split(" ")[1];
           this.currentUserService.user.passport = this.passport;

@@ -1,12 +1,13 @@
+import { EmailValidator } from "@angular/forms";
 import { InternInfo } from "./intern-info.model";
 import { Supervisor } from "./supervisor.model";
 
 export interface User {
     _id?: string,
-    id: number,
+    email: string,
     first_name: string,
     last_name: string,
-    passport: number,
+    passport: string,
     telephone: string,
     role?: string,
     role_number: number,

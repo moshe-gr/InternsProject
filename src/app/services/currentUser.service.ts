@@ -8,10 +8,10 @@ import { User } from '../models/user.model';
 export class CurrentUserService {
 
   user: User = {
-    id: 0,
+    email: '',
     first_name: '',
     last_name: '',
-    passport: 0,
+    passport: '',
     telephone: '',
     role_number: Role.intern
   };

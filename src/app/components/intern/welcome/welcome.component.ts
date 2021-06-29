@@ -15,6 +15,7 @@ export class WelcomeComponent implements OnInit {
   constructor(private currentUserService: CurrentUserService, private usersService: UsersService) {
     this.usersService.getUser(this.currentUserService.user._id).subscribe(
       user => {
+        console.log(user);
         this.currentUserService.user = user;
         this.user = user;
       },

@@ -14,6 +14,7 @@ import { Role } from './enums/role.enum';
 import { RoleGuard } from './guards/role.guard';
 import { UserGuard } from './guards/user.guard';
 import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
+import { TestsComponent } from './components/supervisor/tests/tests.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,8 @@ const routes: Routes = [
   { path: 'updatePersonal', component: Questionnaire1Component, canActivate: [UserGuard] },
   { path: 'updateProfessional', component: Questionnaire2Component, canActivate: [UserGuard] },
   { path: 'updateImg', component: Register3Component, canActivate: [UserGuard] },
+  { path: 'authLogin', component: Register2Component, canActivate: [UserGuard] },
+  { path: 'tests', component: TestsComponent},
 ];
 
 @NgModule({

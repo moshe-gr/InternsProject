@@ -12,20 +12,31 @@ export class ProfileHeaderComponent implements OnInit {
 
   collapsed = false;
   user: User;
+  logo: string;
 
   constructor(private currentUserService: CurrentUserService) {
     this.user = this.currentUserService.user;
-   }
+  }
 
   ngOnInit(): void {
+    if (this.user.role_number == 4 && this.user.more_info && this.user.more_info.professional) {
+      this.logo = "../../../assets/" +     
+      this.user.more_info.professional.medical_institution +
+      ".png";
+    }
+    else if (this.user.role_number == 2 && this.user.more_info) {
+      this.logo = "../../../assets/" +
+        this.user.more_info.medical_institution +
+      ".png";
+    }
   }
 
   logout(): void {
     this.currentUserService.user = {
-      id: 0,
+      email: '',
       first_name: '',
       last_name: '',
-      passport: 0,
+      passport: '',
       telephone: '',
       role_number: Role.intern
     };

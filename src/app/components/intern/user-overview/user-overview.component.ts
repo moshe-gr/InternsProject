@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
 
 @Component({
   selector: 'app-user-overview',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserOverviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
   }

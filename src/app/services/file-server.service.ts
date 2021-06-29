@@ -13,7 +13,7 @@ export class FileServerService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   fileUpload(file, name: string) {
-    this.httpClient.post('http://localhost:8080/api/awsupload', { filename: name, content_type: file.type }, this.authService.getOptions()).subscribe(
+    this.httpClient.post('http://localhost:8080/api/awsupload/img', { filename: name, content_type: file.type }, this.authService.getOptions()).subscribe(
       res => {
         console.log(res);
         let obj = res["params"];

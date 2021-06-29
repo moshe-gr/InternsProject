@@ -7,32 +7,49 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-9">
-            <h1>Welcome&nbsp;{{ role }}!</h1>
-            <h6 class="my-3">please fill in the following fields to create an acounnt</h6>
+            <h1>
+                Welcome&nbsp;{{ role }}!
+            </h1>
+            <h6 class="my-3">
+                please fill in the following fields to create an acounnt
+            </h6>
             <form #regForm="ngForm">
                 <div class="row my-3">            
                     <label class="form-label col-md-4">
-                        ID number
-                        <input type="number" class="form-control" placeholder="id" [(ngModel)] = "id" name="idn" #idn="ngModel" required>
-                        <small class="text-danger" *ngIf="idn.touched && idn.invalid">This is required.</small>
+                        Email
+                        <input type="email" class="form-control" placeholder="email" [(ngModel)]="email" name="userEmail" #userEmail="ngModel" email required>
+                        <small class="text-danger" *ngIf="userEmail.touched && userEmail.errors?.required">
+                            This is required.
+                        </small>
+                        <small class="text-danger" *ngIf="userEmail.touched && userEmail.errors?.email">
+                            Invalid email adress.
+                        </small>
                     </label>                 
                     <label class="form-label col-md-4">
                         Full name
-                        <input type="text" class="form-control" placeholder="first last" [(ngModel)] = "fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{1,} [A-Za-z]{1,}" required>
-                        <small class="text-danger" *ngIf="name.touched && name.errors?.required">This is required.</small>
-                        <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">please enter full name.</small>
+                        <input type="text" class="form-control" placeholder="first last" [(ngModel)]="fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{2,} [A-Za-z]{2,}" required>
+                        <small class="text-danger" *ngIf="name.touched && name.errors?.required">
+                            This is required.
+                        </small>
+                        <small class="text-danger" *ngIf="fullName.length > 0 && !fullName.split(' ')[1]">
+                            please enter full name.
+                        </small>
                     </label>       
                     <label class="form-label col-md-4">
                         Passport/Citizenship id
-                        <input type="number" class="form-control" placeholder="passport" [(ngModel)] = "passport" name="pass" #pass="ngModel" required>
-                        <small class="text-danger" *ngIf="pass.touched && pass.invalid">This is required.</small>
+                        <input type="number" class="form-control" placeholder="passport" [(ngModel)]="passport" name="pass" #pass="ngModel" pattern="[0-9]{9,}" required>
+                        <small class="text-danger" *ngIf="pass.touched && pass.errors?.required">
+                            This is required.
+                        </small>
                     </label>
                 </div>
                 <div class="row my-3">
                     <label class="form-label col-md-8">
                         Pohne number
-                        <input type="tel" class="form-control" placeholder="055-555-5555" [(ngModel)] = "telephone" name="tel" pattern="[0-9]{10}" required>
-                        <small class="fw-bold">A verification code will be sent to you to this number</small>
+                        <input type="tel" class="form-control" placeholder="055-555-5555" [(ngModel)]="telephone" name="tel" pattern="[0-9]{10}" required>
+                        <small class="fw-bold">
+                            A verification code will be sent to you to this number
+                        </small>
                     </label>
                 </div>
                 <button [disabled]="regForm.invalid" (click)="register(content)" (keyup)="register($event)" type="submit" class="py-2 px-4">CONTINUE</button>

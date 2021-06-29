@@ -27,6 +27,7 @@ import { UserCardComponent } from './components/supervisor/user-card/user-card.c
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
 import { PracticeResultsComponent } from './components/intern/practice-results/practice-results.component';
+import { TestsComponent } from './components/supervisor/tests/tests.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PracticeResultsComponent } from './components/intern/practice-results/p
     UserCardComponent,
     UserProfileComponent,
     UserOverviewComponent,
-    PracticeResultsComponent
+    PracticeResultsComponent,
+    TestsComponent
   ],
   imports: [
     BrowserModule,

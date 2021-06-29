@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
   
-  login(passport:number): Observable<any>{
+  login(passport:string): Observable<any>{
     return this.httpClient.get(this.baseUrl + passport);
   }
 

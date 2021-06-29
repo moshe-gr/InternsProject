@@ -15,12 +15,19 @@ export class ReadyComponent implements OnInit {
   }
 
   updateProfile() {
-    this.usersService.createIntern( 
+    this.usersService.createIntern(
       {
         user: this.currentUserService.user._id,
         personal: this.currentUserService.user.more_info.personal,
         professional: this.currentUserService.user.more_info.professional
       }
-    ).subscribe();
+    ).subscribe(
+      () =>
+        this.usersService.getUser(this.currentUserService.user._id).subscribe(
+        user => this.currentUserService.user = user,
+        err => console.log(err)
+        ),
+      err => console.log(err)
+    );
   }
 }

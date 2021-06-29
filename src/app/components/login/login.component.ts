@@ -12,7 +12,7 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 })
 export class LoginComponent implements OnInit {
 
-  passport: number;
+  passport: string;
   userRole: string;
 
   constructor(private authService: AuthService, private currentUserService: CurrentUserService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) { 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         
       this.currentUserService.user = user;
-      this.router.navigate(["/register2"]);
+      this.router.navigate(["/authLogin"]);
       },
       err => {        
         if (err.status == 404) {

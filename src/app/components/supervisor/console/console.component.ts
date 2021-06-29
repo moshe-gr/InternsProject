@@ -19,15 +19,17 @@ export class ConsoleComponent implements OnInit {
   constructor(private usersService: UsersService, private currentUserService: CurrentUserService) {
     this.usersService.getUser(this.currentUserService.user._id).subscribe(
       user => {
+        this.currentUserService.user = user
         this.user = user;
         this.interns = this.user.more_info.students;
         this.usersToShow = this.interns;
       },
       err => console.log(err)
     );
-  }
+   }
 
   ngOnInit(): void {
+    
   }
 
   searchList(): void {
