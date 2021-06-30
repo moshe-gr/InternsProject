@@ -13,23 +13,38 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
   
   login(passport:string): Observable<any>{
-    return this.httpClient.get(this.baseUrl + passport);
+    return this.httpClient.get(
+      this.baseUrl + passport
+    );
   }
 
   request(phoneNumber:string): Observable<any>{
-    return this.httpClient.post(this.baseUrl + 'request', { phoneNumber: phoneNumber })
+    return this.httpClient.post(
+      this.baseUrl + 'request',
+      { phoneNumber: phoneNumber }
+    );
   }
 
   check(pass:{ request_id:string, code:string, role_number?: number }): Observable<any>{
-    return this.httpClient.post(this.baseUrl + 'check', pass);
+    return this.httpClient.post(
+      this.baseUrl + 'check',
+      pass
+    );
   }
 
   cancel(reqId: string): Observable<any>{
-    return this.httpClient.post(this.baseUrl + 'cancel', { request_id: reqId })
+    return this.httpClient.post(
+      this.baseUrl + 'cancel',
+      { request_id: reqId }
+    );
   }
 
   faceDetect(pic): Observable<any>{
-    return this.httpClient.post('http://localhost:8080/faceDetect', { pic: pic.imageAsBase64 })
+    return this.httpClient.post(
+      'http://localhost:8080/api/faceDetect',
+      { pic: pic.imageAsBase64 },
+      this.getOptions()
+    );
   }
 
   getOptions(headers?) {   

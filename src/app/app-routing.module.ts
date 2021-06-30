@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'updateProfessional', component: Questionnaire2Component, canActivate: [UserGuard] },
   { path: 'updateImg', component: Register3Component, canActivate: [UserGuard] },
   { path: 'authLogin', component: Register2Component, canActivate: [UserGuard] },
-  { path: 'tests', component: TestsComponent},
+  { path: 'tests', component: TestsComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } },
 ];
 
 @NgModule({

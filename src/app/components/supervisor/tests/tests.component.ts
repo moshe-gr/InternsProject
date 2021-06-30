@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FileServerService } from 'src/app/services/file-server.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
+import { Supervisor } from 'src/app/models/supervisor.model';
+import { SupervisorService } from 'src/app/services/supervisor.service';
 
 @Component({
   selector: 'app-tests',
@@ -10,29 +13,59 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TestsComponent implements OnInit {
 
+  tasks: Supervisor["tasks"];
 
-  doc;
-  constructor(private fileServerService: FileServerService, private http: HttpClient, private auth: AuthService) { }
+  constructor(private fileServerService: FileServerService, private supervisorService: SupervisorService, private currentUserService: CurrentUserService, private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.tasks = this.currentUserService.user.more_info.tasks;
   }
 
-  uploadFile(target) {
+  uploadFile(target, task: string) {
     if (target.files[0]) {
-      this.doc = target.files[0];
-      this.fileServerService.fileUpload(target.files[0], target.files[0].name);
+      this.fileServerService.fileUpload(target.files[0], target.files[0].name).then(
+        () => {
+          console.log(this.fileServerService.urlToFile);
+          this.supervisorService.updateSupervisor(
+            this.currentUserService.user.more_info._id,
+            {
+              task: task,
+              name: this.fileServerService.urlToFile.split("/")[this.fileServerService.urlToFile.split("/").length - 1],
+              file_url: this.fileServerService.urlToFile
+            }
+          ).subscribe(
+            () => {
+              this.usersService.getUser(this.currentUserService.user._id).subscribe(
+                user => {
+                  this.currentUserService.user = user;
+                  this.tasks = this.currentUserService.user.more_info.tasks;
+                },
+                err => console.error(err)
+              );
+            },
+            err => console.error(err)
+          );
+        },
+        err => console.error(err)
+      );
     }
   }
 
-  df() {
-    this.http.get<any>(this.fileServerService.urlToFile, {responseType: 'blob' as 'json'}).subscribe(
+  downloadFile(task) {
+    this.fileServerService.fileDownload(task.file_url).subscribe(
       data => {
-        const blob = new Blob([data], {type: data.type});
-        const url= window.URL.createObjectURL(blob);
-        window.open(url);
+        console.log(data);
+        const blob = new Blob([data], { type: data.type });
+        const url = window.URL.createObjectURL(blob);
+        // window.open(url);
+        const fileName = task.name;
+        const downloader = document.createElement('a');
+        downloader.href = url;
+        downloader.download = fileName;
+        downloader.click();
       },
-      err => console.log("err")
-    )
+      err => console.error(err)
+    );
   }
 
 }

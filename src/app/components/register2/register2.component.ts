@@ -28,7 +28,7 @@ export class Register2Component implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     authService.request('972' + this.user.telephone).subscribe(
       data => this.request_id = data.request_id,
-      err => {
+      () => {
         alert('ERROR occurred while sending!\nplease try again or enter "1357"');
       }
     );

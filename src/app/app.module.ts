@@ -28,6 +28,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
 import { PracticeResultsComponent } from './components/intern/practice-results/practice-results.component';
 import { TestsComponent } from './components/supervisor/tests/tests.component';
+import { FileDataComponent } from './components/file-data/file-data.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TestsComponent } from './components/supervisor/tests/tests.component';
     UserProfileComponent,
     UserOverviewComponent,
     PracticeResultsComponent,
-    TestsComponent
+    TestsComponent,
+    FileDataComponent
   ],
   imports: [
     BrowserModule,
