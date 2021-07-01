@@ -1,4 +1,3 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FileServerService } from 'src/app/services/file-server.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -19,13 +18,13 @@ export class TestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasks = this.currentUserService.user.more_info.tasks;
+    this.tasks.forEach(task => task.modified = new Date(task.modified));
   }
 
   uploadFile(target, task: string) {
     if (target.files[0]) {
       this.fileServerService.fileUpload(target.files[0], target.files[0].name).then(
         () => {
-          console.log(this.fileServerService.urlToFile);
           this.supervisorService.updateSupervisor(
             this.currentUserService.user.more_info._id,
             {
@@ -39,6 +38,7 @@ export class TestsComponent implements OnInit {
                 user => {
                   this.currentUserService.user = user;
                   this.tasks = this.currentUserService.user.more_info.tasks;
+                  this.tasks.forEach(task => task.modified = new Date(task.modified));
                 },
                 err => console.error(err)
               );
@@ -57,7 +57,6 @@ export class TestsComponent implements OnInit {
         console.log(data);
         const blob = new Blob([data], { type: data.type });
         const url = window.URL.createObjectURL(blob);
-        // window.open(url);
         const fileName = task.name;
         const downloader = document.createElement('a');
         downloader.href = url;
@@ -66,6 +65,14 @@ export class TestsComponent implements OnInit {
       },
       err => console.error(err)
     );
+  }
+
+  openFile(task) {
+    const downloader = document.createElement('a');
+    downloader.href = task.file_url;
+    downloader.target = "_blank";
+    downloader.download = task.name;
+    downloader.click();
   }
 
 }

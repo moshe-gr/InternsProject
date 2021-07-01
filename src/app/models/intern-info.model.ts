@@ -15,5 +15,18 @@ export interface InternInfo {
         residency: string,
         year_in_residency: number,
         department: string
+    },
+    tasks?: {
+        done?: {
+            file_url: string,
+            result: number,
+            date: Date
+        }[],
+        todo?: {
+            name: string,
+            task: string,
+            modified: Date,
+            file_url: string
+        }[]
     }
 }

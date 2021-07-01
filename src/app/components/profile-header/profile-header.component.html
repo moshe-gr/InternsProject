@@ -5,9 +5,11 @@
     <div ngbDropdownMenu (mouseleave)="profileDrop.close()">
       <div class="fw-bold text-center">{{ user.first_name }}</div>
       <div class="fw-bold text-center">{{ user.last_name }}</div>
+      <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/console">Overview</button>
+      <button *ngIf="user.role_number == 4 && user.more_info && user.more_info.personal && user.more_info.professional" ngbDropdownItem routerLink="/overview">Overview</button>
+      <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/tests">Tests/Homework</button>
       <button *ngIf="user.more_info && user.more_info.personal" ngbDropdownItem routerLink="/updatePersonal">Edit personal</button>
       <button *ngIf="user.more_info && user.more_info.professional" ngbDropdownItem routerLink="/updateProfessional">Edit professionall</button>
-      <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/tests">Tests/Homework</button>
       <button ngbDropdownItem routerLink="/updateImg">Change pic</button>
       <button ngbDropdownItem routerLink="/" (click)="logout()">Logout</button>
     </div>

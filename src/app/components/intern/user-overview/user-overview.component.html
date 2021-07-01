@@ -2,12 +2,42 @@
     <app-profile-header></app-profile-header>
 </header>
 <div class="row">
-    <aside class="col-md-3 col-lg-2 py-3 text-center">
+    <aside class="col-md-4 col-lg-3 col-xl-2 py-3 text-center">
         <app-user-profile></app-user-profile>
         <h6 class="pt-5 pb-2">
             Your progress
         </h6>
         <app-users-progres></app-users-progres>
     </aside>
-    <app-practice-results></app-practice-results>
+    <main class="col-md-8 col-lg-9 col-xl-10 pt-3">
+        <h3 class="text-center mb-5">
+            Tasks todo
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Modified</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let task of todo; let i=index">
+                  <tr>
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ task.task }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.modified.toDateString() }}</td>
+                    <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
+                    <td><button class="btn btn-success" (click)="downloadFile(task)">download</button></td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+    </main>
 </div>
