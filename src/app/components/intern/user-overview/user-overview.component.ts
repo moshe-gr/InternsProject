@@ -10,12 +10,12 @@ import { FileServerService } from 'src/app/services/file-server.service';
 })
 export class UserOverviewComponent implements OnInit {
 
-  todo: InternInfo["tasks"]["todo"];
+  todo: InternInfo["tasks"][0]["tasks"];
 
   constructor(private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
-    this.todo = this.currentUserService.user.more_info.tasks.todo;
+    this.currentUserService.user.more_info.tasks.map(tasks => this.todo.push(tasks.tasks));
     this.todo.forEach(task => task.modified = new Date(task.modified));
   }
 

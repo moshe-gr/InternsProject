@@ -12,7 +12,7 @@ import { SupervisorService } from 'src/app/services/supervisor.service';
 })
 export class TestsComponent implements OnInit {
 
-  tasks: Supervisor["tasks"];
+  tasks: Supervisor["tasks"][0]["tasks"];
 
   constructor(private fileServerService: FileServerService, private supervisorService: SupervisorService, private currentUserService: CurrentUserService, private usersService: UsersService) { }
 
