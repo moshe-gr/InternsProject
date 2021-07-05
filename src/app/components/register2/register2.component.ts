@@ -22,24 +22,32 @@ export class Register2Component implements OnInit {
   request_id: string;
   
   constructor(private currentUserService: CurrentUserService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
-    this.user = this.currentUserService.user;
     config.backdrop = 'static';
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    authService.request('972' + this.user.telephone).subscribe(
-      data => this.request_id = data.request_id,
-      () => {
-        alert('ERROR occurred while sending!\nplease try again or enter "1357"');
-      }
-    );
    }
 
   ngOnInit(): void {
+    this.currentUserService.getCurrentUser().then(
+      user => this.user = user
+    ).then(
+      () => {
+        this.authService.request('972' + this.user.telephone).subscribe(
+          data => this.request_id = data.request_id,
+          () => {
+            alert('ERROR occurred while sending!\nplease try again or enter "1357"');
+          }
+        );
+      }
+    );
   }
   
   register(): void {
     this.authService.check(
-      { request_id: this.request_id, code: '' + this.first + this.second + this.third + this.fourth, role_number: this.user.role_number }
+      {
+        request_id: this.request_id,
+        code: '' + this.first + this.second + this.third + this.fourth, role_number: this.user.role_number
+      }
     ).subscribe(
       result => {
         this.authService.token = result.token;

@@ -32,7 +32,8 @@ export class Register3Component implements OnInit, DoCheck {
   update: boolean;
 
   constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router, private location: Location) {
-    this.user = currentUserService.user;
+    currentUserService.getCurrentUser().then(
+      user => this.user = user);
   }
 
   ngDoCheck(): void {

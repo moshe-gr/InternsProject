@@ -22,11 +22,7 @@ export class ReadyComponent implements OnInit {
         professional: this.currentUserService.user.more_info.professional
       }
     ).subscribe(
-      () =>
-        this.usersService.getUser(this.currentUserService.user._id).subscribe(
-        user => this.currentUserService.user = user,
-        err => console.log(err)
-        ),
+      () => this.currentUserService.getCurrentUser(),
       err => console.log(err)
     );
   }

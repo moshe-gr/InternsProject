@@ -1,24 +1,26 @@
-<img [src]="user.pic" alt="profile-pic" class="profile-img">
-<h3>
-    {{ user.first_name }} {{ user.last_name }}
-</h3>
-<ng-container *ngIf="user.role_number == 4">
-    <div>
-        {{ user.more_info.professional.medical_institution }} academic hospital
-    </div>
-    <div>
-        <span>
-            {{ user.more_info.professional.year_in_residency }} year {{ user.more_info.professional.residency }} intern
-        </span>
-    </div>
-</ng-container>
-<ng-container *ngIf="user.role_number == 2">
-    <div>
-        {{ user.more_info.medical_institution }} academic hospital
-    </div>
-    <div>
-        <span>
-            A supervisor
-        </span>
-    </div>
+<ng-container *ngIf="user">
+    <img [src]="user.pic" alt="profile-pic" class="profile-img">
+    <h3>
+        {{ user.first_name }} {{ user.last_name }}
+    </h3>
+    <ng-container *ngIf="user.role_number == 4">
+        <div>
+            {{ user.more_info.professional.medical_institution }} academic hospital
+        </div>
+        <div>
+            <span>
+                {{ user.more_info.professional.year_in_residency }} year {{ user.more_info.professional.residency }} intern
+            </span>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="user.role_number == 2">
+        <div>
+            {{ user.more_info.medical_institution }} academic hospital
+        </div>
+        <div>
+            <span>
+                A supervisor
+            </span>
+        </div>
+    </ng-container>
 </ng-container>
