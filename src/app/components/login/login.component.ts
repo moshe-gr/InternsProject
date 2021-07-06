@@ -26,14 +26,15 @@ export class LoginComponent implements OnInit {
   login(content) {
     this.authService.login(this.passport).subscribe(
       user => {
-        console.log(user);
-        
-      this.currentUserService.user = user;
-      this.router.navigate(["/authLogin"]);
+        this.currentUserService.user = user;
+        this.router.navigate(["/authLogin"]);
       },
       err => {        
         if (err.status == 404) {
           this.open(content);
+        }
+        else {
+          console.error(err);
         }
       }
     );

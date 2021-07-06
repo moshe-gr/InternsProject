@@ -33,35 +33,34 @@ export class Questionnaire2Component implements OnInit {
   }
 
   updateProfile() {
-    if (this.currentUserService.user.more_info) {
-      this.currentUserService.user.more_info.professional = {
+    if (!this.update) {
+      this.currentUserService.internInfo.professional = {
         medical_institution: this.medInst,
         residency: this.residency,
         year_in_residency: this.yInRes,
         department: this.department
       }
-    }
-    else {
-      this.currentUserService.user.more_info = {
-        professional: {
-          medical_institution: this.medInst,
-          residency: this.residency,
-          year_in_residency: this.yInRes,
-          department: this.department
-        }
-      }
-    }
-    if (!this.update) {
       this.router.navigate(["/ready"]);
     }
     else {
       this.internService.updateIntern(
-        this.currentUserService.user.more_info._id, { user: this.currentUserService.user._id, professional: this.currentUserService.user.more_info.professional }
+        this.currentUserService.user.more_info._id,
+        {
+          professional: {
+            medical_institution: this.medInst,
+            residency: this.residency,
+            year_in_residency: this.yInRes,
+            department: this.department
+          }
+        }
       ).subscribe(
-        data => console.log(data),
+        () => {
+          this.currentUserService.getCurrentUser().then(
+            () => this.location.back()
+          );
+        },
         err => console.log(err)
       );
-      this.location.back();
     }
   }
 }

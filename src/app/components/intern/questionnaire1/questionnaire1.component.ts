@@ -41,53 +41,56 @@ export class Questionnaire1Component implements OnInit {
           if (this.country) {
             this.getCities();
           }
-      }
+      },
+      err => console.error(err)
     );
   }
 
   updateProfile() {
-    if (this.currentUserService.user.more_info) {
-      this.currentUserService.user.more_info.personal = {
+    if (this.update) {
+      this.internService.updateIntern(
+        this.currentUserService.user.more_info._id,
+        {
+          personal: {
+          academic_institution: this.acdInst,
+          age: this.age,
+          country: this.country,
+          city: this.city,
+          graduation_year: this.gradYear
+          }
+        }
+      ).subscribe(
+        () => {
+          this.currentUserService.getCurrentUser().then(
+            () => this.location.back()
+          );
+        },
+        err => console.error(err)
+      );
+    }
+    else {
+      this.currentUserService.internInfo.personal = {
         academic_institution: this.acdInst,
         age: this.age,
         country: this.country,
         city: this.city,
         graduation_year: this.gradYear
       }
-    }
-    else {
-      this.currentUserService.user.more_info = {
-        personal: {
-          academic_institution: this.acdInst,
-          age: this.age,
-          country: this.country,
-          city: this.city,
-          graduation_year: this.gradYear
-        }
-      }
-    }
-    if (this.update) {
-      this.internService.updateIntern(
-        this.currentUserService.user.more_info._id, { personal: this.currentUserService.user.more_info.personal }
-      ).subscribe(
-        data => console.log(data),
-        err => console.log(err)
-      );
-      this.location.back();
-    }
-    else {
       this.router.navigate(["/questionnaire2"]);
     }
   }
 
   getCities(): void {
-    this.infoService.getCountriesApi().subscribe(data => {
-      this.citiesList = data.find(
-        data =>
-          data.data ?
-            data.data.country == this.country : data.country == this.country
-      ).cities;
-    });
+    this.infoService.getCountriesApi().subscribe(
+      data => {
+        this.citiesList = data.find(
+          data =>
+            data.data ?
+              data.data.country == this.country : data.country == this.country
+        ).cities;
+      },
+      err => console.error(err)
+    );
   }
 
 }

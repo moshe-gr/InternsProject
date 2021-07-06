@@ -4,6 +4,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { Supervisor } from 'src/app/models/supervisor.model';
 import { SupervisorService } from 'src/app/services/supervisor.service';
+import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-tests',
@@ -14,30 +15,39 @@ export class TestsComponent implements OnInit {
 
   tasks: Supervisor["tasks"][0]["tasks"];
 
-  constructor(private fileServerService: FileServerService, private supervisorService: SupervisorService, private currentUserService: CurrentUserService, private usersService: UsersService) { }
+  constructor(private testService: TestService, private fileServerService: FileServerService, private supervisorService: SupervisorService, private currentUserService: CurrentUserService, private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.tasks = this.currentUserService.user.more_info.tasks;
-    this.tasks.forEach(task => task.modified = new Date(task.modified));
+    this.testService.getTests(this.currentUserService.user.more_info._id).subscribe(
+      tests => {
+        this.currentUserService.user.more_info.tasks = tests;
+        this.tasks = this.currentUserService.user.more_info.tasks.tasks;
+        this.tasks.forEach(task => task.modified = new Date(task.modified));
+      },
+      err => console.error(err)
+    );
   }
 
   uploadFile(target, task: string) {
     if (target.files[0]) {
       this.fileServerService.fileUpload(target.files[0], target.files[0].name).then(
         () => {
-          this.supervisorService.updateSupervisor(
-            this.currentUserService.user.more_info._id,
+          this.testService.addTest(
             {
-              task: task,
-              name: this.fileServerService.urlToFile.split("/")[this.fileServerService.urlToFile.split("/").length - 1],
-              file_url: this.fileServerService.urlToFile
+              _id: this.currentUserService.user.more_info.tasks._id,
+              task:
+              {
+                task: task,
+                name: this.fileServerService.urlToFile.split("/")[this.fileServerService.urlToFile.split("/").length - 1],
+                file_url: this.fileServerService.urlToFile
+              }
             }
           ).subscribe(
             () => {
-              this.usersService.getUser(this.currentUserService.user._id).subscribe(
-                user => {
-                  this.currentUserService.user = user;
-                  this.tasks = this.currentUserService.user.more_info.tasks;
+              this.testService.getTests(this.currentUserService.user.more_info._id).subscribe(
+                tests => {
+                  this.currentUserService.user.more_info.tasks = tests;
+                  this.tasks = this.currentUserService.user.more_info.tasks.tasks;
                   this.tasks.forEach(task => task.modified = new Date(task.modified));
                 },
                 err => console.error(err)

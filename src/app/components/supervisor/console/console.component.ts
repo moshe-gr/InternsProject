@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-console',
@@ -16,13 +15,10 @@ export class ConsoleComponent implements OnInit {
   searchInput: string;
   usersToShow: User[];
 
-  constructor(private usersService: UsersService, private currentUserService: CurrentUserService) {
-    currentUserService.getCurrentUser().then(
-      user => this.user = user
-    );
-  }
+  constructor(private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
+    this.user = this.currentUserService.user;
     this.interns = this.user.more_info.students;
     this.usersToShow = this.interns;
   }

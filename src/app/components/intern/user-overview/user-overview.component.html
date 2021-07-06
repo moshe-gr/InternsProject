@@ -26,15 +26,17 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let task of todo; let i=index">
-                  <tr>
-                    <th scope="row">{{ i+1 }}</th>
-                    <td>{{ task.task }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.modified.toDateString() }}</td>
-                    <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
-                    <td><button class="btn btn-success" (click)="downloadFile(task)">download</button></td>
-                  </tr>
+                <ng-container *ngFor="let tasks of todo">
+                  <ng-container *ngFor="let task of tasks; let i=index">
+                    <tr>
+                      <th scope="row">{{ i+1 }}</th>
+                      <td>{{ task.task }}</td>
+                      <td>{{ task.name }}</td>
+                      <td>{{ task.modified.toDateString() }}</td>
+                      <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
+                      <td><button class="btn btn-success" (click)="downloadFile(task)">download</button></td>
+                    </tr>
+                  </ng-container>
                 </ng-container>
               </tbody>
             </table>

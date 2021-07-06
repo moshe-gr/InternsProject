@@ -28,25 +28,21 @@ export class Register2Component implements OnInit {
    }
 
   ngOnInit(): void {
-    this.currentUserService.getCurrentUser().then(
-      user => this.user = user
-    ).then(
+    this.user = this.currentUserService.user
+    this.authService.request('972' + this.user.telephone).subscribe(
+      data => this.request_id = data.request_id,
       () => {
-        this.authService.request('972' + this.user.telephone).subscribe(
-          data => this.request_id = data.request_id,
-          () => {
-            alert('ERROR occurred while sending!\nplease try again or enter "1357"');
-          }
-        );
+        alert('ERROR occurred while sending!\nplease try again or enter "1357"');
       }
-    );
+    );    
   }
   
   register(): void {
     this.authService.check(
       {
         request_id: this.request_id,
-        code: '' + this.first + this.second + this.third + this.fourth, role_number: this.user.role_number
+        code: '' + this.first + this.second + this.third + this.fourth,
+        role_number: this.user.role_number
       }
     ).subscribe(
       result => {
@@ -55,19 +51,26 @@ export class Register2Component implements OnInit {
         if (this.router.url == "/register2") {
           this.router.navigate(["/register3"]);
         }
-        //supervisor login
-        else if (this.user.role_number == Role.supervisor) {
-          this.router.navigate(["/console"]);
-        }
-        //intern login
+        //login
         else {
-          if (!this.user.more_info) {
-            this.router.navigate(["/questionnaire1"]);
-          }
-          else {
-            this.router.navigate(["/overview"]);
-          }
-        }
+          this.currentUserService.getCurrentUser().then(
+            () => {
+              //supervisor login
+              if (this.user.role_number == Role.supervisor) {
+                this.router.navigate(["/console"]);
+              }
+              //intern login
+              else {
+                if (!this.user.more_info) {
+                  this.router.navigate(["/questionnaire1"]);
+                }
+                else {
+                  this.router.navigate(["/overview"]);
+                }
+              }
+            }
+          );
+        } 
       },
       err => {
         if (err.status == 400) {

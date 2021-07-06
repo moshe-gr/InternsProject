@@ -31,10 +31,7 @@ export class Register3Component implements OnInit, DoCheck {
   webcamImage: WebcamImage;
   update: boolean;
 
-  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router, private location: Location) {
-    currentUserService.getCurrentUser().then(
-      user => this.user = user);
-  }
+  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router, private location: Location) { }
 
   ngDoCheck(): void {
     if (this.errors.length > 0) {
@@ -44,6 +41,7 @@ export class Register3Component implements OnInit, DoCheck {
   }
   
   ngOnInit(): void {
+    this.user = this.currentUserService.user;
     setTimeout(() => this.triggerSnapshot(), 2 * 1000);
   }
 
@@ -67,8 +65,9 @@ export class Register3Component implements OnInit, DoCheck {
         this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
         let img: Blob = this.dataURItoBlob(webcamImage.imageAsDataUrl);
-        this.fileServerService.fileUpload(img, this.user.passport + '.jpg');
-        setTimeout(() => this.register(), 3 * 1000);
+        this.fileServerService.fileUpload(img, this.user.passport + '.jpg').then(
+          () => setTimeout(() => this.register(), 3 * 1000)
+        );
       },
       (err) => {
         this.numTry++;
@@ -89,10 +88,13 @@ export class Register3Component implements OnInit, DoCheck {
   }
 
   register(): void{
-    //user dosn't exist
+    //new registration
     if (!this.update) {
       this.currentUserService.user.pic = this.fileServerService.urlToFile;
-      this.usersService.addUser(Object.assign({}, this.currentUserService.user)).subscribe(
+      this.usersService.addUser(
+        Object.assign({},
+          this.currentUserService.user)
+      ).subscribe(
         user => {
           this.currentUserService.user = user;
           //supervisor
@@ -107,16 +109,20 @@ export class Register3Component implements OnInit, DoCheck {
                   ]
               }
             ).subscribe(
-              data => this.currentUserService.user.more_info = data._id,
-              err => console.log(err)
+              () => {
+                this.currentUserService.getCurrentUser().then(
+                  () => this.router.navigate(["/console"])
+                );
+              },
+              err => console.error(err)
             );
-            this.router.navigate(["/console"]);
           }
           //intern
           else {
             this.router.navigate(["/welcome"]);
           }
-        }
+        },
+        err => console.error(err)
       );
     }
     //user updated profile pic

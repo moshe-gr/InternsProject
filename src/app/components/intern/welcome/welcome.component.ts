@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-welcome',
@@ -12,12 +11,12 @@ export class WelcomeComponent implements OnInit {
 
   user: User;
 
-  constructor(private currentUserService: CurrentUserService, private usersService: UsersService) {
-    currentUserService.getCurrentUser().then(
-      user => this.user = user);
-  }
+  constructor(private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
+    this.currentUserService.getCurrentUser().then(
+      () => this.user = this.currentUserService.user
+    );
   }
 
 }

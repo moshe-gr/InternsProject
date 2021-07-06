@@ -11,13 +11,10 @@ export class UserProfileComponent implements OnInit {
 
   user: User;
 
-  constructor(private currentUserService: CurrentUserService) { 
-    currentUserService.getCurrentUser().then(
-      user => this.user = user
-    );
-  }
+  constructor(private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
+    this.user = this.currentUserService.user;
   }
 
 }

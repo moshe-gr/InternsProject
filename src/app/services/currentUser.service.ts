@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Role } from '../enums/role.enum';
+import { InternInfo } from '../models/intern-info.model';
 import { User } from '../models/user.model';
 import { UsersService } from './users.service';
 
@@ -17,16 +18,21 @@ export class CurrentUserService {
     role_number: Role.intern
   };
 
+  internInfo: InternInfo;
+
   constructor(private usersService: UsersService) { }
 
-  async getCurrentUser(): Promise<User> {
+  async getCurrentUser(): Promise<void> {
     if (this.user._id) {
       await this.usersService.getUser(this.user._id).toPromise().then(
-        user => this.user = user,
+        user => {
+          this.user = user;
+          this.internInfo ?
+            this.internInfo.user = user._id : this.internInfo = { user: user._id };
+        },
         err => console.error(err)
       );
     }
-    return this.user;
   }
 
 }

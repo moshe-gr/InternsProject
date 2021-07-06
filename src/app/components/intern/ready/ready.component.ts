@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -9,21 +10,19 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ReadyComponent implements OnInit {
 
-  constructor(public currentUserService: CurrentUserService, private usersService: UsersService) { }
+  constructor(public currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   updateProfile() {
     this.usersService.createIntern(
-      {
-        user: this.currentUserService.user._id,
-        personal: this.currentUserService.user.more_info.personal,
-        professional: this.currentUserService.user.more_info.professional
-      }
+      this.currentUserService.internInfo
     ).subscribe(
-      () => this.currentUserService.getCurrentUser(),
-      err => console.log(err)
+      () => this.currentUserService.getCurrentUser().then(
+        () => this.router.navigate(["/overview"])
+      ),
+      err => console.error(err)
     );
   }
 }

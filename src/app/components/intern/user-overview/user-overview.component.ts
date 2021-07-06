@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { InternInfo } from 'src/app/models/intern-info.model';
+import { TestModel } from 'src/app/models/test.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { FileServerService } from 'src/app/services/file-server.service';
+import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-user-overview',
@@ -10,13 +12,22 @@ import { FileServerService } from 'src/app/services/file-server.service';
 })
 export class UserOverviewComponent implements OnInit {
 
-  todo: InternInfo["tasks"][0]["tasks"];
+  todo = [];
 
-  constructor(private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
+  constructor(private testService: TestService, private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
-    this.currentUserService.user.more_info.tasks.map(tasks => this.todo.push(tasks.tasks));
-    this.todo.forEach(task => task.modified = new Date(task.modified));
+    this.testService.getTests(this.currentUserService.user.more_info._id).subscribe(
+      tests => {
+        this.currentUserService.user.more_info.tasks = tests;
+        this.currentUserService.user.more_info.tasks.tasks.forEach(
+          data => this.todo.push(data.tasks)
+        );
+        console.log(this.todo)
+        this.todo.forEach(tasks => tasks.forEach(task => task.modified = new Date(task.modified)));
+      },
+      err => console.error(err)
+    );
   }
 
   downloadFile(task) {
