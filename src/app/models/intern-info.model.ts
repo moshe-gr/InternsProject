@@ -1,3 +1,4 @@
+import { AnswerModel } from "./answer.model";
 import { TestModel } from "./test.model";
 import { User } from "./user.model";
 
@@ -17,5 +18,6 @@ export interface InternInfo {
         year_in_residency: number,
         department: string
     },
-    tasks?: TestModel[]
+    tasks?: TestModel[] | string[],
+    done?: AnswerModel | string 
 }

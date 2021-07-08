@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { InternInfo } from 'src/app/models/intern-info.model';
 import { TestModel } from 'src/app/models/test.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { FileServerService } from 'src/app/services/file-server.service';
@@ -12,25 +11,22 @@ import { TestService } from 'src/app/services/test.service';
 })
 export class UserOverviewComponent implements OnInit {
 
-  todo = [];
+  todo: TestModel[] = [];
 
   constructor(private testService: TestService, private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
-    this.testService.getTests(this.currentUserService.user.more_info._id).subscribe(
+    this.testService.getInternTests(this.currentUserService.user.more_info._id).subscribe(
       tests => {
         this.currentUserService.user.more_info.tasks = tests;
-        this.currentUserService.user.more_info.tasks.tasks.forEach(
-          data => this.todo.push(data.tasks)
-        );
-        console.log(this.todo)
-        this.todo.forEach(tasks => tasks.forEach(task => task.modified = new Date(task.modified)));
+        this.todo = tests;
+        this.todo.forEach(tasks => tasks.tasks.forEach(task => task.modified = new Date(task.modified)));
       },
       err => console.error(err)
     );
   }
 
-  downloadFile(task) {
+  downloadFile(task: TestModel['tasks'][0]) {
     this.fileServerService.fileDownload(task.file_url).subscribe(
       data => {
         console.log(data);
@@ -45,7 +41,7 @@ export class UserOverviewComponent implements OnInit {
     );
   }
 
-  openFile(task) {
+  openFile(task: TestModel['tasks'][0]) {
     const downloader = document.createElement('a');
     downloader.href = task.file_url;
     downloader.target = "_blank";

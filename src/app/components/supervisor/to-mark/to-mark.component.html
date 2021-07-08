@@ -1,0 +1,58 @@
+<header>
+    <app-profile-header></app-profile-header>
+</header>
+<div class="container-fluid row">
+    <aside *ngIf="user" class="col-md-3 col-lg-2 py-3 text-center">
+        <app-user-profile></app-user-profile>
+        <div class="text-primary fw-bolder fs-1 pt-5">
+            {{ user.more_info.students.length }}
+        </div>
+        <div>
+            active interns
+        </div>
+    </aside>
+    <main class="col-md-9 col-lg-10">
+        <ngb-accordion [closeOthers]="true" activeIds="static-1">
+            <ngb-panel id="static-1">
+                <ng-container *ngFor="let task of done">
+                    <ng-template ngbPanelTitle [disabled]="!task.done.length">
+                        <tr>
+                            <td>{{ task.intern.first_name }} {{ task.intern.last_name }}</td>
+                            <td>{{ task.intern.more_info.professional.year_in_residency }} year {{ task.intern.more_info.professional.residency }} intern</td>
+                            <td>Num tests <b>{{ task.done.length }}</b></td>
+                        </tr>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Fulfilled</th>
+                                <th scope="col">Score</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let test of task.done; let i=index">
+                                <tr>
+                                    <th scope="row">{{ i+1 }}</th>
+                                    <td>{{ test.test.name }}</td>
+                                    <td>{{ test.date.toDateString() }}</td>
+                                    <td *ngIf="test.result">{{ test.result }}</td>
+                                    <td *ngIf="!test.result" class="text-danger">not marked</td>
+                                    <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
+                                    <td><button class="btn btn-danger">mark</button></td>
+                                </tr>
+                                </ng-container>
+                            </tbody>
+                            </table>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </ngb-panel>
+        </ngb-accordion>
+    </main>
+</div>

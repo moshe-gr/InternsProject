@@ -18,6 +18,9 @@
                     <label class="col-md-4 form-label">
                         Medical institution
                         <select class="form-select" name="medInst" [(ngModel)]="medInst" required>
+                            <option [ngValue]="undefined" disabled selected>
+                                Choose
+                            </option>
                             <option *ngFor="let inst of infoService.medical_institutions">
                                 {{ inst }}
                             </option>
@@ -26,6 +29,9 @@
                     <label class="col-md-4 form-label">
                         Residency
                         <select class="form-select" [(ngModel)]="residency" name="residency" required>
+                            <option [ngValue]="undefined" disabled selected>
+                                Choose
+                            </option>
                             <option *ngFor="let resid of infoService.residencyList">
                                 {{ resid }}
                             </option>
@@ -34,6 +40,9 @@
                     <label class="col-md-4 form-label">
                         Department
                         <select class="form-select" name="dep" [(ngModel)]="department" required>
+                            <option [ngValue]="undefined" disabled selected>
+                                Choose
+                            </option>
                             <option *ngFor="let depart of infoService.departmentsList">
                                 {{ depart }}
                             </option>

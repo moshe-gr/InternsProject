@@ -65,7 +65,7 @@ export class Register3Component implements OnInit, DoCheck {
         this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
         let img: Blob = this.dataURItoBlob(webcamImage.imageAsDataUrl);
-        this.fileServerService.fileUpload(img, this.user.passport + '.jpg').then(
+        this.fileServerService.fileUpload(img, '.*.' + Date.now() + '-*-' + this.user.passport + '.jpg').then(
           () => setTimeout(() => this.register(), 3 * 1000)
         );
       },
@@ -127,7 +127,19 @@ export class Register3Component implements OnInit, DoCheck {
     }
     //user updated profile pic
     else {
-      this.location.back();
+      this.usersService.updateUser(
+        this.user._id,
+        { pic: this.fileServerService.urlToFile }
+      ).subscribe(
+        () => this.fileServerService.fileDelete('.*.' + this.currentUserService.user.pic.split('.*.')[1]).subscribe(
+          () => {
+            this.currentUserService.user.pic = this.fileServerService.urlToFile;
+            this.location.back();
+          },
+          err => console.error(err)
+        ),
+        err => console.error(err)
+      );
     }
   }
 

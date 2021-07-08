@@ -17,11 +17,14 @@
                 <div class="row">
                     <label class="col-md-4 form-label">
                         Age
-                        <input class="form-control" type="text" name="age" [(ngModel)]="age" required>
+                        <input class="form-control" [ngClass]="{ 'is-invalid': _age.touched && _age.invalid, 'is-valid': _age.touched && _age.valid }" type="number" name="age" #_age="ngModel" [(ngModel)]="age" required>
                     </label>
                     <label class="col-md-4 form-label">
                         Country
                         <select (change)="getCities()" class="form-select" name="Country" [(ngModel)]="country" required>
+                            <option [ngValue]="undefined" disabled selected>
+                                Choose
+                            </option>
                             <option *ngFor="let countryName of countriesList">
                                 {{ countryName }}
                             </option>
@@ -30,6 +33,9 @@
                     <label class="col-md-4 form-label">
                         City
                         <select class="form-select" name="city" [(ngModel)]="city" required>
+                            <option [ngValue]="undefined" disabled selected>
+                                Choose
+                            </option>
                             <option *ngFor="let cityName of citiesList">
                                 {{ cityName }}
                             </option>
@@ -39,11 +45,11 @@
                 <div class="row">
                     <label class="col-md-4 form-label">
                         Graduation year
-                        <input class="form-control" type="text" name="gradYear" [(ngModel)]="gradYear" required>
+                        <input class="form-control" [ngClass]="{ 'is-invalid': _gradYear.touched && _gradYear.invalid, 'is-valid': _gradYear.touched && _gradYear.valid }" type="number" name="gradYear" #_gradYear="ngModel" [(ngModel)]="gradYear" required>
                     </label>
                     <label class="col-md-4 form-label">
                         Academic institution
-                        <input class="form-control" name="acdInst" [(ngModel)]="acdInst" required>
+                        <input class="form-control" [ngClass]="{ 'is-invalid': _acdInst.touched && _acdInst.invalid, 'is-valid': _acdInst.touched && _acdInst.valid }" #_acdInst="ngModel" name="acdInst" [(ngModel)]="acdInst" required>
                     </label>
                 </div>
                 <button class="py-2 px-4" [disabled]="quesForm1.invalid" (click)="updateProfile()">

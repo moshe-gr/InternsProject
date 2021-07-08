@@ -9,6 +9,7 @@
         <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/console">Overview</button>
         <button *ngIf="user.role_number == 4 && user.more_info && user.more_info.personal && user.more_info.professional" ngbDropdownItem routerLink="/overview">Overview</button>
         <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/tests">Tests/Homework</button>
+        <button *ngIf="user.role_number == 2" ngbDropdownItem routerLink="/toMark">Done tests</button>
         <button *ngIf="user.more_info && user.more_info.personal" ngbDropdownItem routerLink="/updatePersonal">Edit personal</button>
         <button *ngIf="user.more_info && user.more_info.professional" ngbDropdownItem routerLink="/updateProfessional">Edit professionall</button>
         <button ngbDropdownItem routerLink="/updateImg">Change pic</button>

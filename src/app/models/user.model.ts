@@ -1,4 +1,3 @@
-import { EmailValidator } from "@angular/forms";
 import { InternInfo } from "./intern-info.model";
 import { Supervisor } from "./supervisor.model";
 

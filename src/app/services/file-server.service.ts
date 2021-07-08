@@ -8,14 +8,16 @@ import { AuthService } from './auth.service';
 })
 export class FileServerService {
 
+  baseUtrl: string = 'http://localhost:8080/api/awsS3/';
   urlToFile: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   async fileUpload(file, name: string): Promise<void> {
     try {
+      name = '.*.' + Date.now() + '-*-' + name;
       const res = await this.httpClient.post(
-        'http://localhost:8080/api/awsupload/img',
+        this.baseUtrl + 'upload',
         { filename: name, content_type: file.type },
         this.authService.getOptions()
       ).toPromise();
@@ -27,7 +29,11 @@ export class FileServerService {
       }
       formData.append('file', file, name);
       formData.append('content-type', file.type);
-      await this.httpClient.post(res["endpoint_url"], formData, { responseType: 'text', observe: 'response' }).toPromise();
+      await this.httpClient.post(
+        res["endpoint_url"],
+        formData,
+        { responseType: 'text', observe: 'response' }
+      ).toPromise();
       this.urlToFile = res["endpoint_url"] + '/' + res["params"]["key"];
     }
     catch {
@@ -36,7 +42,17 @@ export class FileServerService {
   }
 
   fileDownload(fileUrl: string): Observable<Blob> {
-    return this.httpClient.get<Blob>(fileUrl, { responseType: 'blob' as 'json' });
+    return this.httpClient.get<Blob>(
+      fileUrl,
+      { responseType: 'blob' as 'json' }
+    );
+  }
+
+  fileDelete(fileName: string): Observable<object> {
+    return this.httpClient.delete(
+      this.baseUtrl + 'delete/' + fileName,
+      this.authService.getOptions()
+    );
   }
 
 }

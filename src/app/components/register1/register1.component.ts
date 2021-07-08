@@ -12,9 +12,9 @@ import { CurrentUserService } from 'src/app/services/currentUser.service';
 })
 export class Register1Component implements OnInit {
 
-  email: string;
+  email: string = '';
   fullName: string = '';
-  passport: string;
+  passport: string = '';
   telephone: string = '';
   role: string;
 

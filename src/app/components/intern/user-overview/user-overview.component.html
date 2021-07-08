@@ -13,33 +13,46 @@
         <h3 class="text-center mb-5">
             Tasks todo
         </h3>
-        <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Modified</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let tasks of todo">
-                  <ng-container *ngFor="let task of tasks; let i=index">
-                    <tr>
-                      <th scope="row">{{ i+1 }}</th>
-                      <td>{{ task.task }}</td>
-                      <td>{{ task.name }}</td>
-                      <td>{{ task.modified.toDateString() }}</td>
-                      <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
-                      <td><button class="btn btn-success" (click)="downloadFile(task)">download</button></td>
-                    </tr>
-                  </ng-container>
-                </ng-container>
-              </tbody>
-            </table>
-          </div>
+        <ngb-accordion *ngIf="todo.length" [closeOthers]="true" activeIds="static-1">
+          <ng-container *ngFor="let tasks of todo">
+            <ngb-panel id="static-1"  [disabled]="!tasks.tasks">
+                  <ng-template ngbPanelTitle>
+                    <div class="row">
+                      <div class="col-4">{{ tasks.supervisor.first_name }} {{ tasks.supervisor.last_name }}</div>
+                      <div class="col-4">{{ tasks.supervisor.more_info.medical_institution }} academic hospital supervisor</div>
+                      <div class="col-4">Num tests <b>{{ tasks.tasks.length }}</b></div>
+                    </div>                      
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                      <div class="table-responsive">
+                          <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Task</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Modified</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <ng-container *ngFor="let task of tasks.tasks; let i=index">
+                              <tr>
+                                  <th scope="row">{{ i+1 }}</th>
+                                  <td>{{ task.task }}</td>
+                                  <td>{{ task.name }}</td>
+                                  <td>{{ task.modified.toDateString() }}</td>
+                                  <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
+                                  <td><button class="btn btn-danger">mark</button></td>
+                              </tr>
+                              </ng-container>
+                          </tbody>
+                          </table>
+                      </div>
+                  </ng-template>
+            </ngb-panel>
+          </ng-container>
+        </ngb-accordion>
     </main>
 </div>

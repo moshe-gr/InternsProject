@@ -17,7 +17,7 @@
                 <div class="row my-3">            
                     <label class="form-label col-md-4">
                         Email
-                        <input type="email" class="form-control" placeholder="email" [(ngModel)]="email" name="userEmail" #userEmail="ngModel" email required>
+                        <input type="email" class="form-control" [ngClass]="{ 'is-invalid': userEmail.touched && userEmail.invalid, 'is-valid': userEmail.touched && userEmail.valid }" placeholder="email@com" [(ngModel)]="email" name="userEmail" #userEmail="ngModel" email required>
                         <small class="text-danger" *ngIf="userEmail.touched && userEmail.errors?.required">
                             This is required.
                         </small>
@@ -27,7 +27,7 @@
                     </label>                 
                     <label class="form-label col-md-4">
                         Full name
-                        <input type="text" class="form-control" placeholder="first last" [(ngModel)]="fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{2,} [A-Za-z]{2,}" required>
+                        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': name.touched && name.invalid, 'is-valid': name.touched && name.valid }" placeholder="first last" [(ngModel)]="fullName" name="fname" #name="ngModel" pattern="[A-Za-z]{2,} [A-Za-z]{2,}" required>
                         <small class="text-danger" *ngIf="name.touched && name.errors?.required">
                             This is required.
                         </small>
@@ -37,7 +37,7 @@
                     </label>       
                     <label class="form-label col-md-4">
                         Passport/Citizenship id
-                        <input type="number" class="form-control" placeholder="passport" [(ngModel)]="passport" name="pass" #pass="ngModel" pattern="[0-9]{9,}" required>
+                        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': pass.touched && pass.invalid, 'is-valid': pass.touched && pass.valid }" placeholder="passport" [(ngModel)]="passport" name="pass" #pass="ngModel" pattern="[0-9]{9,}" required>
                         <small class="text-danger" *ngIf="pass.touched && pass.errors?.required">
                             This is required.
                         </small>
@@ -46,7 +46,7 @@
                 <div class="row my-3">
                     <label class="form-label col-md-8">
                         Pohne number
-                        <input type="tel" class="form-control" placeholder="055-555-5555" [(ngModel)]="telephone" name="tel" pattern="[0-9]{10}" required>
+                        <input type="tel" class="form-control" [ngClass]="{ 'is-invalid': tel.touched && tel.invalid, 'is-valid': tel.touched && tel.valid }" placeholder="055-555-5555" [(ngModel)]="telephone" name="tel" #tel="ngModel" pattern="[0-9]{10}" required>
                         <small class="fw-bold">
                             A verification code will be sent to you to this number
                         </small>
