@@ -12,6 +12,16 @@ import { TestService } from 'src/app/services/test.service';
 export class UserOverviewComponent implements OnInit {
 
   todo: TestModel[] = [];
+  colors: string[] = [
+    "btn-primary",
+    "btn-secondary",
+    "btn-success",
+    "btn-danger",
+    "btn-warning",
+    "btn-info",
+     "btn-light",
+    "btn-dark"
+  ]
 
   constructor(private testService: TestService, private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
 
