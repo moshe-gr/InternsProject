@@ -15,7 +15,7 @@
         </h3>
         <ngb-accordion *ngIf="todo.length" [closeOthers]="true" activeIds="static-1">
           <ng-container *ngFor="let tasks of todo; let j = index">
-            <ngb-panel id="static-1"  [disabled]="!tasks.tasks.length">
+            <ngb-panel id="{{ 'static-'+j+1 }}"  [disabled]="!tasks.tasks.length">
                 <ng-template ngbPanelHeader>
                   <div class="row d-flex justify-content-center">
                   <button ngbPanelToggle class="row text-center border-0" [ngClass]="colors[j%colors.length]">

@@ -13,6 +13,16 @@ export class ToMarkComponent implements OnInit {
 
   done: AnswerModel[];
   user: User;
+  colors: string[] = [
+    "btn-primary",
+    "btn-secondary",
+    "btn-success",
+    "btn-danger",
+    "btn-warning",
+    "btn-info",
+    "btn-light",
+    "btn-dark"
+  ];
 
   constructor(private testService: TestService, private currentUserService: CurrentUserService) { }
 

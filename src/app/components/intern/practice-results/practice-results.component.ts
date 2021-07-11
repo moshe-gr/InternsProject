@@ -11,16 +11,6 @@ import { TestService } from 'src/app/services/test.service';
 export class PracticeResultsComponent implements OnInit {
 
   done: AnswerModel['done'] = [];
-  colors: string[] = [
-    "btn-primary",
-    "btn-secondary",
-    "btn-success",
-    "btn-danger",
-    "btn-warning",
-    "btn-info",
-    "btn-light",
-    "btn-dark"
-  ];
 
   constructor(private testService: TestService, private currentUserService: CurrentUserService) { }
 

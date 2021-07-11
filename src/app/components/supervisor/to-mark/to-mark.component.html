@@ -13,14 +13,16 @@
     </aside>
     <main class="col-md-9 col-lg-10">
         <ngb-accordion [closeOthers]="true" activeIds="static-1">
-            <ng-container *ngFor="let task of done">
-                <ngb-panel id="static-1" [disabled]="!task.done.length">
-                    <ng-template ngbPanelTitle>
-                        <tr>
-                            <td>{{ task.intern.first_name }} {{ task.intern.last_name }}</td>
-                            <td>{{ task.intern.more_info.professional.year_in_residency }} year {{ task.intern.more_info.professional.residency }} intern</td>
-                            <td>Num tests <b>{{ task.done.length }}</b></td>
-                        </tr>
+            <ng-container *ngFor="let task of done; let j=index">
+                <ngb-panel id="{{ 'static-'+j+1 }}" [disabled]="!task.done.length">
+                    <ng-template ngbPanelHeader>
+                        <div class="row d-flex justify-content-center">
+                            <button ngbPanelToggle class="row text-center border-0" [ngClass]="colors[j%colors.length]">
+                                <span class="col-4">{{ task.intern.first_name }} {{ task.intern.last_name }}</span>
+                                <span class="col-4">{{ task.intern.more_info.professional.year_in_residency }} year {{ task.intern.more_info.professional.residency }} intern</span>
+                                <span class="col-4">Num tests <b>{{ task.done.length }}</b></span>
+                            </button>
+                        </div>
                     </ng-template>
                     <ng-template ngbPanelContent>
                         <div class="table-responsive">
