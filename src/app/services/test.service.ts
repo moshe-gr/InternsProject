@@ -66,4 +66,12 @@ export class TestService {
     );
   }
 
+  markTest(_id: string, done: AnswerModel['done'][0]): Observable<AnswerModel> {
+    return this.httpClient.put(
+      this.baseUrl + 'markTest',
+      { _id: _id, done: done },
+      this.authService.getOptions()
+    );
+  }
+
 }

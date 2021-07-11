@@ -13,9 +13,9 @@
     </aside>
     <main class="col-md-9 col-lg-10">
         <ngb-accordion [closeOthers]="true" activeIds="static-1">
-            <ngb-panel id="static-1">
-                <ng-container *ngFor="let task of done">
-                    <ng-template ngbPanelTitle [disabled]="!task.done.length">
+            <ng-container *ngFor="let task of done">
+                <ngb-panel id="static-1" [disabled]="!task.done.length">
+                    <ng-template ngbPanelTitle>
                         <tr>
                             <td>{{ task.intern.first_name }} {{ task.intern.last_name }}</td>
                             <td>{{ task.intern.more_info.professional.year_in_residency }} year {{ task.intern.more_info.professional.residency }} intern</td>
@@ -30,9 +30,8 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Fulfilled</th>
+                                <th scope="col"></th>
                                 <th scope="col">Score</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,19 +39,18 @@
                                 <tr>
                                     <th scope="row">{{ i+1 }}</th>
                                     <td>{{ test.test.name }}</td>
-                                    <td>{{ test.date.toDateString() }}</td>
-                                    <td *ngIf="test.result">{{ test.result }}</td>
-                                    <td *ngIf="!test.result" class="text-danger">not marked</td>
+                                    <td>{{ test.date | date:'shortDate' }}</td>
                                     <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
-                                    <td><button class="btn btn-danger">mark</button></td>
+                                    <td *ngIf="test.result">{{ test.result }}</td>
+                                    <td *ngIf="!test.result"><input type="number" class="text-danger" placeholder="not marked" #mark><button class="btn btn-info" (click)="markTest(task._id, test.file_url, mark.value)">mark</button></td>
                                 </tr>
                                 </ng-container>
                             </tbody>
                             </table>
                         </div>
                     </ng-template>
-                </ng-container>
-            </ngb-panel>
+                </ngb-panel>
+            </ng-container>
         </ngb-accordion>
     </main>
 </div>

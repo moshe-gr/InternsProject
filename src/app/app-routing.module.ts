@@ -16,6 +16,7 @@ import { UserGuard } from './guards/user.guard';
 import { UserOverviewComponent } from './components/intern/user-overview/user-overview.component';
 import { TestsComponent } from './components/supervisor/tests/tests.component';
 import { ToMarkComponent } from './components/supervisor/to-mark/to-mark.component';
+import { PracticeResultsComponent } from './components/intern/practice-results/practice-results.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'updateImg', component: Register3Component, canActivate: [UserGuard] },
   { path: 'authLogin', component: Register2Component, canActivate: [UserGuard] },
   { path: 'tests', component: TestsComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } },
-  { path: 'toMark', component: ToMarkComponent },
+  { path: 'toMark', component: ToMarkComponent, canActivate: [RoleGuard], data: { expectedRole: Role.supervisor } },
+  { path: 'results', component: PracticeResultsComponent, canActivate: [UserGuard] },
 ];
 
 @NgModule({

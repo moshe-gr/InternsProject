@@ -35,4 +35,14 @@ export class ToMarkComponent implements OnInit {
     downloader.click();
   }
 
+  markTest(_id, file_url, result) {
+    this.testService.markTest(
+      _id,
+      { file_url: file_url, result: +result }
+    ).subscribe(
+      () => { },
+      err => console.error(err)
+    );
+  }
+
 }

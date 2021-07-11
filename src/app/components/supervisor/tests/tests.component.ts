@@ -23,7 +23,6 @@ export class TestsComponent implements OnInit {
       tests => {
         this.currentUserService.user.more_info.tasks = tests;
         this.tasks = this.currentUserService.user.more_info.tasks.tasks;
-        this.tasks.forEach(task => task.modified = new Date(task.modified));
       },
       err => console.error(err)
     );
@@ -49,7 +48,6 @@ export class TestsComponent implements OnInit {
                 tests => {
                   this.currentUserService.user.more_info.tasks = tests;
                   this.tasks = this.currentUserService.user.more_info.tasks.tasks;
-                  this.tasks.forEach(task => task.modified = new Date(task.modified));
                 },
                 err => console.error(err)
               );
@@ -81,7 +79,6 @@ export class TestsComponent implements OnInit {
             tests => {
               this.currentUserService.user.more_info.tasks = tests;
               this.tasks = this.currentUserService.user.more_info.tasks.tasks;
-              this.tasks.forEach(task => task.modified = new Date(task.modified));
             },
             err => console.error(err)
           );

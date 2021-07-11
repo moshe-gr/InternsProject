@@ -40,7 +40,7 @@
               <th scope="row">{{ i+1 }}</th>
               <td>{{ task.task }}</td>
               <td>{{ task.name }}</td>
-              <td>{{ task.modified.toDateString() }}</td>
+              <td>{{ task.modified | date:'shortDate' }}</td>
               <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
               <td><button class="btn btn-danger" (click)="deleteFile(task)">delete</button></td>
             </tr>

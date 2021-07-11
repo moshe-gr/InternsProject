@@ -36,6 +36,7 @@
                               <th scope="col">Modified</th>
                               <th scope="col"></th>
                               <th scope="col"></th>
+                              <th scope="col">Upload answer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,9 +45,10 @@
                                 <th scope="row">{{ i+1 }}</th>
                                 <td>{{ task.task }}</td>
                                 <td>{{ task.name }}</td>
-                                <td>{{ task.modified.toDateString() }}</td>
+                                <td>{{ task.modified | date:'shortDate' }}</td>
                                 <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
                                 <td><button class="btn btn-coral" (click)="downloadFile(task)">download</button></td>
+                                <td><input type="file" class="form-control" (change)="uploadFile($event.target, task)"></td>
                             </tr>
                             </ng-container>
                         </tbody>

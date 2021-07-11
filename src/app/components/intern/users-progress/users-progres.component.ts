@@ -1,4 +1,7 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from 'src/app/services/currentUser.service';
+import { TestService } from 'src/app/services/test.service';
 
 @Component({
   selector: 'app-users-progres',
@@ -8,54 +11,43 @@ import { Component, OnInit } from '@angular/core';
 export class UsersProgressComponent implements OnInit {
 
   chartOptions;
+  myGrades: { x: number, y: number }[] = [];
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "My grades",
-          data: [
-            {
-              x: new Date('2018-02-12').getTime(),
-              y: 49
-            },
-            {
-              x: new Date('2018-10-12').getTime(),
-              y: 91
-            },
-            {
-              x: new Date('2019-02-12').getTime(),
-              y: 69
-            },
-            {
-              x: new Date('2019-12-12').getTime(),
-              y: 100
-            },
-            {
-              x: new Date('2020-05-12').getTime(),
-              y: 62
-            },
-          ]
-        },
-      ],
-      chart: {
-        type: "bar",
-        toolbar: {
-          show: false
-        }
-      },
-      xaxis: {
-        type: 'datetime'
-      },
-      yaxis: {
-        max: 100,
-        min: 20,
-        tickAmount: 4,
-      }
-    };
-  }
+  constructor(private currentUserService: CurrentUserService, private testService: TestService) { }
 
   ngOnInit(): void {
+    this.testService.getInternDone(this.currentUserService.user.more_info._id).subscribe(
+      data => {
+        data.done.forEach(
+          test => {
+            test.result ? this.myGrades.push({ x: test.date, y: test.result }) : null
+          }
+        );
+        this.chartOptions = {
+          series: [
+            {
+              name: "My grades",
+              data: this.myGrades
+            },
+          ],
+          chart: {
+            type: "bar",
+            toolbar: {
+              show: false
+            }
+          },
+          xaxis: {
+            type: 'datetime'
+          },
+          yaxis: {
+            max: 100,
+            min: 20,
+            tickAmount: 4,
+          }
+        };
+      },
+      err => console.error(err)
+    );
   }
 
 }
