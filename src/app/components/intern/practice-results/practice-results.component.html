@@ -32,7 +32,8 @@
                     <td>{{ task.test.name }}</td>
                     <td>{{ task.test.modified | date:'shortDate' }}</td>
                     <td>{{ task.date | date:'shortDate' }}</td>
-                    <td class="rounded-circle" [ngClass]="{ 'border-success': task.result > 90, 'border-info': task.result < 91 && task.result > 80, 'border-warning': task.result < 81 && task.result > 70, 'border-warning': task.result < 91 && task.result > 80, 'border-danger': task.result < 71 }">{{ task.result }}</td>
+                    <td *ngIf="task.result" class="rounded-circle" [ngClass]="{ 'border-success text-success': task.result > 90, 'border-info text-info': task.result < 91 && task.result > 80, 'border-warning text-warning': task.result < 81 && task.result > 70, 'border-danger text-danger': task.result < 71 }">{{ task.result }}</td>
+                    <td *ngIf="!task.result" class="text-light">not marked</td>
                     <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
                   </tr>
                 </ng-container>

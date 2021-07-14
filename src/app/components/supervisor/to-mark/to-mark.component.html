@@ -43,7 +43,7 @@
                                             <td>{{ test.test.name }}</td>
                                             <td>{{ test.date | date:'shortDate' }}</td>
                                             <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
-                                            <td *ngIf="test.result">{{ test.result }}</td>
+                                            <td *ngIf="test.result" class="rounded-circle" [ngClass]="{ 'border-success text-success': task.result > 90, 'border-info text-info': task.result < 91 && task.result > 80, 'border-warning text-warning': task.result < 81 && task.result > 70, 'border-danger text-danger': task.result < 71 }">{{ test.result }}</td>
                                             <td *ngIf="!test.result"><input type="number" class="text-danger" placeholder="not marked" #mark><button class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></td>
                                         </tr>
                                     </ng-container>
