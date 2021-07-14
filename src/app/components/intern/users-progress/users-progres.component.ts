@@ -1,4 +1,3 @@
-import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { TestService } from 'src/app/services/test.service';
@@ -18,7 +17,7 @@ export class UsersProgressComponent implements OnInit {
   ngOnInit(): void {
     this.testService.getInternDone(this.currentUserService.user.more_info._id).subscribe(
       data => {
-        data.done.forEach(
+        data.forEach(
           test => {
             test.result ? this.myGrades.push({ x: test.date, y: test.result }) : null
           }

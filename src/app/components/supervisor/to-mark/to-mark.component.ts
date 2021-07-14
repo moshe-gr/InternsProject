@@ -12,6 +12,7 @@ import { TestService } from 'src/app/services/test.service';
 export class ToMarkComponent implements OnInit {
 
   done: AnswerModel[];
+  interns: User[] = [];
   user: User;
   colors: string[] = [
     "btn-primary",
@@ -32,12 +33,19 @@ export class ToMarkComponent implements OnInit {
       data => {
         this.currentUserService.user.more_info.done = data;
         this.done = data;
+        if (data) {
+          data.forEach(
+            done =>
+              !this.interns.find(intern => intern._id == done.intern._id) ?
+                this.interns.push(done.intern) : null
+          );
+        }
       },
       err => console.error(err)
     );
   }
 
-  openFile(task: AnswerModel['done'][0]) {
+  openFile(task: AnswerModel) {
     const downloader = document.createElement('a');
     downloader.href = task.file_url;
     downloader.target = "_blank";
@@ -45,10 +53,9 @@ export class ToMarkComponent implements OnInit {
     downloader.click();
   }
 
-  markTest(_id, file_url, result) {
+  markTest(_id: string, result: string) {
     this.testService.markTest(
-      _id,
-      { file_url: file_url, result: +result }
+      { _id: _id, result: +result }
     ).subscribe(
       () => { },
       err => console.error(err)

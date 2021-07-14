@@ -19,5 +19,5 @@ export interface InternInfo {
         department: string
     },
     tasks?: TestModel[] | string[],
-    done?: AnswerModel | string 
+    done?: AnswerModel[] 
 }

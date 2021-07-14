@@ -10,18 +10,18 @@ import { TestService } from 'src/app/services/test.service';
 })
 export class PracticeResultsComponent implements OnInit {
 
-  done: AnswerModel['done'] = [];
+  done: AnswerModel[] = [];
 
   constructor(private testService: TestService, private currentUserService: CurrentUserService) { }
 
   ngOnInit(): void {
     this.testService.getInternDone(this.currentUserService.user.more_info._id).subscribe(
-      data => this.done = data.done,
+      data => this.done = data,
       err => console.error(err)
     );
   }
 
-  openFile(task: AnswerModel['done'][0]) {
+  openFile(task: AnswerModel) {
     const downloader = document.createElement('a');
     downloader.href = task.file_url;
     downloader.target = "_blank";

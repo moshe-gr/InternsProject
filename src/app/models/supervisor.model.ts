@@ -8,6 +8,6 @@ export interface Supervisor {
     medical_institution: string,
     students?: InternInfo[] | string[],
     user?: User | string,
-    tasks?: TestModel | string,
-    done?: AnswerModel[] | string[]
+    tasks?: TestModel[],
+    done?: AnswerModel[]
 }

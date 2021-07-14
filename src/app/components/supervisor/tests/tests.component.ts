@@ -12,7 +12,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class TestsComponent implements OnInit {
 
-  tasks: TestModel["tasks"] = [];
+  tasks: TestModel[] = [];
   user: User;
 
   constructor(private testService: TestService, private fileServerService: FileServerService, private currentUserService: CurrentUserService) { }
@@ -22,7 +22,7 @@ export class TestsComponent implements OnInit {
     this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
       tests => {
         this.currentUserService.user.more_info.tasks = tests;
-        this.tasks = this.currentUserService.user.more_info.tasks.tasks;
+        this.tasks = tests;
       },
       err => console.error(err)
     );
@@ -34,20 +34,17 @@ export class TestsComponent implements OnInit {
         () => {
           this.testService.addTest(
             {
-              _id: this.currentUserService.user.more_info.tasks._id,
-              task:
-              {
-                task: task,
-                name: this.fileServerService.urlToFile.split("-*-")[1],
-                file_url: this.fileServerService.urlToFile
-              }
+              supervisor: this.currentUserService.user._id,
+              task: task,
+              name: this.fileServerService.urlToFile.split("-*-")[1],
+              file_url: this.fileServerService.urlToFile
             }
           ).subscribe(
             () => {
               this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
                 tests => {
                   this.currentUserService.user.more_info.tasks = tests;
-                  this.tasks = this.currentUserService.user.more_info.tasks.tasks;
+                  this.tasks = tests;
                 },
                 err => console.error(err)
               );
@@ -60,7 +57,7 @@ export class TestsComponent implements OnInit {
     }
   }
 
-  openFile(task: TestModel['tasks'][0]) {
+  openFile(task: TestModel) {
     const downloader = document.createElement('a');
     downloader.href = task.file_url;
     downloader.target = "_blank";
@@ -68,17 +65,16 @@ export class TestsComponent implements OnInit {
     downloader.click();
   }
 
-  deleteFile(task: TestModel['tasks'][0]) {
+  deleteFile(task: TestModel) {
     this.fileServerService.fileDelete('.*.' + task.file_url.split('.*.')[1]).subscribe(
       () => this.testService.deleteTest(
-        this.currentUserService.user.more_info.tasks._id,
-        task.file_url
+        task._id
       ).subscribe(
         () => {
           this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
             tests => {
               this.currentUserService.user.more_info.tasks = tests;
-              this.tasks = this.currentUserService.user.more_info.tasks.tasks;
+              this.tasks = tests;
             },
             err => console.error(err)
           );

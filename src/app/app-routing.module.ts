@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/overall/home/home.component';
+import { LoginComponent } from './components/overall/login/login.component';
 import { Questionnaire1Component } from './components/intern/questionnaire1/questionnaire1.component';
 import { Questionnaire2Component } from './components/intern/questionnaire2/questionnaire2.component';
 import { ReadyComponent } from './components/intern/ready/ready.component';
-import { Register1Component } from './components/register1/register1.component';
-import { Register2Component } from './components/register2/register2.component';
-import { Register3Component } from './components/register3/register3.component';
+import { Register1Component } from './components/overall/register1/register1.component';
+import { Register2Component } from './components/overall/register2/register2.component';
+import { Register3Component } from './components/overall/register3/register3.component';
 import { ConsoleComponent } from './components/supervisor/console/console.component';
 import { WelcomeComponent } from './components/intern/welcome/welcome.component';
 import { Role } from './enums/role.enum';
@@ -17,9 +17,11 @@ import { UserOverviewComponent } from './components/intern/user-overview/user-ov
 import { TestsComponent } from './components/supervisor/tests/tests.component';
 import { ToMarkComponent } from './components/supervisor/to-mark/to-mark.component';
 import { PracticeResultsComponent } from './components/intern/practice-results/practice-results.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { expectedRole: Role.admin } },
   { path: 'register1', component: Register1Component },
   { path: 'register2', component: Register2Component, canActivate: [UserGuard] },
   { path: 'register3', component: Register3Component, canActivate: [UserGuard] },

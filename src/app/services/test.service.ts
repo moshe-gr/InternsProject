@@ -21,23 +21,23 @@ export class TestService {
     );
   }
 
-  getSupervisorTests(id: string): Observable<TestModel> {
-    return this.httpClient.get<TestModel>(
+  getSupervisorTests(id: string): Observable<TestModel[]> {
+    return this.httpClient.get<TestModel[]>(
       this.baseUrl + 'getAllSupervisorTests/' + id,
       this.authService.getOptions()
     );
   }
 
-  addTest(test): Observable<TestModel> {
-    return this.httpClient.put(
+  addTest(test: TestModel): Observable<TestModel> {
+    return this.httpClient.put<TestModel>(
       this.baseUrl + 'addTest',
-      { _id: test._id, task: test.task },
+      test,
       this.authService.getOptions()
     );
   }
 
-  getInternDone(id: string): Observable<AnswerModel> {
-    return this.httpClient.get<AnswerModel>(
+  getInternDone(id: string): Observable<AnswerModel[]> {
+    return this.httpClient.get<AnswerModel[]>(
       this.baseUrl + 'getAllInternDone/' + id,
       this.authService.getOptions()
     );
@@ -50,26 +50,25 @@ export class TestService {
     );
   }
 
-  addDone(test): Observable<AnswerModel> {
-    return this.httpClient.put(
+  addDone(test: AnswerModel): Observable<AnswerModel> {
+    return this.httpClient.put<AnswerModel>(
       this.baseUrl + 'addDone',
-      { _id: test._id, file_url: test.file_url, test: test.test },
+      test,
       this.authService.getOptions()
     );
   }
 
-  deleteTest(_id: string, file_url: string): Observable<TestModel> {
-    return this.httpClient.put(
-      this.baseUrl + 'delete',
-      { _id: _id, file_url: file_url },
+  deleteTest(_id: string): Observable<TestModel> {
+    return this.httpClient.delete<TestModel>(
+      this.baseUrl + 'delete/' + _id,
       this.authService.getOptions()
     );
   }
 
-  markTest(_id: string, done: AnswerModel['done'][0]): Observable<AnswerModel> {
-    return this.httpClient.put(
+  markTest(done: AnswerModel): Observable<AnswerModel> {
+    return this.httpClient.put<AnswerModel>(
       this.baseUrl + 'markTest',
-      { _id: _id, done: done },
+      done,
       this.authService.getOptions()
     );
   }

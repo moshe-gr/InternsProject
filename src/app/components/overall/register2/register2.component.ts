@@ -55,6 +55,10 @@ export class Register2Component implements OnInit {
         else {
           this.currentUserService.getCurrentUser().then(
             () => {
+              //admin login
+              if (this.user.role_number == Role.admin) {
+                this.router.navigate(["/admin"]);
+              }
               //supervisor login
               if (this.user.role_number == Role.supervisor) {
                 this.router.navigate(["/console"]);

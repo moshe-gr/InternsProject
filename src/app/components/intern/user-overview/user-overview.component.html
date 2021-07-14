@@ -13,45 +13,45 @@
         <h3 class="text-center mb-5">
             Tasks todo
         </h3>
-        <ngb-accordion *ngIf="todo.length" [closeOthers]="true" activeIds="static-1">
-          <ng-container *ngFor="let tasks of todo; let j = index">
-            <ngb-panel id="{{ 'static-'+j+1 }}"  [disabled]="!tasks.tasks.length">
+        <ngb-accordion *ngIf="supervisors.length" [closeOthers]="true" activeIds="static-1">
+          <ng-container *ngFor="let supervisor of supervisors; let j = index">
+            <ngb-panel id="{{ 'static-'+j+1 }}"  [disabled]="!supervisor.more_info.tasks.length">
                 <ng-template ngbPanelHeader>
                   <div class="row d-flex justify-content-center">
                   <button ngbPanelToggle class="row text-center border-0" [ngClass]="colors[j%colors.length]">
-                    <span class="col-4">{{ tasks.supervisor.first_name }} {{ tasks.supervisor.last_name }}</span>
-                    <span class="col-4">{{ tasks.supervisor.email }}</span>
-                    <span class="col-4">Num tests <b>{{ tasks.tasks.length }}</b></span>
+                    <span class="col-4">{{ supervisor.first_name }} {{ supervisor.last_name }}</span>
+                    <span class="col-4">{{ supervisor.email }}</span>
+                    <span class="col-4">Num tests <b>{{ supervisor.more_info.tasks.length }}</b></span>
                   </button>        
                 </div>              
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <div class="table-responsive">
                         <table class="table table-striped">
-                        <thead>
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Task</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">Modified</th>
-                              <th scope="col"></th>
-                              <th scope="col"></th>
-                              <th scope="col">Upload answer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngFor="let task of tasks.tasks; let i=index">
-                            <tr>
-                                <th scope="row">{{ i+1 }}</th>
-                                <td>{{ task.task }}</td>
-                                <td>{{ task.name }}</td>
-                                <td>{{ task.modified | date:'shortDate' }}</td>
-                                <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
-                                <td><button class="btn btn-coral" (click)="downloadFile(task)">download</button></td>
-                                <td><input type="file" class="form-control" (change)="uploadFile($event.target, task)"></td>
-                            </tr>
-                            </ng-container>
-                        </tbody>
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Task</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Modified</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col">Upload answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let task of todo; let i=index">
+                                    <tr>
+                                        <th scope="row">{{ i+1 }}</th>
+                                        <td>{{ task.task }}</td>
+                                        <td>{{ task.name }}</td>
+                                        <td>{{ task.modified | date:'shortDate' }}</td>
+                                        <td><button class="btn btn-success" (click)="openFile(task)">open</button></td>
+                                        <td><button class="btn btn-coral" (click)="downloadFile(task)">download</button></td>
+                                        <td><input type="file" class="form-control" (change)="uploadFile($event.target, task._id)"></td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
                         </table>
                     </div>
                 </ng-template>

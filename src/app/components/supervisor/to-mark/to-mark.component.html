@@ -13,41 +13,41 @@
     </aside>
     <main class="col-md-9 col-lg-10">
         <ngb-accordion [closeOthers]="true" activeIds="static-1">
-            <ng-container *ngFor="let task of done; let j=index">
-                <ngb-panel id="{{ 'static-'+j+1 }}" [disabled]="!task.done.length">
+            <ng-container *ngFor="let intern of interns; let j=index">
+                <ngb-panel id="{{ 'static-'+j+1 }}" [disabled]="!intern.more_info.done.length">
                     <ng-template ngbPanelHeader>
                         <div class="row d-flex justify-content-center">
                             <button ngbPanelToggle class="row text-center border-0" [ngClass]="colors[j%colors.length]">
-                                <span class="col-4">{{ task.intern.first_name }} {{ task.intern.last_name }}</span>
-                                <span class="col-4">{{ task.intern.more_info.professional.year_in_residency }} year {{ task.intern.more_info.professional.residency }} intern</span>
-                                <span class="col-4">Num tests <b>{{ task.done.length }}</b></span>
+                                <span class="col-4">{{ intern.first_name }} {{ intern.last_name }}</span>
+                                <span class="col-4">{{ intern.more_info.professional.year_in_residency }} year {{ intern.more_info.professional.residency }} intern</span>
+                                <span class="col-4">Num tests <b>{{ intern.more_info.done.length }}</b></span>
                             </button>
                         </div>
                     </ng-template>
                     <ng-template ngbPanelContent>
                         <div class="table-responsive">
                             <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Fulfilled</th>
-                                <th scope="col"></th>
-                                <th scope="col">Score</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <ng-container *ngFor="let test of task.done; let i=index">
-                                <tr>
-                                    <th scope="row">{{ i+1 }}</th>
-                                    <td>{{ test.test.name }}</td>
-                                    <td>{{ test.date | date:'shortDate' }}</td>
-                                    <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
-                                    <td *ngIf="test.result">{{ test.result }}</td>
-                                    <td *ngIf="!test.result"><input type="number" class="text-danger" placeholder="not marked" #mark><button class="btn btn-info" (click)="markTest(task._id, test.file_url, mark.value)">mark</button></td>
-                                </tr>
-                                </ng-container>
-                            </tbody>
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Fulfilled</th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let test of done; let i=index">
+                                        <tr *ngIf="test.intern._id == intern._id">
+                                            <th scope="row">{{ i+1 }}</th>
+                                            <td>{{ test.test.name }}</td>
+                                            <td>{{ test.date | date:'shortDate' }}</td>
+                                            <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
+                                            <td *ngIf="test.result">{{ test.result }}</td>
+                                            <td *ngIf="!test.result"><input type="number" class="text-danger" placeholder="not marked" #mark><button class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
                             </table>
                         </div>
                     </ng-template>

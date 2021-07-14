@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestModel } from 'src/app/models/test.model';
+import { User } from 'src/app/models/user.model';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { FileServerService } from 'src/app/services/file-server.service';
 import { TestService } from 'src/app/services/test.service';
@@ -12,6 +13,7 @@ import { TestService } from 'src/app/services/test.service';
 export class UserOverviewComponent implements OnInit {
 
   todo: TestModel[] = [];
+  supervisors: User[] = [];
   colors: string[] = [
     "btn-primary",
     "btn-secondary",
@@ -30,12 +32,19 @@ export class UserOverviewComponent implements OnInit {
       tests => {
         this.currentUserService.user.more_info.tasks = tests;
         this.todo = tests;
+        if (tests) {
+          tests.forEach(
+            test =>
+              !this.supervisors.find(supervisor => supervisor._id == test.supervisor._id) ?
+                this.supervisors.push(test.supervisor) : null
+          );
+        }
       },
       err => console.error(err)
     );
   }
 
-  downloadFile(task: TestModel['tasks'][0]) {
+  downloadFile(task: TestModel) {
     this.fileServerService.fileDownload(task.file_url).subscribe(
       data => {
         console.log(data);
@@ -50,7 +59,7 @@ export class UserOverviewComponent implements OnInit {
     );
   }
 
-  openFile(task: TestModel['tasks'][0]) {
+  openFile(task: TestModel) {
     const downloader = document.createElement('a');
     downloader.href = task.file_url;
     downloader.target = "_blank";
@@ -58,19 +67,15 @@ export class UserOverviewComponent implements OnInit {
     downloader.click();
   }
 
-  uploadFile(target, task: TestModel['tasks'][0]) {
+  uploadFile(target, _id) {
     if (target.files[0]) {
       this.fileServerService.fileUpload(target.files[0], target.files[0].name).then(
         () => {
           this.testService.addDone(
             {
-              _id: this.currentUserService.user.more_info.done,
+              intern: this.currentUserService.user._id,
               file_url: this.fileServerService.urlToFile,
-              test: {
-                name: task.name,
-                modified: task.modified,
-                file_url: task.file_url
-              }
+              test: _id
             }
           ).subscribe(
             () => { },
