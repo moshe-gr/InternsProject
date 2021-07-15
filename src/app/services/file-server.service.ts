@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class FileServerService {
 
-  baseUtrl: string = 'http://localhost:8080/api/awsS3/';
+  baseUtrl: string = environment.myServer + 'api/awsS3/';
   urlToFile: string;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }

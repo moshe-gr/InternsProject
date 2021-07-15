@@ -8,9 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  baseUrl = "http://localhost:8080/auth/";
+  baseUrl = environment.myServer + "auth/";
   token: string;
-  mySever = environment.myServer;
 
   constructor(private httpClient: HttpClient) { }
   
@@ -43,7 +42,7 @@ export class AuthService {
 
   faceDetect(pic): Observable<any>{
     return this.httpClient.post(
-      'http://localhost:8080/api/faceDetect',
+      environment.myServer + 'api/faceDetect',
       { pic: pic.imageAsBase64 },
       this.getOptions()
     );

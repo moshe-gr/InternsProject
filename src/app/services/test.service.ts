@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AnswerModel } from '../models/answer.model';
 import { TestModel } from '../models/test.model';
 import { AuthService } from './auth.service';
@@ -10,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class TestService {
 
-  baseUrl: string = 'http://localhost:8080/api/tests/';
+  baseUrl: string = environment.myServer + 'api/tests/';
 
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
 

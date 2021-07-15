@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  myServer: 'https://moshesapp.herokuapp.com/'
+  myServer: 'http://localhost:8080/'
 };
 
 /*
