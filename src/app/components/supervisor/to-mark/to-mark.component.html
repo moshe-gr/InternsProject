@@ -32,8 +32,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Fulfilled</th>
-                                    <th scope="col"></th>
                                     <th scope="col">Score</th>
+                                    <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,9 +42,9 @@
                                             <th scope="row">{{ i+1 }}</th>
                                             <td>{{ test.test.name }}</td>
                                             <td>{{ test.date | date:'shortDate' }}</td>
+                                            <td *ngIf="test.result"><span class="rounded-circle text-center border p-2" [ngClass]="{ 'border-success text-success': test.result > 90, 'border-info text-info': test.result < 91 && test.result > 80, 'border-warning text-warning': test.result < 81 && test.result > 70, 'border-danger text-danger': test.result < 71 }">{{ test.result }}</span></td>
+                                            <td *ngIf="!test.result"><input type="number" max="100" class="form-control text-danger" placeholder="not marked" #mark><button [disabled]="!mark" class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></td>
                                             <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
-                                            <td *ngIf="test.result" class="rounded-circle" [ngClass]="{ 'border-success text-success': task.result > 90, 'border-info text-info': task.result < 91 && task.result > 80, 'border-warning text-warning': task.result < 81 && task.result > 70, 'border-danger text-danger': task.result < 71 }">{{ test.result }}</td>
-                                            <td *ngIf="!test.result"><input type="number" class="text-danger" placeholder="not marked" #mark><button class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></td>
                                         </tr>
                                     </ng-container>
                                 </tbody>
