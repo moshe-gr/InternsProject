@@ -12,6 +12,9 @@
         </div>
     </aside>
     <main class="col-md-9 col-lg-10">
+        <h3 class="text-center mb-5">
+            Tests completed
+        </h3>
         <ngb-accordion [closeOthers]="true" activeIds="static-1">
             <ng-container *ngFor="let intern of interns; let j=index">
                 <ngb-panel id="{{ 'static-'+j+1 }}" [disabled]="!intern.more_info.done.length">
@@ -43,8 +46,11 @@
                                             <td>{{ test.test.name }}</td>
                                             <td>{{ test.date | date:'shortDate' }}</td>
                                             <td *ngIf="test.result"><span class="rounded-circle text-center border p-2" [ngClass]="{ 'border-success text-success': test.result > 90, 'border-info text-info': test.result < 91 && test.result > 80, 'border-warning text-warning': test.result < 81 && test.result > 70, 'border-danger text-danger': test.result < 71 }">{{ test.result }}</span></td>
-                                            <td *ngIf="!test.result"><input type="number" max="100" class="form-control text-danger" placeholder="not marked" #mark><button [disabled]="!mark" class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></td>
+                                            <td *ngIf="!test.result" class="input-group"><span class="input-group w-50"><input type="number" max="100" class="form-control text-danger" placeholder="score" #mark><button class="btn btn-info" (click)="markTest(test._id, mark.value)">mark</button></span></td>
                                             <td><button class="btn btn-success" (click)="openFile(test)">open</button></td>
+                                        </tr>
+                                        <tr>
+                                            
                                         </tr>
                                     </ng-container>
                                 </tbody>

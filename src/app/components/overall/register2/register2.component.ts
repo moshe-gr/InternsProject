@@ -20,6 +20,7 @@ export class Register2Component implements OnInit {
   third: number;
   fourth: number;
   request_id: string;
+  isRegister: boolean;
   
   constructor(private currentUserService: CurrentUserService, private router: Router, config: NgbModalConfig, private modalService: NgbModal, private authService: AuthService) {
     config.backdrop = 'static';
@@ -28,6 +29,7 @@ export class Register2Component implements OnInit {
    }
 
   ngOnInit(): void {
+    this.isRegister = this.router.url == "/register2";
     this.user = this.currentUserService.user
     this.authService.request('972' + this.user.telephone).subscribe(
       data => this.request_id = data.request_id,
@@ -48,7 +50,7 @@ export class Register2Component implements OnInit {
       result => {
         this.authService.token = result.token;
         //registration
-        if (this.router.url == "/register2") {
+        if (this.isRegister) {
           this.router.navigate(["/register3"]);
         }
         //login

@@ -1,5 +1,5 @@
 <header>
-    <app-login-header></app-login-header>
+    <app-login-header *ngIf="isRegister"></app-login-header>
 </header>
 <ng-container *ngIf="user">
     <div class="container-fluid d-flex justify-content-center text-center pos-lower">
