@@ -30,7 +30,6 @@ export class UserOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.testService.getInternTests(this.currentUserService.user.more_info._id).subscribe(
       tests => {
-        this.currentUserService.user.more_info.tasks = tests;
         this.todo = tests;
         if (tests) {
           tests.forEach(

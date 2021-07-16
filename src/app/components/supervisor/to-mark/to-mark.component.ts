@@ -31,7 +31,6 @@ export class ToMarkComponent implements OnInit {
     this.user = this.currentUserService.user;
     this.testService.getSupervisorDone(this.user.more_info._id).subscribe(
       data => {
-        this.currentUserService.user.more_info.done = data;
         this.done = data;
         if (data) {
           data.forEach(
@@ -57,7 +56,7 @@ export class ToMarkComponent implements OnInit {
     this.testService.markTest(
       { _id: _id, result: +result }
     ).subscribe(
-      () => { },
+      () => { this.done.find(test => test._id == _id).result = +result },
       err => console.error(err)
     );
   }

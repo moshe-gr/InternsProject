@@ -20,10 +20,7 @@ export class TestsComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.currentUserService.user;
     this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
-      tests => {
-        this.currentUserService.user.more_info.tasks = tests;
-        this.tasks = tests;
-      },
+      tests => this.tasks = tests,
       err => console.error(err)
     );
   }
@@ -40,15 +37,7 @@ export class TestsComponent implements OnInit {
               file_url: this.fileServerService.urlToFile
             }
           ).subscribe(
-            () => {
-              this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
-                tests => {
-                  this.currentUserService.user.more_info.tasks = tests;
-                  this.tasks = tests;
-                },
-                err => console.error(err)
-              );
-            },
+            test => this.tasks.push(test),
             err => console.error(err)
           );
         },
@@ -71,13 +60,7 @@ export class TestsComponent implements OnInit {
         task._id
       ).subscribe(
         () => {
-          this.testService.getSupervisorTests(this.user.more_info._id).subscribe(
-            tests => {
-              this.currentUserService.user.more_info.tasks = tests;
-              this.tasks = tests;
-            },
-            err => console.error(err)
-          );
+          this.tasks = this.tasks.filter(test => test._id != task._id);
         },
         err => console.error(err)
       ),

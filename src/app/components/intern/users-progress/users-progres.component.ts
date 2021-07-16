@@ -36,7 +36,7 @@ export class UsersProgressComponent implements OnInit {
             }
           },
           xaxis: {
-            type: 'datetime'
+            type: "datetime"
           },
           yaxis: {
             max: 100,
