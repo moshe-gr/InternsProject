@@ -20,7 +20,7 @@ export class Register1Component implements OnInit {
 
   constructor(private authService: AuthService, private currentUserService: CurrentUserService, private router: Router, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
-    this.role = Role[this.currentUserService.user.role_number];
+    this.role = currentUserService.user.role;
    }
 
   ngOnInit(): void {
