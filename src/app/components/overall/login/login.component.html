@@ -9,7 +9,7 @@
         <div class="col-md-5 text-center">
             <img src="/assets/logo.jpg" alt="logo">
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7 text-center text-md-start">
             <h1>
               Welcome&nbsp;{{ userRole }}!
             </h1>
@@ -18,7 +18,7 @@
             </p>
             <input type="number" class="form-control" [ngClass]="{ 'is-invalid': pass.touched && pass.invalid, 'is-valid': pass.touched && pass.valid }" [(ngModel)]="passport" #pass="ngModel" placeholder="passport" (keyup)="pressEnter($event, content)" pattern="[0-9]{9,}" autofocus required>
             <br><br>
-            <button class="py-2 px-4" (click)="login(content)">
+            <button [disabled]="pass.invalid" class="py-2 px-4" (click)="login(content)">
               SEND
             </button>
         </div>

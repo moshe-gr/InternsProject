@@ -7,7 +7,7 @@
             <img src="/assets/logo.jpg" alt="logo">
         </div>
         <div class="col-md-9">
-            <h1>
+            <h1 class="text-center text-md-start">
                 Welcome&nbsp;{{ role }}!
             </h1>
             <h6 class="my-3">
@@ -52,7 +52,11 @@
                         </small>
                     </label>
                 </div>
-                <button [disabled]="regForm.invalid" (click)="register(content)" (keyup)="register($event)" type="submit" class="py-2 px-4">CONTINUE</button>
+                <div class="text-center text-md-start">
+                    <button [disabled]="regForm.invalid" (click)="register(content)" (keyup)="register($event)" type="submit" class="py-2 px-4">
+                        CONTINUE
+                    </button>
+                </div>
             </form>
         </div>
     </div>
