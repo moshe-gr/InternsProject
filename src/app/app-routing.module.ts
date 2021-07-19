@@ -22,7 +22,7 @@ import { AdminComponent } from './components/admin/admin.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'admin', component: AdminComponent, canActivate: [RoleGuard], data: { expectedRole: Role.admin } },
-  { path: 'register1', component: Register1Component },
+  { path: 'register1', component: Register1Component, canActivate: [UserGuard] },
   { path: 'register2', component: Register2Component, canActivate: [UserGuard] },
   { path: 'register3', component: Register3Component, canActivate: [UserGuard] },
   { path: 'welcome', component: WelcomeComponent, canActivate: [UserGuard] },

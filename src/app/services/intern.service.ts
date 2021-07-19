@@ -21,6 +21,14 @@ export class InternService {
     );
   }
 
+  createIntern(intern: InternInfo, headers?): Observable<InternInfo> {
+    return this.httpClient.post<InternInfo>(
+      this.baseUrl + 'createIntern',
+      intern,
+      this.authService.getOptions(headers)
+    );
+  }
+
   updateIntern(_id: string, updteData, headers?): Observable<InternInfo> {
     return this.httpClient.put<InternInfo>(
       this.baseUrl + _id,

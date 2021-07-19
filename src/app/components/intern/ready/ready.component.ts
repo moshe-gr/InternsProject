@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
-import { UsersService } from 'src/app/services/users.service';
+import { InternService } from 'src/app/services/intern.service';
 
 @Component({
   selector: 'app-ready',
@@ -10,13 +10,17 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ReadyComponent implements OnInit {
 
-  constructor(public currentUserService: CurrentUserService, private usersService: UsersService, private router: Router) { }
+  constructor(
+    public currentUserService: CurrentUserService,
+    private internService: InternService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   updateProfile() {
-    this.usersService.createIntern(
+    this.internService.createIntern(
       this.currentUserService.internInfo
     ).subscribe(
       () => this.currentUserService.getCurrentUser().then(

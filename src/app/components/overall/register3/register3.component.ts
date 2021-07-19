@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CurrentUserService } from 'src/app/services/currentUser.service';
 import { FileServerService } from 'src/app/services/file-server.service';
 import { InfoService } from 'src/app/services/info.service';
+import { SupervisorService } from 'src/app/services/supervisor.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -31,7 +32,16 @@ export class Register3Component implements OnInit, DoCheck {
   webcamImage: WebcamImage;
   update: boolean;
 
-  constructor(private infoService: InfoService, private fileServerService: FileServerService, private authService: AuthService, private currentUserService: CurrentUserService, private usersService: UsersService, private router: Router, private location: Location) { }
+  constructor(
+    private supervisorService: SupervisorService,
+    private infoService: InfoService,
+    private fileServerService: FileServerService,
+    private authService: AuthService,
+    private currentUserService: CurrentUserService,
+    private usersService: UsersService,
+    private router: Router,
+    private location: Location
+  ) { }
 
   ngDoCheck(): void {
     if (this.errors.length > 0) {
@@ -65,7 +75,9 @@ export class Register3Component implements OnInit, DoCheck {
         this.error = "";
         this.msg = "Thanks this will use as yuor profile pic";
         let img: Blob = this.dataURItoBlob(webcamImage.imageAsDataUrl);
-        this.fileServerService.fileUpload(img, '.*.' + Date.now() + '-*-' + this.user.passport + '.jpg').then(
+        this.fileServerService.fileUpload(
+          img, '.*.' + Date.now() + '-*-' + this.user.passport + '.jpg'
+        ).then(
           () => setTimeout(() => this.register(), 3 * 1000)
         );
       },
@@ -99,7 +111,7 @@ export class Register3Component implements OnInit, DoCheck {
           this.currentUserService.user = user;
           //supervisor
           if (this.user.role_number == Role.supervisor) {
-            this.usersService.createSupervisor(
+            this.supervisorService.createSupervisor(
               {
                 user:
                   user._id,
@@ -131,7 +143,9 @@ export class Register3Component implements OnInit, DoCheck {
         this.user._id,
         { pic: this.fileServerService.urlToFile }
       ).subscribe(
-        () => this.fileServerService.fileDelete('.*.' + this.currentUserService.user.pic.split('.*.')[1]).subscribe(
+        () => this.fileServerService.fileDelete(
+          '.*.' + this.currentUserService.user.pic.split('.*.')[1]
+        ).subscribe(
           () => {
             this.currentUserService.user.pic = this.fileServerService.urlToFile;
             this.location.back();

@@ -14,18 +14,9 @@ export class SupervisorService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  getSupervisor(_id: string, headers?): Observable<Supervisor> {
-    return this.httpClient.get<Supervisor>(
-      this.baseUrl + _id,
-      this.authService.getOptions(headers)
-    );
-  }
-
-  updateSupervisor(_id: string, updteData, headers?): Observable<Supervisor> {
-    return this.httpClient.put<Supervisor>(
-      this.baseUrl + _id,
-      updteData,
-      this.authService.getOptions(headers)
+  createSupervisor(superVisor: Supervisor, headers?): Observable<Supervisor> {
+    return this.httpClient.post<Supervisor>(
+      this.baseUrl + 'createSupervisor', superVisor, this.authService.getOptions(headers)
     );
   }
 
