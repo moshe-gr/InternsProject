@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                                 <ng-container *ngFor="let task of todo; let i=index">
-                                    <tr>
+                                    <tr *ngIf="task.supervisor._id == supervisor._id">
                                         <th scope="row">{{ i+1 }}</th>
                                         <td>{{ task.task }}</td>
                                         <td>{{ task.name }}</td>

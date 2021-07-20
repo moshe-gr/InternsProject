@@ -46,4 +46,11 @@ export class UsersService {
     );
   }
 
+  deleteUser(_id: string, headers?): Observable<JSON> {
+    return this.httpClient.delete<JSON>(
+      this.baseUrl + _id,
+      this.authService.getOptions(headers)
+    );
+  }
+
 }
